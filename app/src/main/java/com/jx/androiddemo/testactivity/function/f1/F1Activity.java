@@ -1,4 +1,4 @@
-package com.jx.androiddemo.activity.function;
+package com.jx.androiddemo.testactivity.function.f1;
 
 import android.annotation.SuppressLint;
 import android.os.Looper;
@@ -8,8 +8,6 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
 import com.jx.androiddemo.constant.Constants;
-import com.jx.androiddemo.contract.function.F1Contract;
-import com.jx.androiddemo.presenter.function.F1Presenter;
 import com.jx.androiddemo.tool.JniTest;
 
 import java.util.concurrent.TimeUnit;

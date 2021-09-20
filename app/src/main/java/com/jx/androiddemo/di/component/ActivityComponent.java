@@ -2,11 +2,11 @@ package com.jx.androiddemo.di.component;
 
 import android.app.Activity;
 
-import com.jx.androiddemo.activity.function.F1Activity;
+import com.jx.androiddemo.testactivity.function.f1.F1Activity;
 import com.jx.androiddemo.activity.main.LaunchActivity;
 import com.jx.androiddemo.activity.main.MainActivity;
-import com.jx.androiddemo.activity.ui.U1Activity;
-import com.jx.androiddemo.activity.ui.U2Activity;
+import com.jx.androiddemo.testactivity.ui.u1.U1Activity;
+import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.di.ActivityScope;
 import com.jx.androiddemo.di.module.ActivityModule;
 

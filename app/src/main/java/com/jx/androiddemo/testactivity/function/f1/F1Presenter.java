@@ -1,8 +1,8 @@
-package com.jx.androiddemo.presenter.function;
+package com.jx.androiddemo.testactivity.function.f1;
 
 import android.content.Context;
 
-import com.jx.androiddemo.contract.function.F1Contract;
+import com.jx.androiddemo.testactivity.function.f1.F1Contract;
 import com.jx.androiddemo.presenter.BaseRxPresenter;
 
 import javax.inject.Inject;

@@ -1,8 +1,9 @@
-package com.jx.androiddemo.activity.ui;
+package com.jx.androiddemo.testactivity.ui.u1;
 
 import android.annotation.SuppressLint;
 import android.graphics.PixelFormat;
-import android.os.Looper;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,8 +13,6 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
 import com.jx.androiddemo.constant.Constants;
-import com.jx.androiddemo.contract.ui.U1Contract;
-import com.jx.androiddemo.presenter.ui.U1Presenter;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +28,10 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
 
     @BindView(R.id.tv_add_view_in_child_thread)
     TextView tv_add_view_in_child_thread;
+
+    private HandlerThread mHandlerThread;
+
+    private Handler mBackHandler;
 
     @Override
     protected void initInject() {
@@ -75,6 +78,7 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
                 });
     }
 
+    //切换全屏
     private void changeFullScreenOld() {
         int options = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -91,6 +95,7 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
         }
     }
 
+    //切换全屏
     private void changeFullScreenNew() {
         /*WindowInsetsControllerCompat controllerCompat = ViewCompat.getWindowInsetsController(tv_change_full_screen2);
         if (!mIsFullScreen) {
@@ -102,24 +107,28 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
         }*/
     }
 
+    //子线程添加view
     private void addViewInChildThread() {
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        if (null == mHandlerThread) {
+            mHandlerThread = new HandlerThread("childThread");
+            mHandlerThread.start();
+        }
+        if (null == mBackHandler) {
+            mBackHandler = new Handler(mHandlerThread.getLooper(), msg -> {
+                switch (msg.what) {
+                    case 0:
+                        addWindView();
+                        break;
                 }
-                Looper.prepare();
-                addWindView();
-                Looper.loop();
-            }
-        }.start();
+                return false;
+            });
+        }
+        mBackHandler.sendEmptyMessage(0);
     }
 
+    //子线程添加view
     private void addWindView() {
-        TextView tx = new TextView(this);
+        TextView tx = new TextView(U1Activity.this);
         tx.setText("今天天气很好哦！");
         tx.setTextColor(getResources().getColor(R.color.color_white));
         tx.setBackgroundColor(getResources().getColor(R.color.colorPrimary));

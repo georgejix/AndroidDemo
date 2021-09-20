@@ -1,4 +1,4 @@
-package com.jx.androiddemo.activity.ui;
+package com.jx.androiddemo.testactivity.ui.u2;
 
 import android.annotation.SuppressLint;
 
@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.adapter.ui.U2ListAdapter;
-import com.jx.androiddemo.contract.ui.U2Contract;
-import com.jx.androiddemo.presenter.ui.U2Presenter;
 import com.jx.pullrefreshview.SmartRefreshLayout;
 import com.jx.pullrefreshview.api.RefreshLayout;
 import com.jx.pullrefreshview.listener.OnRefreshLoadMoreListener;

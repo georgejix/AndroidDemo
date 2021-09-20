@@ -1,8 +1,8 @@
-package com.jx.androiddemo.presenter.ui;
+package com.jx.androiddemo.testactivity.ui.u1;
 
 import android.content.Context;
 
-import com.jx.androiddemo.contract.ui.U1Contract;
+import com.jx.androiddemo.testactivity.ui.u1.U1Contract;
 import com.jx.androiddemo.presenter.BaseRxPresenter;
 
 import javax.inject.Inject;

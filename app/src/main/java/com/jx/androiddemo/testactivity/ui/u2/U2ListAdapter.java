@@ -1,4 +1,4 @@
-package com.jx.androiddemo.adapter.ui;
+package com.jx.androiddemo.testactivity.ui.u2;
 
 import android.content.Context;
 

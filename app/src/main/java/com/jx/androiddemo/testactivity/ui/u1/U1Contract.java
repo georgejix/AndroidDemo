@@ -1,4 +1,4 @@
-package com.jx.androiddemo.contract.ui;
+package com.jx.androiddemo.testactivity.ui.u1;
 
 import com.jx.androiddemo.BaseView;
 import com.jx.androiddemo.presenter.BasePresenter;

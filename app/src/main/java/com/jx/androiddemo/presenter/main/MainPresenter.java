@@ -1,11 +1,10 @@
 package com.jx.androiddemo.presenter.main;
 
-import android.app.Activity;
 import android.content.Context;
 
-import com.jx.androiddemo.activity.function.F1Activity;
-import com.jx.androiddemo.activity.ui.U1Activity;
-import com.jx.androiddemo.activity.ui.U2Activity;
+import com.jx.androiddemo.testactivity.function.f1.F1Activity;
+import com.jx.androiddemo.testactivity.ui.u1.U1Activity;
+import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.bean.main.MainPageBean;
 import com.jx.androiddemo.contract.main.MainContract;
 import com.jx.androiddemo.presenter.BaseRxPresenter;
