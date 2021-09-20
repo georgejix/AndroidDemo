@@ -8,6 +8,10 @@ import com.jx.androiddemo.activity.main.LaunchActivity;
 import com.jx.androiddemo.activity.main.MainActivity;
 import com.jx.androiddemo.testactivity.function.f2.F2Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
+import com.jx.androiddemo.testactivity.function.f4.Camera2Activity;
+import com.jx.androiddemo.testactivity.function.f4.Camera3Activity;
+import com.jx.androiddemo.testactivity.function.f4.CameraActivity;
+import com.jx.androiddemo.testactivity.function.f4.F4Activity;
 import com.jx.androiddemo.testactivity.ui.u1.U1Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.di.ActivityScope;
@@ -34,6 +38,11 @@ public interface ActivityComponent {
     void inject(F2Activity f2Activity);
 
     void inject(F3Activity f3Activity);
+
+    void inject(F4Activity f4Activity);
+    void inject(CameraActivity cameraActivity);
+    void inject(Camera2Activity camera2Activity);
+    void inject(Camera3Activity camera3Activity);
 
 
     void inject(U1Activity u1Activity);

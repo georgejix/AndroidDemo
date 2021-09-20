@@ -5,6 +5,7 @@ import android.content.Context;
 import com.jx.androiddemo.testactivity.function.f1.F1Activity;
 import com.jx.androiddemo.testactivity.function.f2.F2Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
+import com.jx.androiddemo.testactivity.function.f4.F4Activity;
 import com.jx.androiddemo.testactivity.ui.u1.U1Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.bean.main.MainPageBean;
@@ -42,6 +43,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("简单线程", F1Activity.class));
             mMainPageList.add(new MainPageBean("序列号和aidl", F2Activity.class));
             mMainPageList.add(new MainPageBean("handler", F3Activity.class));
+            mMainPageList.add(new MainPageBean("相机", F4Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_camera1"
+        style="@style/generalTv"
+        android:text="camera1" />
+
+    <TextView
+        android:id="@+id/tv_camera2"
+        style="@style/generalTv"
+        android:text="camera2" />
+
+    <TextView
+        android:id="@+id/tv_camera3"
+        style="@style/generalTv"
+        android:text="camera3" />
+</LinearLayout>
