@@ -3,8 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jx.androiddemo">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture" />
+    <supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 唤醒锁 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.mplanet.testhandler.READ_CONTENT" />
+    <uses-permission android:name="com.mplanet.testhandler.WRITE_CONTENT" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".BaseApplication"
@@ -25,7 +50,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.main.MainActivity" />
+        <activity
+            android:name=".activity.main.MainActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.function.F1Activity" />
+
+        <activity android:name=".activity.ui.U1Activity" />
+        <activity android:name=".activity.ui.U2Activity" />
+
     </application>
 
 </manifest>

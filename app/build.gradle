@@ -26,7 +26,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         ndk {
-            abiFilters "armeabi", "armeabi-v7a"
+            abiFilters "x86", "armeabi", "armeabi-v7a"
         }
     }
 
@@ -140,4 +140,6 @@ dependencies {
     implementation developmentDependencies.leakCanary
     implementation project(path: ':arch') // 基础库
     implementation project(path: ':appfw') // 业务中心
+    implementation project(path: ':rvhelper')   //adapter
+    implementation project(path: ':pullrefreshview')    //下拉刷新
 }

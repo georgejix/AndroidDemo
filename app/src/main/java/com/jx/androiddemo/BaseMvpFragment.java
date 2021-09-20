@@ -131,7 +131,7 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseAppFr
     @Override
     public void showMsg(String msg)
     {
-        ToastUtil.showTextToast(mContext, msg);
+        ToastUtil.showTextToast(msg);
     }
 
     @Override

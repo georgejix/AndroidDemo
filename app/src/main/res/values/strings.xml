@@ -1,7 +1,3 @@
 <resources>
-    <string name="login_username">账号</string>
-    <string name="login_username_hint">输入用户名/手机号</string>
-    <string name="login_password">密码</string>
-    <string name="login_password_hint">输入密码</string>
-    <string name="login_submit">登录/注册</string>
+    <string name="access_camera_permission" translatable="false">获得摄像头权限成功</string>
 </resources>

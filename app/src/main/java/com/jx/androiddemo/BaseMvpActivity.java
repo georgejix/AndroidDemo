@@ -123,7 +123,7 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseAppAc
     @Override
     public void showMsg(String msg)
     {
-        ToastUtil.showTextToast(mContext, msg);
+        ToastUtil.showTextToast(msg);
     }
 
     @Override
