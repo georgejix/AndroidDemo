@@ -55,7 +55,7 @@ public class F3Activity extends BaseMvpActivity<F3Presenter> implements F3Contra
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_empty;
+        return R.layout.activity_f3;
     }
 
     @SuppressLint("CheckResult")

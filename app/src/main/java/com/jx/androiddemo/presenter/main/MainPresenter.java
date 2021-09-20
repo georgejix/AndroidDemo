@@ -10,6 +10,7 @@ import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.bean.main.MainPageBean;
 import com.jx.androiddemo.contract.main.MainContract;
 import com.jx.androiddemo.presenter.BaseRxPresenter;
+import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
 
             mMainPageList.add(new MainPageBean("简单ui", U1Activity.class));
             mMainPageList.add(new MainPageBean("上拉加载，下拉刷新", U2Activity.class));
+            mMainPageList.add(new MainPageBean("activity生命周期,popupwindow", U3Activity.class));
         }
         return mMainPageList;
     }

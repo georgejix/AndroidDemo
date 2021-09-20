@@ -59,6 +59,8 @@
 
         <activity android:name=".testactivity.ui.u1.U1Activity" />
         <activity android:name=".testactivity.ui.u2.U2Activity" />
+        <activity android:name=".testactivity.ui.u3.U3Activity" />
+        <activity android:name=".testactivity.ui.u3.U3_1Activity" />
 
 
         <service

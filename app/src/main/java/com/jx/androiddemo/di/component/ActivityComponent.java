@@ -12,6 +12,8 @@ import com.jx.androiddemo.testactivity.ui.u1.U1Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.di.ActivityScope;
 import com.jx.androiddemo.di.module.ActivityModule;
+import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
+import com.jx.androiddemo.testactivity.ui.u3.U3_1Activity;
 
 import dagger.Component;
 
@@ -37,4 +39,8 @@ public interface ActivityComponent {
     void inject(U1Activity u1Activity);
 
     void inject(U2Activity u2Activity);
+
+    void inject(U3Activity u3Activity);
+
+    void inject(U3_1Activity u3_1Activity);
 }
