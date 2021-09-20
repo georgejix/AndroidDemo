@@ -10,6 +10,7 @@ import com.jx.androiddemo.R;
 import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.contract.function.F1Contract;
 import com.jx.androiddemo.presenter.function.F1Presenter;
+import com.jx.androiddemo.tool.JniTest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +20,9 @@ public class F1Activity extends BaseMvpActivity<F1Presenter> implements F1Contra
 
     @BindView(R.id.tv_current_thread)
     TextView tv_current_thread;
+
+    @BindView(R.id.tv_jni)
+    TextView tv_jni;
 
     @Override
     protected void initInject() {
@@ -48,6 +52,14 @@ public class F1Activity extends BaseMvpActivity<F1Presenter> implements F1Contra
                 .subscribe(o ->
                 {
                     showMsg(Looper.getMainLooper().getThread() == Thread.currentThread() ? "yes" : "no");
+                });
+        RxView.clicks(tv_jni)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    JniTest j = new JniTest();
+                    j.test();
                 });
     }
 }

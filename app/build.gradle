@@ -14,6 +14,20 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    //引入其他so位置
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+
+    //make文件位置
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
     defaultConfig {
         minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
@@ -25,8 +39,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
-        ndk {
-            abiFilters "x86", "armeabi", "armeabi-v7a"
+        //声明平台
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+                abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+            }
         }
     }
 
@@ -135,6 +153,7 @@ dependencies {
     annotationProcessor presentationDependencies.glideCompiler
     implementation libraryDependencies.gson
     implementation libraryDependencies.guava
+    testImplementation 'junit:junit:4.12'
 
     //Development
     implementation developmentDependencies.leakCanary

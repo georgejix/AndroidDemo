@@ -1,0 +1,97 @@
+receiver添加过滤器用于接收隐式广播，没有过滤器的广播，就接收不到隐式广播，但是可以显示调用
+
+onTrimMemory TRIM_MEMORY_RUNNING_MODERATE：你的app正在运行并且不会被列为可杀死的。但是设备此时正运行于低内存状态下，系统开始触发杀死LRU Cache中的Process的机制。
+             TRIM_MEMORY_RUNNING_LOW：你的app正在运行且没有被列为可杀死的。但是设备正运行于更低内存的状态下，你应该释放不用的资源用来提升系统性能（但是这也会直接影响到你的app的性能）。
+             TRIM_MEMORY_RUNNING_CRITICAL：你的app仍在运行，但是系统已经把LRU Cache中的大多数进程都已经杀死，因此你应该立即释放所有非必须的资源。如果系统不能回收到足够的RAM数量，系统将会清除所有的LRU缓存中的进程，并且开始杀死那些之前被认为不应该杀死的进程，例如那个包含了一个运行态Service的进程。
+
+SparseArray, SparseBooleanArray, 与 LongSparseArray
+
+zipalign
+
+<service android:name=".PlaybackService"
+         android:process=":background" />
+
+layout: include merge ViewStub
+
+// 把当前的线程变成后台执行的线程
+android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+
+查看手机activity栈信息命令：adb shell dumpsys activity
+
+elevation 立体效果
+
+图片裁剪的核心功能 Bitmap.createBitmap(
+                                    //原图
+                                    originalBitmap,
+                                    //图片裁剪横坐标开始位置
+                                    cropX,
+                                    //图片裁剪纵坐标开始位置
+                                    cropY,
+                                    //要裁剪的宽度
+                                    cropWidth,
+                                    //要裁剪的高度
+                                    cropHeight);
+
+imageview设置tint属性，修改着色
+
+ServerSocket serverSocket =  new ServerSocket(0); //读取空闲的可用端口
+int port = serverSocket.getLocalPort();
+
+//HorizontalScrollView滑动到最右
+titleScroll.getViewTreeObserver().addOnGlobalLayoutListener(titleLayoutListener);
+ViewTreeObserver.OnGlobalLayoutListener titleLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+        @Override
+        public void onGlobalLayout() {
+        	titleScroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
+        	titleScroll.getViewTreeObserver().removeOnGlobalLayoutListener(titleLayoutListener);
+        }
+    };
+
+launchmode=singleInstance的activity，都会独占一个stack
+taskAffinity属性对singleInstance不会生效,taskAffinity属性只对singletask生效
+standard A->singleInstance B->standard C        A和C在一个stack，B单独stack
+standard A->singleTask（没有指定taskAffinity） B->standard C      A,B,C在同一个stack
+standard A->singleTask（指定taskAffinity） B->standard C      A在一个stack,B,C在一个stack
+跳转activity时，默认在当前stack上新增，遇到需要新建stack时则新建，如果当前stack不让新增新的activity，则用之前存在的可用的stack
+不同activity stack，在点击系统menu按钮时，是不同的窗口
+
+library工程中，获取string.xml中string的方法
+SDKInitializer.getContext().getResources().getIdentifier("upgrade_pkg_download_failed", "string", SDKInitializer.getContext().getPackageName())
+
+androidmenifest.xml中process的值有两种形式 “:remote” “com.a.b.c.remote” 第一种中的“：”表示当前包名，私有进程，其他应用不可以和它跑在同一进程，
+全名称表示公用进程，可以和其他应用跑在同一进程（通过shareuid相同，签名相同）
+不同进程，data目录，组件信息，内存数据都不共享
+
+decorView windowmanager activitythread window
+Viewroot对应于ViewRootImpl类，它是连接WindowManager和DecorView的纽带，
+View的三大流程均是通过ViewRoot来完成的。在ActivityThread中，当Activity对象被创建
+完毕后，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将ViewRootImpl
+对象和DecorView建立关联，这个过程可参看如下源码：
+root = new ViewRootImpl(view.getContext(),display);
+root.setView(view, wparams, panelParentView);
+
+DecorView作为顶级View（FrameLayout），包含竖直方向2个子view：titlebar和android.R.id.content
+可以通过ViewGroup content = findViewById(R.android.id.content)获取，在给activity设置layout时方法是setContentView()
+获取设置的layout，可以通过content.getChildAt(0)
+
+activitymanager managerservice
+算法 设计模式
+
+
+android9.0 activity启动：
+https://www.jianshu.com/p/e1153fed5b23
+https://www.jianshu.com/p/824db350dce6
+
+oncreate()中view.getWidth()=0
+Activity.phonewindow.(ViewGroup)mContentParent
+phonewindow.setContentView()->mContentParent.requestApplyInsets()->view.requestApplyInsets()->view.requestFitSystemWindows()->viewrootimpl.requestFitSystemWindows()
+->viewrootimpl.scheduleTraversals()->handler.send(mTraversalRunnable)->viewrootimpl.doTraversal()->viewrootimpl.performTraversals()->viewrootimpl.performLayout()
+->host.layout()
+使用handler，getwidth()时,view未绘画完成
+
+//获取动态实例化的textview的宽高
+int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+textView.measure(w, h);
+int tvh = textView.getMeasuredHeight();
+int tvw = textView.getMeasuredWidth();
