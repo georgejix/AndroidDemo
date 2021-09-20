@@ -3,6 +3,7 @@ package com.jx.androiddemo.presenter.main;
 import android.content.Context;
 
 import com.jx.androiddemo.testactivity.function.f1.F1Activity;
+import com.jx.androiddemo.testactivity.function.f2.F2Activity;
 import com.jx.androiddemo.testactivity.ui.u1.U1Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.bean.main.MainPageBean;
@@ -37,6 +38,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
         if (null == mMainPageList) {
             mMainPageList = new ArrayList<>();
             mMainPageList.add(new MainPageBean("简单线程", F1Activity.class));
+            mMainPageList.add(new MainPageBean("aidl", F2Activity.class));
 
 
             mMainPageList.add(new MainPageBean("简单ui", U1Activity.class));

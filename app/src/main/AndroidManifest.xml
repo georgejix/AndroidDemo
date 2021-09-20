@@ -54,10 +54,18 @@
             android:name=".activity.main.MainActivity"
             android:launchMode="singleTask" />
         <activity android:name=".testactivity.function.f1.F1Activity" />
+        <activity android:name=".testactivity.function.f2.F2Activity" />
 
         <activity android:name=".testactivity.ui.u1.U1Activity" />
         <activity android:name=".testactivity.ui.u2.U2Activity" />
 
+
+        <service
+            android:name="com.jx.androiddemo.aidl.MessengerService"
+            android:process=":remote" />
+        <service
+            android:name="com.jx.androiddemo.aidl.BookManagerService"
+            android:process=":remote" />
     </application>
 
 </manifest>
