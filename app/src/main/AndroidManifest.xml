@@ -55,6 +55,7 @@
             android:launchMode="singleTask" />
         <activity android:name=".testactivity.function.f1.F1Activity" />
         <activity android:name=".testactivity.function.f2.F2Activity" />
+        <activity android:name=".testactivity.function.f3.F3Activity" />
 
         <activity android:name=".testactivity.ui.u1.U1Activity" />
         <activity android:name=".testactivity.ui.u2.U2Activity" />

@@ -58,7 +58,9 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         mMainPageListAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, Object o, int position) {
-                startActivity(new Intent(mContext, mPresenter.getMainPageList().get(position).clazz));
+                if (null != mPresenter.getMainPageList().get(position).clazz) {
+                    startActivity(new Intent(mContext, mPresenter.getMainPageList().get(position).clazz));
+                }
             }
 
             @Override
