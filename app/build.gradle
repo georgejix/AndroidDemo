@@ -1,0 +1,143 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'com.android.application'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+    flavorDimensions "androiddemo1"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+
+        applicationId globalConfiguration.getAt("androidApplicationId")
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a"
+        }
+    }
+
+    signingConfigs {
+        releaseConfig {
+            storeFile file('../buildsystem/myAppKey.jks')
+            storePassword 'jixiao'
+            keyAlias 'com.jx.androiddemo'
+            keyPassword 'jixiao'
+        }
+    }
+
+    productFlavors {
+        androiddemo1 { // 通用版本
+            applicationId globalConfiguration.getAt("androidApplicationId")
+            versionName globalConfiguration.getAt("androidVersionName")
+            resValue "string", "app_name", globalConfiguration.getAt("androidAppName")
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            resValue "string", "app_name", globalConfiguration.getAt("androidAppName") + "debug"
+            signingConfig signingConfigs.releaseConfig
+            applicationIdSuffix '.debug' //在debug版本中，将会在程序的原包名上加上.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            project.gradle.startParameter.excludedTaskNames.add('lint')  // 屏蔽lint耗时检查
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.releaseConfig
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            aaptOptions.cruncherEnabled = false
+            aaptOptions.useNewCruncher = false
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.buildType.name == 'release') {
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss")
+                Date curDate = new Date(System.currentTimeMillis())
+                String currentVersionName = "androidVersionName"
+                outputFileName = productFlavors[0].name + "-app-" + globalConfiguration.getAt(currentVersionName) + "-" + formatter.format(curDate) + ".apk"
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude "lib/armeabi/librealm-jni.so"
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+}
+
+dependencies {
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def developmentDependencies = rootProject.ext.developmentDependencies
+    implementation fileTree(dir: 'libs', include: ['*.jar', "*.aar"])
+    implementation presentationDependencies.appcompat
+    implementation presentationDependencies.androidxLegacy
+    implementation presentationDependencies.androidxRecyclerview
+    implementation presentationDependencies.androidxMaterial
+
+    implementation presentationDependencies.androidxMultidex
+    implementation presentationDependencies.dagger
+    implementation presentationDependencies.appcompat
+    implementation presentationDependencies.constraintlayout
+    annotationProcessor presentationDependencies.daggerCompiler
+    implementation presentationDependencies.rxJava
+    implementation presentationDependencies.rxAndroid
+    compileOnly presentationDependencies.javaxAnnotation
+    implementation presentationDependencies.lifecycleExtensions
+    annotationProcessor presentationDependencies.lifecycleCompiler
+
+    implementation presentationDependencies.eventbus
+    implementation presentationDependencies.rxbinding
+    implementation presentationDependencies.rxbindingSupport
+    implementation presentationDependencies.rxbindingAppcompat
+    implementation presentationDependencies.rxbindingDesign
+    implementation presentationDependencies.rxbindingRecyclerview
+    implementation presentationDependencies.rxlifecycle
+    implementation presentationDependencies.rxlifecycleComponents
+    implementation presentationDependencies.butterknife
+    annotationProcessor presentationDependencies.butterknifeCompiler
+    implementation presentationDependencies.meFragmentation
+    implementation presentationDependencies.glide
+    annotationProcessor presentationDependencies.glideCompiler
+    implementation libraryDependencies.gson
+    implementation libraryDependencies.guava
+
+    //Development
+    implementation developmentDependencies.leakCanary
+    implementation project(path: ':arch') // 基础库
+    implementation project(path: ':appfw') // 业务中心
+}

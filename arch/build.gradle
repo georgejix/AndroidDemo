@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: 'realm-android'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+
+    defaultConfig {
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            buildConfigField("boolean", "ON_OFF", String.valueOf(globalConfiguration.getAt("androidOpenTest")))
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            buildConfigField("boolean", "ON_OFF", String.valueOf(globalConfiguration.getAt("androidOpenTest")))
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    def libraryDependencies = rootProject.ext.libraryDependencies
+    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation project(':HTTPDNS_ANDROID_SDK_V3.3.0_G96')
+    compileOnly libraryDependencies.javaxAnnotation
+    implementation libraryDependencies.javaxInject
+    implementation libraryDependencies.rxJava
+    implementation libraryDependencies.rxAndroid
+    implementation libraryDependencies.androidAnnotations
+    implementation libraryDependencies.arrow
+    implementation libraryDependencies.gson
+    implementation libraryDependencies.okhttp
+    implementation libraryDependencies.okhttpLogging
+    implementation libraryDependencies.androidxDrawerlayout
+    implementation('io.jaegertracing:jaeger-client:1.3.1') {
+        exclude group: 'com.squareup.okhttp3'
+    }
+    api 'org.jetbrains:annotations:15.0'
+}

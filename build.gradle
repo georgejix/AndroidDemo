@@ -1,0 +1,41 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: 'buildsystem/ci.gradle'
+apply from: 'buildsystem/dependencies.gradle'
+
+buildscript {
+    repositories {
+        maven{url 'https://maven.aliyun.com/repository/public'}
+        maven{url 'https://maven.aliyun.com/repository/google'}
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.2"
+        classpath "io.realm:realm-gradle-plugin:6.0.1"
+    }
+}
+
+allprojects {
+    ext {
+        // 通用配置
+        androidVersionCode = 1
+        /**
+         * 是否开启测试
+         * TODO 发布的时候改成false
+         */
+        androidOpenTest = true
+
+        androidApplicationId = 'com.jx.androiddemo'
+        androidVersionName = "1.0.0"
+        androidAppName = "androiddemo"
+    }
+
+    repositories {
+        maven{url 'https://maven.aliyun.com/repository/public'}
+        maven{url 'https://maven.aliyun.com/repository/google'}
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

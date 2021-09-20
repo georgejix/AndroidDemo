@@ -1,0 +1,91 @@
+ext {
+    //Android
+    androidBuildToolsVersion = "30.0.0"
+    androidMinSdkVersion = 19
+    androidTargetSdkVersion = 30
+    androidCompileSdkVersion = 30
+    supportLibraryVersion = '30.0.0'
+    //Libraries
+    daggerVersion = '2.21'
+    rxJavaVersion = '2.1.3'
+    rxAndroidVersion = '2.0.1'
+    javaxAnnotationVersion = '1.0'
+    javaxInjectVersion = '1'
+    gsonVersion = '2.3'
+    androidAnnotationsVersion = '28.0.0'
+    archLifecycleVersion = "2.0.0"
+    arrowVersion = '1.0.0'
+    appcompatVersion = '1.2.0'
+    constraintlayoutVersion = '2.0.4'
+    androidxVersion = '1.0.0'
+    guavaVersion = '28.1-android'
+    eventbusVersion = '3.2.0'
+    rxbindingVersion = '2.1.1'
+    rxlifecycleVersion = '2.2.1'
+    rxlifecycleComponentsVersion = '2.1.0'
+    butterknifeVersion = '10.2.0'
+    meFragmentationVersion = '1.0.2'
+    glideVersion = '4.10.0'
+    okhttpVersion = '3.14.9'
+    okhttpLoggingVersion = '3.14.9'
+    materialishVersion = '1.7'
+    designVersion = '28.0.0'
+
+    //Development
+    leakCanaryVersion = '1.3.1'
+    multidexVersion = '2.0.0'
+    okioVersion = '2.2.2'
+
+    presentationDependencies = [
+            daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger               : "com.google.dagger:dagger:${daggerVersion}",
+            rxJava               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation      : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            lifecycleExtensions  : "androidx.lifecycle:lifecycle-extensions:${archLifecycleVersion}",
+            lifecycleCompiler    : "androidx.lifecycle:lifecycle-extensions:${archLifecycleVersion}",
+            guava                : "com.google.guava:guava:$rootProject.guavaVersion",
+            appcompat            : "androidx.appcompat:appcompat:${appcompatVersion}",
+            constraintlayout     : "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
+            androidxLegacy       : "androidx.legacy:legacy-support-v4:${androidxVersion}",
+            androidxRecyclerview : "androidx.recyclerview:recyclerview:${androidxVersion}",
+            androidxMaterial     : "com.google.android.material:material:${androidxVersion}",
+            eventbus             : "org.greenrobot:eventbus:${eventbusVersion}",
+            rxbinding            : "com.jakewharton.rxbinding2:rxbinding:${rxbindingVersion}",
+            rxbindingSupport     : "com.jakewharton.rxbinding2:rxbinding-support-v4:${rxbindingVersion}",
+            rxbindingAppcompat   : "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${rxbindingVersion}",
+            rxbindingDesign      : "com.jakewharton.rxbinding2:rxbinding-design:${rxbindingVersion}",
+            rxbindingRecyclerview: "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:${rxbindingVersion}",
+            rxlifecycle          : "com.trello.rxlifecycle2:rxlifecycle:${rxlifecycleVersion}",
+            rxlifecycleComponents: "com.trello.rxlifecycle2:rxlifecycle-components:${rxlifecycleComponentsVersion}",
+            butterknife          : "com.jakewharton:butterknife:${butterknifeVersion}",
+            butterknifeCompiler  : "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
+            meFragmentation      : "me.yokeyword:fragmentationx:${meFragmentationVersion}",
+            glide                : "com.github.bumptech.glide:glide:${glideVersion}",
+            glideCompiler        : "com.github.bumptech.glide:compiler:${glideVersion}",
+            androidxMultidex     : "androidx.multidex:multidex:${multidexVersion}",
+    ]
+
+    libraryDependencies = [
+            daggerCompiler      : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger              : "com.google.dagger:dagger:${daggerVersion}",
+            gson                : "com.google.code.gson:gson:${gsonVersion}",
+            rxJava              : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid           : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation     : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject         : "javax.inject:javax.inject:${javaxInjectVersion}",
+            androidAnnotations  : "com.android.support:support-annotations:${androidAnnotationsVersion}",
+            arrow               : "com.fernandocejas:arrow:${arrowVersion}",
+            androidxDrawerlayout: "androidx.drawerlayout:drawerlayout:${androidxVersion}",
+            okhttp              : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+            okhttpLogging       : "com.squareup.okhttp3:logging-interceptor:${okhttpLoggingVersion}",
+            materialish         : "com.pnikosis:materialish-progress:${materialishVersion}",
+            design              : "com.android.support:design:${designVersion}",
+            guava               : "com.google.guava:guava:$rootProject.guavaVersion",
+            okio               : "com.squareup.okio:okio:${okioVersion}",
+    ]
+
+    developmentDependencies = [
+            leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+    ]
+}
