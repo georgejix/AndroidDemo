@@ -60,11 +60,44 @@
         <activity android:name=".testactivity.function.f4.CameraActivity" />
         <activity android:name=".testactivity.function.f4.Camera2Activity" />
         <activity android:name=".testactivity.function.f4.Camera3Activity" />
+        <activity android:name=".testactivity.function.f5.F5Activity" />
+        <activity android:name=".testactivity.function.f6.F6Activity" />
+        <activity android:name=".testactivity.function.f7.F7Activity" />
+        <activity android:name=".testactivity.function.f8.F8Activity" />
+        <activity android:name=".testactivity.function.f9.F9Activity" />
+        <activity android:name=".testactivity.function.f10.F10Activity" />
+        <activity android:name=".testactivity.function.f11.F11Activity" />
+        <activity android:name=".testactivity.function.f12.F12Activity" />
+        <activity android:name=".testactivity.function.f13.F13Activity" />
+        <activity android:name=".testactivity.function.f14.F14Activity" />
+        <activity android:name=".testactivity.function.f15.F15Activity" />
+        <activity android:name=".testactivity.function.f16.F16Activity" />
+        <activity android:name=".testactivity.function.f17.F17Activity" />
+        <activity android:name=".testactivity.function.f18.F18Activity" />
+        <activity android:name=".testactivity.function.f19.F19Activity" />
+        <activity android:name=".testactivity.function.f20.F20Activity" />
 
         <activity android:name=".testactivity.ui.u1.U1Activity" />
         <activity android:name=".testactivity.ui.u2.U2Activity" />
         <activity android:name=".testactivity.ui.u3.U3Activity" />
         <activity android:name=".testactivity.ui.u3.U3_1Activity" />
+        <activity android:name=".testactivity.ui.u4.U4Activity" />
+        <activity android:name=".testactivity.ui.u5.U5Activity" />
+        <activity android:name=".testactivity.ui.u6.U6Activity" />
+        <activity android:name=".testactivity.ui.u7.U7Activity" />
+        <activity android:name=".testactivity.ui.u8.U8Activity" />
+        <activity android:name=".testactivity.ui.u9.U9Activity" />
+        <activity android:name=".testactivity.ui.u10.U10Activity" />
+        <activity android:name=".testactivity.ui.u11.U11Activity" />
+        <activity android:name=".testactivity.ui.u12.U12Activity" />
+        <activity android:name=".testactivity.ui.u13.U13Activity" />
+        <activity android:name=".testactivity.ui.u14.U14Activity" />
+        <activity android:name=".testactivity.ui.u15.U15Activity" />
+        <activity android:name=".testactivity.ui.u16.U16Activity" />
+        <activity android:name=".testactivity.ui.u17.U17Activity" />
+        <activity android:name=".testactivity.ui.u18.U18Activity" />
+        <activity android:name=".testactivity.ui.u19.U19Activity" />
+        <activity android:name=".testactivity.ui.u20.U20Activity" />
 
 
         <service
