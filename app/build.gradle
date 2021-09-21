@@ -154,6 +154,7 @@ dependencies {
     implementation libraryDependencies.gson
     implementation libraryDependencies.guava
     testImplementation 'junit:junit:4.12'
+    implementation 'com.jakewharton:disklrucache:2.0.2'
 
     //Development
     implementation developmentDependencies.leakCanary

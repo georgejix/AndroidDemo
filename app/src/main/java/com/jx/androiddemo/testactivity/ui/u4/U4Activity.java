@@ -1,6 +1,8 @@
 package com.jx.androiddemo.testactivity.ui.u4;
 
 import android.annotation.SuppressLint;
+import android.os.Environment;
+import android.widget.ListView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
@@ -9,12 +11,19 @@ import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class U4Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+
+    @BindView(R.id.listview)
+    private ListView listView;
+
+    private Adapter4TestBitmap adapter;
 
     @Override
     protected void initInject() {
@@ -34,6 +43,13 @@ public class U4Activity extends BaseMvpActivity<EmptyPresenter> implements Empty
     }
 
     private void initView() {
+        if (null == adapter) {
+            if (Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+                adapter = new Adapter4TestBitmap(this, new File(Environment.getExternalStorageDirectory() + File.separator + "pic"));
+            }
+
+            listView.setAdapter(adapter);
+        }
     }
 
     @SuppressLint("CheckResult")
