@@ -1,9 +1,13 @@
 package com.jx.androiddemo.presenter.main;
 
 import android.content.Context;
-import android.view.VelocityTracker;
 
+import com.jx.androiddemo.bean.main.MainPageBean;
+import com.jx.androiddemo.contract.main.MainContract;
+import com.jx.androiddemo.presenter.BaseRxPresenter;
 import com.jx.androiddemo.testactivity.function.f1.F1Activity;
+import com.jx.androiddemo.testactivity.function.f10.F10Activity;
+import com.jx.androiddemo.testactivity.function.f11.F11Activity;
 import com.jx.androiddemo.testactivity.function.f2.F2Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
@@ -15,9 +19,6 @@ import com.jx.androiddemo.testactivity.function.f9.F9Activity;
 import com.jx.androiddemo.testactivity.ui.u1.U1Activity;
 import com.jx.androiddemo.testactivity.ui.u10.U10Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
-import com.jx.androiddemo.bean.main.MainPageBean;
-import com.jx.androiddemo.contract.main.MainContract;
-import com.jx.androiddemo.presenter.BaseRxPresenter;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
 import com.jx.androiddemo.testactivity.ui.u5.U5Activity;
@@ -61,7 +62,9 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("nsd", F6Activity.class));
             mMainPageList.add(new MainPageBean("net", F7Activity.class));
             mMainPageList.add(new MainPageBean("xml", F8Activity.class));
-            mMainPageList.add(new MainPageBean("intentservice", F9Activity.class));
+            mMainPageList.add(new MainPageBean("intentService", F9Activity.class));
+            mMainPageList.add(new MainPageBean("Thumbnail", F10Activity.class));
+            mMainPageList.add(new MainPageBean("DeviceAwake", F11Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));

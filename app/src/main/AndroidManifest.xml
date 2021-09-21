@@ -112,6 +112,15 @@
         <service
             android:name=".service.RSSPullService"
             android:exported="false" />
+
+
+        <service android:name=".testactivity.function.f11.MyIntentService" />
+        <receiver android:name=".testactivity.function.f11.AlarmReceiver" />
+        <receiver android:name=".testactivity.function.f11.SampleBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
