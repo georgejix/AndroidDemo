@@ -8,6 +8,7 @@ import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
 import com.jx.androiddemo.testactivity.function.f5.F5Activity;
 import com.jx.androiddemo.testactivity.function.f6.F6Activity;
+import com.jx.androiddemo.testactivity.function.f7.F7Activity;
 import com.jx.androiddemo.testactivity.ui.u1.U1Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.bean.main.MainPageBean;
@@ -50,7 +51,8 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("handler", F3Activity.class));
             mMainPageList.add(new MainPageBean("相机", F4Activity.class));
             mMainPageList.add(new MainPageBean("CountDownLatch", F5Activity.class));
-            mMainPageList.add(new MainPageBean("nds", F6Activity.class));
+            mMainPageList.add(new MainPageBean("nsd", F6Activity.class));
+            mMainPageList.add(new MainPageBean("net", F7Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));
