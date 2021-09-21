@@ -1,4 +1,4 @@
-package com.jx.androiddemo.view;
+package com.jx.androiddemo.testactivity.ui.u7;
 
 import android.content.Context;
 import android.content.res.TypedArray;
