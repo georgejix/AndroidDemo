@@ -20,6 +20,8 @@ import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
 import com.jx.androiddemo.testactivity.ui.u5.U5Activity;
 import com.jx.androiddemo.testactivity.ui.u6.U6Activity;
 import com.jx.androiddemo.testactivity.ui.u7.U7Activity;
+import com.jx.androiddemo.testactivity.ui.u8.U8Activity;
+import com.jx.androiddemo.testactivity.ui.u9.U9Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +69,8 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("opengles", U5Activity.class));
             mMainPageList.add(new MainPageBean("animation", U6Activity.class));
             mMainPageList.add(new MainPageBean("圆角图片", U7Activity.class));
+            mMainPageList.add(new MainPageBean("TouchEvent,popupwindow", U8Activity.class));
+
         }
         return mMainPageList;
     }
