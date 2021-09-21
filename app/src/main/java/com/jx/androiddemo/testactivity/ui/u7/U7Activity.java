@@ -1,20 +1,27 @@
 package com.jx.androiddemo.testactivity.ui.u7;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+import android.widget.ImageView;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class U7Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+    private final String TAG = "TestImgActivity";
+
+    @BindView(R.id.img01)
+    ImageView img01;
 
     @Override
     protected void initInject() {
@@ -34,6 +41,16 @@ public class U7Activity extends BaseMvpActivity<EmptyPresenter> implements Empty
     }
 
     private void initView() {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(getResources(),
+                R.mipmap.pic2, options);
+        options.inSampleSize = Math.max(options.outWidth / img01.getLayoutParams().width, options.outHeight / img01.getLayoutParams().height);
+        options.inJustDecodeBounds = false;
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                R.mipmap.pic2, options);
+        Log.d(TAG, img01.getLayoutParams().width + "");
+        img01.setImageDrawable(new CircleImageDrawable(bitmap));
     }
 
     @SuppressLint("CheckResult")

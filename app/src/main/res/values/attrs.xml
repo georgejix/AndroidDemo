@@ -8,4 +8,8 @@
         <attr name="layout_shadowDx" format="dimension" />
         <attr name="layout_shadowDy" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="RoundLayout">
+        <attr name="roundLayoutRadius" format="dimension"/>
+    </declare-styleable>
 </resources>
