@@ -21,7 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class U4Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
 
     @BindView(R.id.listview)
-    private ListView listView;
+    ListView listView;
 
     private Adapter4TestBitmap adapter;
 

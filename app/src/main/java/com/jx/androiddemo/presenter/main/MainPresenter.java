@@ -14,6 +14,7 @@ import com.jx.androiddemo.contract.main.MainContract;
 import com.jx.androiddemo.presenter.BaseRxPresenter;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
+import com.jx.androiddemo.testactivity.ui.u5.U5Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("上拉加载，下拉刷新", U2Activity.class));
             mMainPageList.add(new MainPageBean("activity生命周期,popupwindow", U3Activity.class));
             mMainPageList.add(new MainPageBean("bitmap加载显示", U4Activity.class));
+            mMainPageList.add(new MainPageBean("opengles", U5Activity.class));
         }
         return mMainPageList;
     }
