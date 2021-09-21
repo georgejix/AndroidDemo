@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
     xmlns:my_app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +9,8 @@
 
     <TextView
         style="@style/generalTv"
-        android:text="bitmap传入drawable，画笔画圆" />
+        android:text="bitmap传入drawable，画笔画圆"
+        android:textColor="@color/color_white" />
 
     <ImageView
         android:id="@+id/img01"
@@ -19,7 +19,8 @@
 
     <TextView
         style="@style/generalTv"
-        android:text="圓角矩形clippath" />
+        android:text="圓角矩形clippath"
+        android:textColor="@color/color_white" />
 
     <com.jx.androiddemo.testactivity.ui.u7.RoundLayout
         android:layout_width="match_parent"
@@ -39,7 +40,8 @@
 
     <TextView
         style="@style/generalTv"
-        android:text="drawable转为bitmap，画笔画圆" />
+        android:text="drawable转为bitmap，画笔画圆"
+        android:textColor="@color/color_white" />
 
     <com.jx.androiddemo.testactivity.ui.u7.CircleImageView
         android:layout_width="50dp"
@@ -57,7 +59,8 @@
 
     <TextView
         style="@style/generalTv"
-        android:text="clear边角方式的圆角布局" />
+        android:text="clear边角方式的圆角布局"
+        android:textColor="@color/color_white" />
 
     <com.jx.androiddemo.testactivity.ui.u7.RoundRelativeLayout
         android:layout_width="match_parent"
@@ -67,8 +70,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#fff"
-            app:layout_radius="10dp">
+            my_app:layout_radius="10dp">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/pic4" />
         </LinearLayout>
     </com.jx.androiddemo.testactivity.ui.u7.RoundRelativeLayout>
 </LinearLayout>
