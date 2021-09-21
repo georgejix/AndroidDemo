@@ -99,13 +99,19 @@
         <activity android:name=".testactivity.ui.u19.U19Activity" />
         <activity android:name=".testactivity.ui.u20.U20Activity" />
 
-
+        <!-- aidl -->
         <service
             android:name="com.jx.androiddemo.aidl.MessengerService"
             android:process=":remote" />
         <service
             android:name="com.jx.androiddemo.aidl.BookManagerService"
             android:process=":remote" />
+
+
+        <!-- IntentService -->
+        <service
+            android:name=".service.RSSPullService"
+            android:exported="false" />
     </application>
 
 </manifest>

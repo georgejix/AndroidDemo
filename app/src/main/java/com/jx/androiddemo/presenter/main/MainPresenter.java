@@ -11,6 +11,7 @@ import com.jx.androiddemo.testactivity.function.f5.F5Activity;
 import com.jx.androiddemo.testactivity.function.f6.F6Activity;
 import com.jx.androiddemo.testactivity.function.f7.F7Activity;
 import com.jx.androiddemo.testactivity.function.f8.F8Activity;
+import com.jx.androiddemo.testactivity.function.f9.F9Activity;
 import com.jx.androiddemo.testactivity.ui.u1.U1Activity;
 import com.jx.androiddemo.testactivity.ui.u10.U10Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
@@ -60,6 +61,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("nsd", F6Activity.class));
             mMainPageList.add(new MainPageBean("net", F7Activity.class));
             mMainPageList.add(new MainPageBean("xml", F8Activity.class));
+            mMainPageList.add(new MainPageBean("intentservice", F9Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));
