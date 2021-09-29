@@ -16,7 +16,8 @@
     <dimen name="text_big">24sp</dimen>
     <dimen name="text_title_small">17sp</dimen>
     <dimen name="alert_width">86dp</dimen>
-
+    <dimen name="mainTextSize">12sp</dimen>
+    <dimen name="perLineHeight">20dp</dimen>
     <!-- px转换成dp -->
     <!-- return (int) (pxValue / fontScale + 0.5f); 这里fontScale为2-xhdpi -->
     <dimen name="pxtodp0">0dp</dimen>

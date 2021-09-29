@@ -28,6 +28,8 @@ import com.jx.androiddemo.testactivity.ui.u13.U13Activity;
 import com.jx.androiddemo.testactivity.ui.u14.U14Activity;
 import com.jx.androiddemo.testactivity.ui.u15.U15Activity;
 import com.jx.androiddemo.testactivity.ui.u16.U16Activity;
+import com.jx.androiddemo.testactivity.ui.u17.U17Activity;
+import com.jx.androiddemo.testactivity.ui.u18.U18Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
@@ -99,6 +101,8 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("TestSomeView", U14Activity.class));
             mMainPageList.add(new MainPageBean("imageView", U15Activity.class));
             mMainPageList.add(new MainPageBean("相机选择照片，拍照", U16Activity.class));
+            mMainPageList.add(new MainPageBean("选择日期", U17Activity.class));
+            mMainPageList.add(new MainPageBean("选择日期2", U18Activity.class));
 
 
         }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg_pop_choose_date"
     android:orientation="vertical">
 
     <LinearLayout
@@ -17,10 +17,10 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="right"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="15dp"
             android:src="@mipmap/cancel"
-            app:tint="@color/black" />
+            app:tint="@color/grey" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="开始日期"
+                    android:text="@string/starttime"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:textColor="@color/red"
+                    android:textColor="@color/yellow"
                     android:textSize="14sp" />
 
                 <View
@@ -64,6 +64,8 @@
             <View
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/grey" />
 
             <LinearLayout
@@ -78,7 +80,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="结束日期"
+                    android:text="@string/endtime"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -87,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:textColor="@color/red"
+                    android:textColor="@color/yellow"
                     android:textSize="14sp" />
 
                 <View
@@ -211,7 +213,7 @@
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            app:hightlightBgColor="#F49F5F"
+            app:hightlightBgColor="@color/yellow"
             app:hightlightTextColor="@color/white"
             app:mainBgColor="#FEF2E9"
             app:mainTextColor="@color/black"
@@ -221,9 +223,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textview_cancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -233,11 +237,12 @@
                 android:gravity="center"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="取消"
+                android:text="@string/cancel"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/textview_save"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -247,7 +252,7 @@
                 android:gravity="center"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="保存"
+                android:text="@string/save"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
