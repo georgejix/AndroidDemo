@@ -13,6 +13,7 @@ import com.jx.androiddemo.testactivity.function.f13.F13Activity;
 import com.jx.androiddemo.testactivity.function.f14.F14Activity;
 import com.jx.androiddemo.testactivity.function.f15.F15Activity;
 import com.jx.androiddemo.testactivity.function.f16.F16Activity;
+import com.jx.androiddemo.testactivity.function.f17.F17Activity;
 import com.jx.androiddemo.testactivity.function.f2.F2Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
@@ -84,9 +85,11 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("timer", F14Activity.class));
             mMainPageList.add(new MainPageBean("notification", F15Activity.class));
             mMainPageList.add(new MainPageBean("sqlite", F16Activity.class));
+            mMainPageList.add(new MainPageBean("contentProvider", F17Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));
+
 
             mMainPageList.add(new MainPageBean("简单ui", U1Activity.class));
             mMainPageList.add(new MainPageBean("上拉加载，下拉刷新", U2Activity.class));

@@ -136,6 +136,15 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <provider
+            android:name=".testactivity.function.f17.DemoContentProvider"
+            android:authorities="com.jx.androiddemo"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":provider"
+            android:readPermission="com.mplanet.testhandler.READ_CONTENT"
+            android:writePermission="com.mplanet.testhandler.WRITE_CONTENT" />
     </application>
 
 </manifest>
