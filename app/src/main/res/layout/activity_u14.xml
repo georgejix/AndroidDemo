@@ -1,8 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textview_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="改变文本框内文字的颜色属性"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textview_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="改变文本框内文字的颜色字体属性"
+        android:textSize="16sp" />
+
+    <com.jx.androiddemo.testactivity.ui.u14.MTextView
+        android:id="@+id/textview_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@mipmap/test_nine_pic"
+        android:text=".9背景图片测试.9背景图片测试.9背景图片测试.9背景图片测试试.9背景图片测试.9背景图片测试.9背景图片测试.9背景图片测试"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:id="@+id/radiogroup2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radiobutton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_u13_checkbox_one" />
+
+        <RadioButton
+            android:id="@+id/radiobutton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_u13_checkbox_one" />
+    </RadioGroup>
 </LinearLayout>
