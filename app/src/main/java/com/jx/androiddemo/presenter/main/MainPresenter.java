@@ -11,6 +11,7 @@ import com.jx.androiddemo.testactivity.function.f11.F11Activity;
 import com.jx.androiddemo.testactivity.function.f12.F12Activity;
 import com.jx.androiddemo.testactivity.function.f13.F13Activity;
 import com.jx.androiddemo.testactivity.function.f14.F14Activity;
+import com.jx.androiddemo.testactivity.function.f15.F15Activity;
 import com.jx.androiddemo.testactivity.function.f2.F2Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
@@ -77,6 +78,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("Http", F12Activity.class));
             mMainPageList.add(new MainPageBean("thread", F13Activity.class));
             mMainPageList.add(new MainPageBean("timer", F14Activity.class));
+            mMainPageList.add(new MainPageBean("notification", F15Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));
