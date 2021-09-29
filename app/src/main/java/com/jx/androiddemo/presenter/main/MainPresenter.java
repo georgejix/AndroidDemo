@@ -17,6 +17,8 @@ import com.jx.androiddemo.testactivity.function.f17.F17Activity;
 import com.jx.androiddemo.testactivity.function.f18.F18Activity;
 import com.jx.androiddemo.testactivity.function.f19.F19Activity;
 import com.jx.androiddemo.testactivity.function.f2.F2Activity;
+import com.jx.androiddemo.testactivity.function.f20.F20Activity;
+import com.jx.androiddemo.testactivity.function.f21.F21Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
 import com.jx.androiddemo.testactivity.function.f5.F5Activity;
@@ -92,6 +94,8 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("contentProvider", F17Activity.class));
             mMainPageList.add(new MainPageBean("service", F18Activity.class));
             mMainPageList.add(new MainPageBean("自定义handler", F19Activity.class));
+            mMainPageList.add(new MainPageBean("sharedpreference", F20Activity.class));
+            mMainPageList.add(new MainPageBean("mediaplayer", F21Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));

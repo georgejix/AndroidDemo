@@ -1,11 +1,10 @@
 package com.jx.androiddemo.testactivity.function.f20;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
@@ -15,6 +14,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class F20Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+    private final static String TAG = "Testsp";
 
     @Override
     protected void initInject() {
@@ -34,6 +34,10 @@ public class F20Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
+        TestSharedPreference testSharedPreference = new TestSharedPreference(this);
+        testSharedPreference.saveSomeSP();
+        String sp = testSharedPreference.generateSPJsonString();
+        Log.d(TAG, sp);
     }
 
     @SuppressLint("CheckResult")
