@@ -91,7 +91,9 @@
         <activity
             android:name=".testactivity.ui.u11.U11Activity"
             android:theme="@style/Transparent2" />
-        <activity android:name=".testactivity.ui.u12.U12Activity" />
+        <activity
+            android:name=".testactivity.ui.u12.U12Activity"
+            android:theme="@style/Theme.AppCompat.Dialog" />
         <activity android:name=".testactivity.ui.u13.U13Activity" />
         <activity android:name=".testactivity.ui.u14.U14Activity" />
         <activity android:name=".testactivity.ui.u15.U15Activity" />

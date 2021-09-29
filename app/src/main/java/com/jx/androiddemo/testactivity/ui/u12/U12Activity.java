@@ -1,6 +1,7 @@
 package com.jx.androiddemo.testactivity.ui.u12;
 
 import android.annotation.SuppressLint;
+import android.view.View;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
@@ -11,10 +12,14 @@ import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class U12Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+
+    @BindView(R.id.textview_close)
+    View textview_close;
 
     @Override
     protected void initInject() {
@@ -34,6 +39,7 @@ public class U12Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
+        setFinishOnTouchOutside(false);
     }
 
     @SuppressLint("CheckResult")
@@ -47,11 +53,12 @@ public class U12Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 });
 
         //点击
-        /*RxView.clicks(null)
+        RxView.clicks(textview_close)
                 .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                });*/
+                    finish();
+                });
     }
 }
