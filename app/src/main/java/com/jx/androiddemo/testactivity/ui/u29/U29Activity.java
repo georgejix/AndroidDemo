@@ -47,11 +47,11 @@ public class U29Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 });
 
         //点击
-        RxView.clicks(null)
+        /*RxView.clicks(null)
                 .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                });
+                });*/
     }
 }
