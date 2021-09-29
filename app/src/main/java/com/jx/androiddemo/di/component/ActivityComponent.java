@@ -20,7 +20,17 @@ import com.jx.androiddemo.testactivity.function.f18.F18Activity;
 import com.jx.androiddemo.testactivity.function.f19.F19Activity;
 import com.jx.androiddemo.testactivity.function.f2.F2Activity;
 import com.jx.androiddemo.testactivity.function.f20.F20Activity;
+import com.jx.androiddemo.testactivity.function.f21.F21Activity;
+import com.jx.androiddemo.testactivity.function.f22.F22Activity;
+import com.jx.androiddemo.testactivity.function.f23.F23Activity;
+import com.jx.androiddemo.testactivity.function.f24.F24Activity;
+import com.jx.androiddemo.testactivity.function.f25.F25Activity;
+import com.jx.androiddemo.testactivity.function.f26.F26Activity;
+import com.jx.androiddemo.testactivity.function.f27.F27Activity;
+import com.jx.androiddemo.testactivity.function.f28.F28Activity;
+import com.jx.androiddemo.testactivity.function.f29.F29Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
+import com.jx.androiddemo.testactivity.function.f30.F30Activity;
 import com.jx.androiddemo.testactivity.function.f4.Camera2Activity;
 import com.jx.androiddemo.testactivity.function.f4.Camera3Activity;
 import com.jx.androiddemo.testactivity.function.f4.CameraActivity;
@@ -43,8 +53,18 @@ import com.jx.androiddemo.testactivity.ui.u18.U18Activity;
 import com.jx.androiddemo.testactivity.ui.u19.U19Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.testactivity.ui.u20.U20Activity;
+import com.jx.androiddemo.testactivity.ui.u21.U21Activity;
+import com.jx.androiddemo.testactivity.ui.u22.U22Activity;
+import com.jx.androiddemo.testactivity.ui.u23.U23Activity;
+import com.jx.androiddemo.testactivity.ui.u24.U24Activity;
+import com.jx.androiddemo.testactivity.ui.u25.U25Activity;
+import com.jx.androiddemo.testactivity.ui.u26.U26Activity;
+import com.jx.androiddemo.testactivity.ui.u27.U27Activity;
+import com.jx.androiddemo.testactivity.ui.u28.U28Activity;
+import com.jx.androiddemo.testactivity.ui.u29.U29Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3_1Activity;
+import com.jx.androiddemo.testactivity.ui.u30.U30Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
 import com.jx.androiddemo.testactivity.ui.u5.U5Activity;
 import com.jx.androiddemo.testactivity.ui.u6.U6Activity;
@@ -112,6 +132,25 @@ public interface ActivityComponent {
 
     void inject(F20Activity f20Activity);
 
+    void inject(F21Activity f21Activity);
+
+    void inject(F22Activity f22Activity);
+
+    void inject(F23Activity f23Activity);
+
+    void inject(F24Activity f24Activity);
+
+    void inject(F25Activity f25Activity);
+
+    void inject(F26Activity f26Activity);
+
+    void inject(F27Activity f27Activity);
+
+    void inject(F28Activity f28Activity);
+
+    void inject(F29Activity f29Activity);
+
+    void inject(F30Activity f30Activity);
 
     void inject(U1Activity u1Activity);
 
@@ -154,4 +193,24 @@ public interface ActivityComponent {
     void inject(U19Activity u19Activity);
 
     void inject(U20Activity u20Activity);
+
+    void inject(U21Activity u21Activity);
+
+    void inject(U22Activity u22Activity);
+
+    void inject(U23Activity u23Activity);
+
+    void inject(U24Activity u24Activity);
+
+    void inject(U25Activity u25Activity);
+
+    void inject(U26Activity u26Activity);
+
+    void inject(U27Activity u27Activity);
+
+    void inject(U28Activity u28Activity);
+
+    void inject(U29Activity u29Activity);
+
+    void inject(U30Activity u30Activity);
 }
