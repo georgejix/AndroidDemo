@@ -1,20 +1,22 @@
 package com.jx.androiddemo.testactivity.ui.u15;
 
 import android.annotation.SuppressLint;
+import android.widget.ImageView;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class U15Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+    @BindView(R.id.img_test)
+    ImageView testImg;
 
     @Override
     protected void initInject() {
@@ -34,6 +36,7 @@ public class U15Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
+        testImg.setImageResource(R.mipmap.pic4);
     }
 
     @SuppressLint("CheckResult")

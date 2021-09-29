@@ -25,6 +25,7 @@ import com.jx.androiddemo.testactivity.ui.u11.U11Activity;
 import com.jx.androiddemo.testactivity.ui.u12.U12Activity;
 import com.jx.androiddemo.testactivity.ui.u13.U13Activity;
 import com.jx.androiddemo.testactivity.ui.u14.U14Activity;
+import com.jx.androiddemo.testactivity.ui.u15.U15Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
@@ -93,6 +94,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("dialogActivity", U12Activity.class));
             mMainPageList.add(new MainPageBean("CheckBox", U13Activity.class));
             mMainPageList.add(new MainPageBean("TestSomeView", U14Activity.class));
+            mMainPageList.add(new MainPageBean("imageView", U15Activity.class));
 
 
         }
