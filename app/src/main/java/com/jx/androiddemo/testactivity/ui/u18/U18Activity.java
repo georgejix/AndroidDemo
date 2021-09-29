@@ -255,12 +255,7 @@ public class U18Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
             chooseDatePopupWindow.setOutsideTouchable(false);
             // 设置PopupWindow是否能响应点击事件
             chooseDatePopupWindow.setTouchable(true);
-            chooseDatePopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    setBackgroundAlpha(1f);
-                }
-            });
+            chooseDatePopupWindow.setOnDismissListener(() -> setBackgroundAlpha(1f));
             chooseDatePopupWindow.setFocusable(true);
             chooseDatePopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         }
