@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -18,7 +18,7 @@
         <!-- 窗口背景颜色 -->
         <item name="android:windowBackground">@color/colorPrimary</item>
         <!-- Status bar color. -->
-        <!--<item name="android:statusBarColor" tools:targetApi="l">@color/colors</item>-->
+        <item name="android:statusBarColor" tools:targetApi="l">#00000000</item>
         <!-- 关闭 RecyclerView NestedScrollView ViewPager 水波纹效果 -->
         <item name="android:overScrollMode">never</item>
         <item name="android:windowAnimationStyle">@style/FeedAnimTheme</item>

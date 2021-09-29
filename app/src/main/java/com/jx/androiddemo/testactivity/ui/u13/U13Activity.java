@@ -1,20 +1,23 @@
 package com.jx.androiddemo.testactivity.ui.u13;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
+import android.widget.CheckBox;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class U13Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+    @BindView(R.id.checkbox_one)
+    CheckBox checkBoxOne;
 
     @Override
     protected void initInject() {
@@ -34,6 +37,14 @@ public class U13Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
+        //取得设置好的drawable对象
+        Drawable drawable = this.getResources().getDrawable(R.drawable.selector_u13_checkbox_one);
+
+        //设置drawable对象的大小
+        drawable.setBounds(0, 0, 40, 40);
+
+        //设置CheckBox对象的位置，对应为左、上、右、下
+        checkBoxOne.setCompoundDrawables(drawable, null, null, null);
     }
 
     @SuppressLint("CheckResult")
