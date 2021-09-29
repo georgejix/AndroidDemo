@@ -77,4 +77,14 @@
         <item name="android:windowExitAnimation">@anim/pop_exit_anim</item>
     </style>
 
+    <!-- 梯形 -->
+    <declare-styleable name="TrapesoidLayout">
+        <attr name="triangleHeight" format="dimension"/>
+        <attr name="orientation" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="backgroundColor" format="color"/>
+    </declare-styleable>
+
 </resources>
