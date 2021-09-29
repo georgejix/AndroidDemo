@@ -37,6 +37,7 @@ import com.jx.androiddemo.testactivity.ui.u18.U18Activity;
 import com.jx.androiddemo.testactivity.ui.u19.U19Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.testactivity.ui.u20.U20Activity;
+import com.jx.androiddemo.testactivity.ui.u21.U21Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
 import com.jx.androiddemo.testactivity.ui.u5.U5Activity;
@@ -116,6 +117,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("选择日期2", U18Activity.class));
             mMainPageList.add(new MainPageBean("Bezier曲线", U19Activity.class));
             mMainPageList.add(new MainPageBean("梯形", U20Activity.class));
+            mMainPageList.add(new MainPageBean("事件分发", U21Activity.class));
 
 
         }

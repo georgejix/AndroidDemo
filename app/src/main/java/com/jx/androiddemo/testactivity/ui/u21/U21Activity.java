@@ -1,6 +1,8 @@
 package com.jx.androiddemo.testactivity.ui.u21;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
@@ -15,6 +17,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class U21Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+    private static final String TAG = "te_Activity";
 
     @Override
     protected void initInject() {
@@ -53,5 +56,17 @@ public class U21Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .subscribe(o ->
                 {
                 });
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "dispatchTouchEvent" + ev.getAction());
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent");
+        return super.onTouchEvent(event);
     }
 }
