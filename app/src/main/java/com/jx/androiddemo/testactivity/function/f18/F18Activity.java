@@ -1,11 +1,10 @@
 package com.jx.androiddemo.testactivity.function.f18;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
@@ -15,6 +14,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class F18Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+    private Intent intent;
 
     @Override
     protected void initInject() {
@@ -34,6 +34,8 @@ public class F18Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
+        intent = new Intent(this, MyService.class);
+        startService(intent);
     }
 
     @SuppressLint("CheckResult")
@@ -53,5 +55,11 @@ public class F18Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .subscribe(o ->
                 {
                 });*/
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopService(intent);
     }
 }

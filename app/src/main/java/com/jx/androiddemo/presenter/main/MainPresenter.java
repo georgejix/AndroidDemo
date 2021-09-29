@@ -14,6 +14,7 @@ import com.jx.androiddemo.testactivity.function.f14.F14Activity;
 import com.jx.androiddemo.testactivity.function.f15.F15Activity;
 import com.jx.androiddemo.testactivity.function.f16.F16Activity;
 import com.jx.androiddemo.testactivity.function.f17.F17Activity;
+import com.jx.androiddemo.testactivity.function.f18.F18Activity;
 import com.jx.androiddemo.testactivity.function.f2.F2Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
@@ -86,6 +87,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("notification", F15Activity.class));
             mMainPageList.add(new MainPageBean("sqlite", F16Activity.class));
             mMainPageList.add(new MainPageBean("contentProvider", F17Activity.class));
+            mMainPageList.add(new MainPageBean("service", F18Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));
