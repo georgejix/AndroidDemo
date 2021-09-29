@@ -163,7 +163,7 @@ public class BaseApplication extends MultiDexApplication {
     private static File projectFile;
 
     public static void initDir(){
-        path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "demoproject";
+        path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "androidDemo";
         if(null != path){
             projectFile = new File(path);
             if(null != projectFile){
