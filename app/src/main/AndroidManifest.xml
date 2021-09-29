@@ -88,7 +88,9 @@
         <activity android:name=".testactivity.ui.u8.U8Activity" />
         <activity android:name=".testactivity.ui.u9.U9Activity" />
         <activity android:name=".testactivity.ui.u10.U10Activity" />
-        <activity android:name=".testactivity.ui.u11.U11Activity" />
+        <activity
+            android:name=".testactivity.ui.u11.U11Activity"
+            android:theme="@style/Transparent2" />
         <activity android:name=".testactivity.ui.u12.U12Activity" />
         <activity android:name=".testactivity.ui.u13.U13Activity" />
         <activity android:name=".testactivity.ui.u14.U14Activity" />
@@ -110,11 +112,12 @@
 
         <!-- IntentService -->
         <service
-            android:name=".service.RSSPullService"
+            android:name=".testactivity.function.f9.RSSPullService"
             android:exported="false" />
 
 
         <service android:name=".testactivity.function.f11.MyIntentService" />
+
         <receiver android:name=".testactivity.function.f11.AlarmReceiver" />
         <receiver android:name=".testactivity.function.f11.SampleBootReceiver">
             <intent-filter>

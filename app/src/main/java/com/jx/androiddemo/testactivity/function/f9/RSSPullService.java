@@ -1,10 +1,8 @@
-package com.jx.androiddemo.service;
+package com.jx.androiddemo.testactivity.function.f9;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
-
-import androidx.annotation.Nullable;
 
 /**
  * Created by jix on 2018/12/21.
@@ -14,44 +12,54 @@ import androidx.annotation.Nullable;
  * 连续调用：onCreate()->onStart()->onHandleIntent()->onStart()->onHandleIntent()->onDestory();
  */
 
-public class RSSPullService extends IntentService {
+public class RSSPullService extends IntentService
+{
     private final String TAG = "RSSPullService";
 
-    public RSSPullService() {
+    public RSSPullService()
+    {
         super("RSSPullService");
     }
 
     @Override
-    public void onCreate() {
+    public void onCreate()
+    {
         super.onCreate();
         Log.d(TAG, "onCreate");
     }
 
     @Override
-    public void onStart(@Nullable Intent intent, int startId) {
+    public void onStart(Intent intent, int startId)
+    {
         super.onStart(intent, startId);
         Log.d(TAG, "onStart");
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
         Log.d(TAG, "onDestroy");
     }
 
     @Override
-    protected void onHandleIntent(@Nullable Intent intent) {
-        if (null != intent) {
+    protected void onHandleIntent(Intent intent)
+    {
+        if (null != intent)
+        {
             String dataString = intent.getDataString();
             Log.d(TAG, null == dataString ? "null" : dataString);
             long i1 = getApplicationContext().getMainLooper().getThread().getId();
             long i2 = Thread.currentThread().getId();
             Log.d(TAG, i1 + "," + i2);
             new Thread(() -> {
-                for (int i = 0; i < 100; i++) {
-                    try {
+                for (int i = 0; i < 100; i++)
+                {
+                    try
+                    {
                         Thread.sleep(1000);
-                    } catch (InterruptedException e) {
+                    } catch (InterruptedException e)
+                    {
                         e.printStackTrace();
                     }
                     Log.d(TAG, i + "");

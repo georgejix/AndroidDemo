@@ -8,6 +8,7 @@ import com.jx.androiddemo.presenter.BaseRxPresenter;
 import com.jx.androiddemo.testactivity.function.f1.F1Activity;
 import com.jx.androiddemo.testactivity.function.f10.F10Activity;
 import com.jx.androiddemo.testactivity.function.f11.F11Activity;
+import com.jx.androiddemo.testactivity.function.f12.F12Activity;
 import com.jx.androiddemo.testactivity.function.f2.F2Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
@@ -18,6 +19,7 @@ import com.jx.androiddemo.testactivity.function.f8.F8Activity;
 import com.jx.androiddemo.testactivity.function.f9.F9Activity;
 import com.jx.androiddemo.testactivity.ui.u1.U1Activity;
 import com.jx.androiddemo.testactivity.ui.u10.U10Activity;
+import com.jx.androiddemo.testactivity.ui.u11.U11Activity;
 import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
@@ -79,6 +81,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("TouchEvent,popupwindow", U8Activity.class));
             mMainPageList.add(new MainPageBean("VelocityTracker", U9Activity.class));
             mMainPageList.add(new MainPageBean("input显示隐藏密码", U10Activity.class));
+            mMainPageList.add(new MainPageBean("TransparentActivity", U11Activity.class));
 
 
         }
