@@ -9,6 +9,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 
+import com.jx.androiddemo.BaseApplication;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
@@ -49,8 +50,8 @@ public class F21Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
-        audioPath1 = getAssets() + File.separator + "fcw_h_be.wav";
-        audioPath2 = getAssets() + File.separator + "fcw_h_be.wav";
+        audioPath1 = BaseApplication.getFile() + File.separator + "fcw_h_be.wav";
+        audioPath2 = BaseApplication.getFile() + File.separator + "fcw_h_be.wav";
         if (null == soundPool) {
             soundPool = new SoundPool(2, AudioManager.STREAM_ALARM, 0);
         }
