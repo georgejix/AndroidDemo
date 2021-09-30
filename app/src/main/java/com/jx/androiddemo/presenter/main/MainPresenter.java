@@ -21,6 +21,9 @@ import com.jx.androiddemo.testactivity.function.f20.F20Activity;
 import com.jx.androiddemo.testactivity.function.f21.F21Activity;
 import com.jx.androiddemo.testactivity.function.f22.F22Activity;
 import com.jx.androiddemo.testactivity.function.f23.F23Activity;
+import com.jx.androiddemo.testactivity.function.f24.F24Activity;
+import com.jx.androiddemo.testactivity.function.f25.F25Activity;
+import com.jx.androiddemo.testactivity.function.f26.F26Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
 import com.jx.androiddemo.testactivity.function.f5.F5Activity;
@@ -43,6 +46,7 @@ import com.jx.androiddemo.testactivity.ui.u2.U2Activity;
 import com.jx.androiddemo.testactivity.ui.u20.U20Activity;
 import com.jx.androiddemo.testactivity.ui.u21.U21Activity;
 import com.jx.androiddemo.testactivity.ui.u22.U22Activity;
+import com.jx.androiddemo.testactivity.ui.u23.U23Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
 import com.jx.androiddemo.testactivity.ui.u5.U5Activity;
@@ -101,6 +105,9 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("mediaplayer", F21Activity.class));
             mMainPageList.add(new MainPageBean("显示yuv图片", F22Activity.class));
             mMainPageList.add(new MainPageBean("mp4toyuv", F23Activity.class));
+            mMainPageList.add(new MainPageBean("surfaceview", F24Activity.class));
+            mMainPageList.add(new MainPageBean("videoview", F25Activity.class));
+            mMainPageList.add(new MainPageBean("observer", F26Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));
@@ -128,6 +135,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("梯形", U20Activity.class));
             mMainPageList.add(new MainPageBean("事件分发", U21Activity.class));
             mMainPageList.add(new MainPageBean("loading", U22Activity.class));
+            mMainPageList.add(new MainPageBean("一行两列linearlayout", U23Activity.class));
 
 
         }

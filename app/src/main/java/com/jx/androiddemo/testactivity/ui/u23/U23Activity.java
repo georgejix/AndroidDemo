@@ -15,6 +15,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class U23Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+    private final static String TAG = "AutoLineActivity";
 
     @Override
     protected void initInject() {

@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<LinearLayout xmlns:local_android="http://schemas.android.com/apk/res/android"
+    local_android:layout_width="match_parent"
+    local_android:layout_height="match_parent"
+    local_android:orientation="vertical">
+
+    <com.jx.androiddemo.testactivity.ui.u23.AutoLinefeedLayout
+        local_android:layout_width="match_parent"
+        local_android:layout_height="wrap_content">
+
+        <com.jx.androiddemo.testactivity.ui.u23.LocalTextView
+            local_android:layout_width="wrap_content"
+            local_android:layout_height="40dp"
+            local_android:gravity="center"
+            local_android:text="autoline1" />
+
+        <TextView
+            local_android:layout_width="wrap_content"
+            local_android:layout_height="40dp"
+            local_android:gravity="center"
+            local_android:text="autoline2" />
+
+        <TextView
+            local_android:layout_width="wrap_content"
+            local_android:layout_height="40dp"
+            local_android:gravity="center"
+            local_android:text="autoline3" />
+    </com.jx.androiddemo.testactivity.ui.u23.AutoLinefeedLayout>
 </LinearLayout>
