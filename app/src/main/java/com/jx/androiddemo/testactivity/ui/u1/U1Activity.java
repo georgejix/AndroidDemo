@@ -1,6 +1,7 @@
 package com.jx.androiddemo.testactivity.ui.u1;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Handler;
@@ -120,7 +121,7 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                    addViewInChildThread();
+                    optViewInChildThread();
                 });
     }
 
@@ -141,7 +142,7 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
         }
     }
 
-    //切换全屏,显示好像有问题！
+    //显示导航栏，状态栏
     private void showActionAndNavNew() {
         WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(tv_change_full_screen2);
         if (null == controller) {
@@ -159,6 +160,7 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
 
     }
 
+    //隐藏导航栏，状态栏
     private void hideActionAndNavNew() {
         WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(tv_change_full_screen2);
         if (null == controller) {
@@ -175,26 +177,26 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
         controller.hide(WindowInsetsCompat.Type.ime());
     }
 
+    //显示所有系统栏
     private void showSysView() {
         WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(tv_change_full_screen2);
         if (null == controller) {
             return;
         }
-        //操作所有系统栏
         controller.show(WindowInsetsCompat.Type.systemBars());
     }
 
+    //隐藏所有系统栏
     private void hideSysView() {
         WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(tv_change_full_screen2);
         if (null == controller) {
             return;
         }
-        //操作所有系统栏
         controller.hide(WindowInsetsCompat.Type.systemBars());
     }
 
-    //子线程添加view
-    private void addViewInChildThread() {
+    //子线程操作view
+    private void optViewInChildThread() {
         if (null == mHandlerThread) {
             mHandlerThread = new HandlerThread("childThread");
             mHandlerThread.start();
@@ -202,27 +204,45 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
         if (null == mBackHandler) {
             mBackHandler = new Handler(mHandlerThread.getLooper(), msg -> {
                 switch (msg.what) {
-                    case 0:
-                        addWindView();
+                    case MSG_ADD_TV:
+                        addWindView(U1Activity.this);
+                        break;
+                    case MSG_DEL_TV:
+                        removeWindView(U1Activity.this);
                         break;
                 }
                 return false;
             });
         }
-        mBackHandler.sendEmptyMessage(0);
+        mBackHandler.sendEmptyMessage(null == mChildThreadTv ? MSG_ADD_TV : MSG_DEL_TV);
     }
 
+    TextView mChildThreadTv;
+    private final int MSG_ADD_TV = 1001;
+    private final int MSG_DEL_TV = 1002;
+
     //子线程添加view
-    private void addWindView() {
-        TextView tx = new TextView(U1Activity.this);
-        tx.setText("今天天气很好哦！");
-        tx.setTextColor(getResources().getColor(R.color.color_white));
-        tx.setBackgroundColor(getResources().getColor(R.color.red));
-        tx.setGravity(Gravity.CENTER);
-        WindowManager wm = getWindowManager();
+    private void addWindView(Activity activity) {
+        mChildThreadTv = new TextView(activity);
+        mChildThreadTv.setText("今天天气很好哦！");
+        mChildThreadTv.setTextColor(getResources().getColor(R.color.color_white));
+        mChildThreadTv.setBackgroundColor(getResources().getColor(R.color.red));
+        mChildThreadTv.setGravity(Gravity.CENTER);
+        WindowManager wm = activity.getWindowManager();
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 250, 150, 200, 200, WindowManager.LayoutParams.FIRST_SUB_WINDOW,
                 WindowManager.LayoutParams.TYPE_TOAST, PixelFormat.OPAQUE);
-        wm.addView(tx, params);
+        wm.addView(mChildThreadTv, params);
     }
+
+    //子线程删除view
+    private void removeWindView(Activity activity) {
+        if (null == mChildThreadTv) {
+            return;
+        }
+        WindowManager wm = activity.getWindowManager();
+        wm.removeView(mChildThreadTv);
+        mChildThreadTv = null;
+    }
+
 }
