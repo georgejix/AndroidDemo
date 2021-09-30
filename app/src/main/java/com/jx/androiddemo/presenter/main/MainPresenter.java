@@ -20,6 +20,7 @@ import com.jx.androiddemo.testactivity.function.f2.F2Activity;
 import com.jx.androiddemo.testactivity.function.f20.F20Activity;
 import com.jx.androiddemo.testactivity.function.f21.F21Activity;
 import com.jx.androiddemo.testactivity.function.f22.F22Activity;
+import com.jx.androiddemo.testactivity.function.f23.F23Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
 import com.jx.androiddemo.testactivity.function.f5.F5Activity;
@@ -98,6 +99,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("sharedpreference", F20Activity.class));
             mMainPageList.add(new MainPageBean("mediaplayer", F21Activity.class));
             mMainPageList.add(new MainPageBean("显示yuv图片", F22Activity.class));
+            mMainPageList.add(new MainPageBean("mp4toyuv", F23Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));
