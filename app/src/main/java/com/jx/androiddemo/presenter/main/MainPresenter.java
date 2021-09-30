@@ -73,8 +73,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
         this.context = context;
     }
 
-    @Override
-    public void doDispose() {
+    @Override    public void doDispose() {
 
     }
 
@@ -113,7 +112,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("---------------------------------", null));
 
 
-            mMainPageList.add(new MainPageBean("简单ui", U1Activity.class));
+            mMainPageList.add(new MainPageBean("全屏切换，子线程addview", U1Activity.class));
             mMainPageList.add(new MainPageBean("上拉加载，下拉刷新", U2Activity.class));
             mMainPageList.add(new MainPageBean("activity生命周期,popupwindow", U3Activity.class));
             mMainPageList.add(new MainPageBean("bitmap加载显示", U4Activity.class));
