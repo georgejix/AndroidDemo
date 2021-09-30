@@ -39,7 +39,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
-        //声明平台
+        //声明so文件夹支持的平台
+        ndk{
+            abiFilters "armeabi-v7a"
+        }
+
+        //声明cpp生成的平台
         externalNativeBuild {
             cmake {
                 cppFlags ""
