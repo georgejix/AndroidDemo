@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.jx.androiddemo.activity.main.LaunchActivity">
 
     <TextView
         android:id="@+id/tv_change_full_screen1"
         style="@style/generalTv"
-        android:text="切换全屏、非全屏旧方法"
-        app:layout_constraintBottom_toTopOf="@+id/tv_change_full_screen2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:text="切换全屏、非全屏旧方法" />
 
     <TextView
         android:id="@+id/tv_change_full_screen2"
         style="@style/generalTv"
-        android:text="切换全屏、非全屏新方法"
-        app:layout_constraintBottom_toTopOf="@+id/tv_add_view_in_child_thread"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_change_full_screen1" />
+        android:text="显示导航栏，状态栏新方法" />
+
+    <TextView
+        android:id="@+id/tv_change_full_screen3"
+        style="@style/generalTv"
+        android:text="隐藏导航栏，状态栏新方法" />
+
+    <TextView
+        android:id="@+id/tv_change_full_screen4"
+        style="@style/generalTv"
+        android:text="显示所以系统组件" />
+
+    <TextView
+        android:id="@+id/tv_change_full_screen5"
+        style="@style/generalTv"
+        android:text="隐藏所以系统组件" />
 
     <TextView
         android:id="@+id/tv_add_view_in_child_thread"
         style="@style/generalTv"
-        android:text="在子线程操作ui"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_change_full_screen2" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="在子线程操作ui" />
+</LinearLayout>

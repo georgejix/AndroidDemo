@@ -2,12 +2,19 @@ package com.jx.androiddemo.testactivity.ui.u1;
 
 import android.annotation.SuppressLint;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
@@ -26,9 +33,14 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
 
     @BindView(R.id.tv_change_full_screen1)
     TextView tv_change_full_screen1;
-
     @BindView(R.id.tv_change_full_screen2)
     TextView tv_change_full_screen2;
+    @BindView(R.id.tv_change_full_screen3)
+    TextView tv_change_full_screen3;
+    @BindView(R.id.tv_change_full_screen4)
+    TextView tv_change_full_screen4;
+    @BindView(R.id.tv_change_full_screen5)
+    TextView tv_change_full_screen5;
 
     @BindView(R.id.tv_add_view_in_child_thread)
     TextView tv_add_view_in_child_thread;
@@ -55,6 +67,15 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
     }
 
     private void initView() {
+        //api30判断导航栏显示与否
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (null != getWindow() && null != getWindow().getDecorView()) {
+                getWindow().getDecorView().setOnApplyWindowInsetsListener((v, insets) -> {
+                    Log.d(TAG, "statusBars" + insets.isVisible(WindowInsets.Type.statusBars()));
+                    return insets;
+                });
+            }
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -71,7 +92,28 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                    changeFullScreenNew();
+                    showActionAndNavNew();
+                });
+        RxView.clicks(tv_change_full_screen3)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    hideActionAndNavNew();
+                });
+        RxView.clicks(tv_change_full_screen4)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    showSysView();
+                });
+        RxView.clicks(tv_change_full_screen5)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    hideSysView();
                 });
         RxView.clicks(tv_add_view_in_child_thread)
                 .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
@@ -99,16 +141,56 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
         }
     }
 
-    //切换全屏
-    private void changeFullScreenNew() {
-        /*WindowInsetsControllerCompat controllerCompat = ViewCompat.getWindowInsetsController(tv_change_full_screen2);
-        if (!mIsFullScreen) {
-            controllerCompat.hide(WindowInsetsCompat.Type.systemBars());
-            mIsFullScreen = true;
-        } else {
-            controllerCompat.show(WindowInsetsCompat.Type.systemBars());
-            mIsFullScreen = false;
-        }*/
+    //切换全屏,显示好像有问题！
+    private void showActionAndNavNew() {
+        WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(tv_change_full_screen2);
+        if (null == controller) {
+            return;
+        }
+
+        //显示状态栏
+        controller.show(WindowInsetsCompat.Type.statusBars());
+        //显示导航栏
+        controller.show(WindowInsetsCompat.Type.navigationBars());
+        //导航栏文字颜色
+        controller.setAppearanceLightNavigationBars(false);
+        //显示键盘
+        controller.show(WindowInsetsCompat.Type.ime());
+
+    }
+
+    private void hideActionAndNavNew() {
+        WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(tv_change_full_screen2);
+        if (null == controller) {
+            return;
+        }
+
+        //隐藏状态栏
+        controller.hide(WindowInsetsCompat.Type.statusBars());
+        //隐藏导航栏
+        controller.hide(WindowInsetsCompat.Type.navigationBars());
+        //导航栏文字颜色
+        controller.setAppearanceLightNavigationBars(true);
+        //隐藏键盘
+        controller.hide(WindowInsetsCompat.Type.ime());
+    }
+
+    private void showSysView() {
+        WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(tv_change_full_screen2);
+        if (null == controller) {
+            return;
+        }
+        //操作所有系统栏
+        controller.show(WindowInsetsCompat.Type.systemBars());
+    }
+
+    private void hideSysView() {
+        WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(tv_change_full_screen2);
+        if (null == controller) {
+            return;
+        }
+        //操作所有系统栏
+        controller.hide(WindowInsetsCompat.Type.systemBars());
     }
 
     //子线程添加view

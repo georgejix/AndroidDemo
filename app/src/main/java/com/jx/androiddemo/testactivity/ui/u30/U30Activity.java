@@ -2,10 +2,8 @@ package com.jx.androiddemo.testactivity.ui.u30;
 
 import android.annotation.SuppressLint;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
@@ -47,7 +45,7 @@ public class U30Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 });
 
         //点击
-       /*RxView.clicks(null)
+        /*RxView.clicks(null)
                 .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
