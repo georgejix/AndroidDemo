@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:Android="http://schemas.android.com/apk/res/android">
-
-    <item Android:drawable="@drawable/button_presser" Android:state_pressed="true"/>
-    <item Android:drawable="@drawable/button_normal" Android:state_enabled="true"/>
-    <item Android:drawable="@drawable/button_disabled" Android:state_enabled="false"/>
-
-</selector>

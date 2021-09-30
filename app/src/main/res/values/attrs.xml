@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--EasyLinearLayout自定义属性-->
+    <!--RoundRelativeLayout自定义属性-->
     <declare-styleable name="RoundRelativeLayout">
         <attr name="layout_radius" format="dimension" />
         <attr name="layout_shadowColor" format="color" />
