@@ -61,13 +61,13 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseAppAc
     @Override
     protected void onResume() {
         super.onResume();
-        DeviceUtils.NavigationBarStatusBar(getWindow());
+        //DeviceUtils.NavigationBarStatusBar(getWindow());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        DeviceUtils.NavigationBarStatusBar(getWindow());
+        //DeviceUtils.NavigationBarStatusBar(getWindow());
     }
 
     @Override

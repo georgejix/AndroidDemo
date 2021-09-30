@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -9,16 +8,15 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- test Base application theme. -->
+    <!-- test Base application theme. 全屏显示，状态栏透明 -->
     <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!-- 窗口背景颜色 -->
         <item name="android:windowBackground">@color/colorPrimary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">#00000000</item>
+<!--        <item name="android:statusBarColor" tools:targetApi="l">#00000000</item>-->
         <!-- 关闭 RecyclerView NestedScrollView ViewPager 水波纹效果 -->
         <item name="android:overScrollMode">never</item>
         <item name="android:windowAnimationStyle">@style/FeedAnimTheme</item>
@@ -36,13 +34,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/FeedAnimTheme</item>
-    </style>
-
-    <!-- test透明主题 -->
-    <style name="Transparent2" parent="@style/Base.Theme.AppCompat">
-        <item name="android:windowBackground">#00000000</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <!-- 淡入淡出效果 -->
@@ -64,12 +55,12 @@
 
     <!-- 日期选择 -->
     <declare-styleable name="ChooseDate">
-        <attr name="mainTextColor" format="color"/>
-        <attr name="hightlightTextColor" format="color"/>
-        <attr name="mainBgColor" format="color"/>
-        <attr name="hightlightBgColor" format="color"/>
-        <attr name="mainTextSize" format="dimension"/>
-        <attr name="perLineHeight" format="dimension"/>
+        <attr name="mainTextColor" format="color" />
+        <attr name="hightlightTextColor" format="color" />
+        <attr name="mainBgColor" format="color" />
+        <attr name="hightlightBgColor" format="color" />
+        <attr name="mainTextSize" format="dimension" />
+        <attr name="perLineHeight" format="dimension" />
     </declare-styleable>
 
     <style name="animation_in_and_out" parent="android:Animation">
@@ -79,12 +70,12 @@
 
     <!-- 梯形 -->
     <declare-styleable name="TrapesoidLayout">
-        <attr name="triangleHeight" format="dimension"/>
+        <attr name="triangleHeight" format="dimension" />
         <attr name="orientation" format="enum">
-            <enum name="left" value="0"/>
-            <enum name="right" value="1"/>
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
         </attr>
-        <attr name="backgroundColor" format="color"/>
+        <attr name="backgroundColor" format="color" />
     </declare-styleable>
 
 </resources>

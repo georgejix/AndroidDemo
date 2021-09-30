@@ -40,7 +40,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppTheme2"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.main.LaunchActivity">
@@ -100,7 +100,7 @@
         <activity android:name=".testactivity.ui.u10.U10Activity" />
         <activity
             android:name=".testactivity.ui.u11.U11Activity"
-            android:theme="@style/Transparent2" />
+            android:theme="@style/Transparent" />
         <activity
             android:name=".testactivity.ui.u12.U12Activity"
             android:theme="@style/Theme.AppCompat.Dialog" />

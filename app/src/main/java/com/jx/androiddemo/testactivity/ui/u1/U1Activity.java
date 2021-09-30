@@ -18,6 +18,10 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 
+/**
+ * 全屏，非全屏切换
+ * 子线程添加view
+ */
 public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contract.View {
 
     @BindView(R.id.tv_change_full_screen1)
