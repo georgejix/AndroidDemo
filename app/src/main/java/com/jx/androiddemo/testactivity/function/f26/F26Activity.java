@@ -1,20 +1,24 @@
 package com.jx.androiddemo.testactivity.function.f26;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class F26Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+    private final static String TAG = "ObserverActivity";
 
     @Override
     protected void initInject() {
@@ -34,6 +38,7 @@ public class F26Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
+        test1();
     }
 
     @SuppressLint("CheckResult")
@@ -53,5 +58,60 @@ public class F26Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .subscribe(o ->
                 {
                 });*/
+    }
+
+    private void test1() {
+        Observer<String> observer = new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.d(TAG, s);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "onComplete");
+            }
+        };
+        Observer<String> observer2 = new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.d(TAG, "2_" + s);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "2_onComplete");
+            }
+        };
+        Observable<String> observable = Observable.create((ObservableOnSubscribe<String>) e -> {
+            e.onNext("next1");
+            e.onNext("next2");
+            e.onComplete();
+        });
+        observable.subscribe(observer);
+        observable
+                .subscribeOn(Schedulers.io())    // 给上面代码分配异步线程
+                .observeOn(AndroidSchedulers.mainThread()) // 给下面代码分配主线程;
+                .subscribe(observer2);
     }
 }
