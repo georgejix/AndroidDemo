@@ -135,7 +135,7 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
         TextView tx = new TextView(U1Activity.this);
         tx.setText("今天天气很好哦！");
         tx.setTextColor(getResources().getColor(R.color.color_white));
-        tx.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        tx.setBackgroundColor(getResources().getColor(R.color.red));
         tx.setGravity(Gravity.CENTER);
         WindowManager wm = getWindowManager();
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(

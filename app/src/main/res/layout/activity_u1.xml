@@ -10,22 +10,25 @@
         android:id="@+id/tv_change_full_screen1"
         style="@style/generalTv"
         android:text="切换全屏、非全屏旧方法"
+        app:layout_constraintBottom_toTopOf="@+id/tv_change_full_screen2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/tv_change_full_screen2"
         style="@style/generalTv"
         android:text="切换全屏、非全屏新方法"
+        app:layout_constraintBottom_toTopOf="@+id/tv_add_view_in_child_thread"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_change_full_screen1" />
 
     <TextView
         android:id="@+id/tv_add_view_in_child_thread"
         style="@style/generalTv"
         android:text="在子线程操作ui"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_change_full_screen2" />
