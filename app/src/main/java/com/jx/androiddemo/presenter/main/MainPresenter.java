@@ -24,6 +24,7 @@ import com.jx.androiddemo.testactivity.function.f23.F23Activity;
 import com.jx.androiddemo.testactivity.function.f24.F24Activity;
 import com.jx.androiddemo.testactivity.function.f25.F25Activity;
 import com.jx.androiddemo.testactivity.function.f26.F26Activity;
+import com.jx.androiddemo.testactivity.function.f27.F27Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
 import com.jx.androiddemo.testactivity.function.f5.F5Activity;
@@ -106,6 +107,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             add("surfaceView", F24Activity.class);
             add("videoView", F25Activity.class);
             add("observer", F26Activity.class);
+            add("系统相册选择图片", F27Activity.class);
 
 
             add("---------------------------------", null);
