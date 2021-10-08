@@ -80,63 +80,70 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
     public List<MainPageBean> getMainPageList() {
         if (null == mMainPageList) {
             mMainPageList = new ArrayList<>();
-            mMainPageList.add(new MainPageBean("简单线程", F1Activity.class));
-            mMainPageList.add(new MainPageBean("序列化和aidl", F2Activity.class));
-            mMainPageList.add(new MainPageBean("handler", F3Activity.class));
-            mMainPageList.add(new MainPageBean("相机", F4Activity.class));
-            mMainPageList.add(new MainPageBean("CountDownLatch", F5Activity.class));
-            mMainPageList.add(new MainPageBean("nsd", F6Activity.class));
-            mMainPageList.add(new MainPageBean("net", F7Activity.class));
-            mMainPageList.add(new MainPageBean("xml", F8Activity.class));
-            mMainPageList.add(new MainPageBean("intentService", F9Activity.class));
-            mMainPageList.add(new MainPageBean("Thumbnail", F10Activity.class));
-            mMainPageList.add(new MainPageBean("DeviceAwake", F11Activity.class));
-            mMainPageList.add(new MainPageBean("Http", F12Activity.class));
-            mMainPageList.add(new MainPageBean("thread", F13Activity.class));
-            mMainPageList.add(new MainPageBean("timer", F14Activity.class));
-            mMainPageList.add(new MainPageBean("notification", F15Activity.class));
-            mMainPageList.add(new MainPageBean("sqlite", F16Activity.class));
-            mMainPageList.add(new MainPageBean("contentProvider", F17Activity.class));
-            mMainPageList.add(new MainPageBean("service", F18Activity.class));
-            mMainPageList.add(new MainPageBean("自定义handler", F19Activity.class));
-            mMainPageList.add(new MainPageBean("sharedPreference", F20Activity.class));
-            mMainPageList.add(new MainPageBean("mediaPlayer", F21Activity.class));
-            mMainPageList.add(new MainPageBean("显示yuv图片", F22Activity.class));
-            mMainPageList.add(new MainPageBean("mp4toYuv", F23Activity.class));
-            mMainPageList.add(new MainPageBean("surfaceView", F24Activity.class));
-            mMainPageList.add(new MainPageBean("videoView", F25Activity.class));
-            mMainPageList.add(new MainPageBean("observer", F26Activity.class));
+            add("简单线程", F1Activity.class);
+            add("序列化和aidl", F2Activity.class);
+            add("handler", F3Activity.class);
+            add("相机", F4Activity.class);
+            add("CountDownLatch", F5Activity.class);
+            add("nsd", F6Activity.class);
+            add("net", F7Activity.class);
+            add("xml", F8Activity.class);
+            add("intentService", F9Activity.class);
+            add("Thumbnail", F10Activity.class);
+            add("DeviceAwake", F11Activity.class);
+            add("Http", F12Activity.class);
+            add("thread", F13Activity.class);
+            add("timer", F14Activity.class);
+            add("notification", F15Activity.class);
+            add("sqlite", F16Activity.class);
+            add("contentProvider", F17Activity.class);
+            add("service", F18Activity.class);
+            add("自定义handler", F19Activity.class);
+            add("sharedPreference", F20Activity.class);
+            add("mediaPlayer", F21Activity.class);
+            add("显示yuv图片", F22Activity.class);
+            add("mp4toYuv", F23Activity.class);
+            add("surfaceView", F24Activity.class);
+            add("videoView", F25Activity.class);
+            add("observer", F26Activity.class);
 
 
-            mMainPageList.add(new MainPageBean("---------------------------------", null));
+            add("---------------------------------", null);
 
 
-            mMainPageList.add(new MainPageBean("全屏切换，子线程addView", U1Activity.class));
-            mMainPageList.add(new MainPageBean("上拉加载，下拉刷新", U2Activity.class));
-            mMainPageList.add(new MainPageBean("activity生命周期,popupWindow", U3Activity.class));
-            mMainPageList.add(new MainPageBean("bitmap加载显示", U4Activity.class));
-            mMainPageList.add(new MainPageBean("openglES", U5Activity.class));
-            mMainPageList.add(new MainPageBean("animation", U6Activity.class));
-            mMainPageList.add(new MainPageBean("圆角图片", U7Activity.class));
-            mMainPageList.add(new MainPageBean("TouchEvent,popupWindow", U8Activity.class));
-            mMainPageList.add(new MainPageBean("VelocityTracker", U9Activity.class));
-            mMainPageList.add(new MainPageBean("input显示隐藏密码", U10Activity.class));
-            mMainPageList.add(new MainPageBean("TransparentActivity", U11Activity.class));
-            mMainPageList.add(new MainPageBean("dialogActivity", U12Activity.class));
-            mMainPageList.add(new MainPageBean("CheckBox", U13Activity.class));
-            mMainPageList.add(new MainPageBean("TestSomeView", U14Activity.class));
-            mMainPageList.add(new MainPageBean("imageView", U15Activity.class));
-            mMainPageList.add(new MainPageBean("相机选择照片，拍照", U16Activity.class));
-            mMainPageList.add(new MainPageBean("选择日期", U17Activity.class));
-            mMainPageList.add(new MainPageBean("选择日期2", U18Activity.class));
-            mMainPageList.add(new MainPageBean("Bezier曲线", U19Activity.class));
-            mMainPageList.add(new MainPageBean("梯形", U20Activity.class));
-            mMainPageList.add(new MainPageBean("事件分发", U21Activity.class));
-            mMainPageList.add(new MainPageBean("loading", U22Activity.class));
-            mMainPageList.add(new MainPageBean("一行两列linearlayout", U23Activity.class));
+            add("全屏切换，子线程addView", U1Activity.class);
+            add("上拉加载，下拉刷新", U2Activity.class);
+            add("activity生命周期,popupWindow", U3Activity.class);
+            add("bitmap加载显示", U4Activity.class);
+            add("openglES", U5Activity.class);
+            add("animation", U6Activity.class);
+            add("圆角图片", U7Activity.class);
+            add("TouchEvent,popupWindow", U8Activity.class);
+            add("VelocityTracker", U9Activity.class);
+            add("input显示隐藏密码", U10Activity.class);
+            add("TransparentActivity", U11Activity.class);
+            add("dialogActivity", U12Activity.class);
+            add("CheckBox", U13Activity.class);
+            add("TestSomeView", U14Activity.class);
+            add("imageView", U15Activity.class);
+            add("相机选择照片，拍照", U16Activity.class);
+            add("选择日期", U17Activity.class);
+            add("选择日期2", U18Activity.class);
+            add("Bezier曲线", U19Activity.class);
+            add("梯形", U20Activity.class);
+            add("事件分发", U21Activity.class);
+            add("loading", U22Activity.class);
+            add("一行两列linearlayout", U23Activity.class);
 
 
         }
         return mMainPageList;
+    }
+
+    private void add(String name, Class clazz) {
+        if (null == mMainPageList) {
+            return;
+        }
+        mMainPageList.add(new MainPageBean(name, clazz));
     }
 }
