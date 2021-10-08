@@ -61,9 +61,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class MainPresenter extends BaseRxPresenter<MainContract.View> implements MainContract.Presenter {
-    private static final String TAG = "MainPresenter";
-
-    private Context context;
+    private final Context context;
 
     private List<MainPageBean> mMainPageList;
 
@@ -73,7 +71,8 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
         this.context = context;
     }
 
-    @Override    public void doDispose() {
+    @Override
+    public void doDispose() {
 
     }
 
@@ -100,26 +99,26 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             mMainPageList.add(new MainPageBean("contentProvider", F17Activity.class));
             mMainPageList.add(new MainPageBean("service", F18Activity.class));
             mMainPageList.add(new MainPageBean("自定义handler", F19Activity.class));
-            mMainPageList.add(new MainPageBean("sharedpreference", F20Activity.class));
-            mMainPageList.add(new MainPageBean("mediaplayer", F21Activity.class));
+            mMainPageList.add(new MainPageBean("sharedPreference", F20Activity.class));
+            mMainPageList.add(new MainPageBean("mediaPlayer", F21Activity.class));
             mMainPageList.add(new MainPageBean("显示yuv图片", F22Activity.class));
-            mMainPageList.add(new MainPageBean("mp4toyuv", F23Activity.class));
-            mMainPageList.add(new MainPageBean("surfaceview", F24Activity.class));
-            mMainPageList.add(new MainPageBean("videoview", F25Activity.class));
+            mMainPageList.add(new MainPageBean("mp4toYuv", F23Activity.class));
+            mMainPageList.add(new MainPageBean("surfaceView", F24Activity.class));
+            mMainPageList.add(new MainPageBean("videoView", F25Activity.class));
             mMainPageList.add(new MainPageBean("observer", F26Activity.class));
 
 
             mMainPageList.add(new MainPageBean("---------------------------------", null));
 
 
-            mMainPageList.add(new MainPageBean("全屏切换，子线程addview", U1Activity.class));
+            mMainPageList.add(new MainPageBean("全屏切换，子线程addView", U1Activity.class));
             mMainPageList.add(new MainPageBean("上拉加载，下拉刷新", U2Activity.class));
-            mMainPageList.add(new MainPageBean("activity生命周期,popupwindow", U3Activity.class));
+            mMainPageList.add(new MainPageBean("activity生命周期,popupWindow", U3Activity.class));
             mMainPageList.add(new MainPageBean("bitmap加载显示", U4Activity.class));
-            mMainPageList.add(new MainPageBean("opengles", U5Activity.class));
+            mMainPageList.add(new MainPageBean("openglES", U5Activity.class));
             mMainPageList.add(new MainPageBean("animation", U6Activity.class));
             mMainPageList.add(new MainPageBean("圆角图片", U7Activity.class));
-            mMainPageList.add(new MainPageBean("TouchEvent,popupwindow", U8Activity.class));
+            mMainPageList.add(new MainPageBean("TouchEvent,popupWindow", U8Activity.class));
             mMainPageList.add(new MainPageBean("VelocityTracker", U9Activity.class));
             mMainPageList.add(new MainPageBean("input显示隐藏密码", U10Activity.class));
             mMainPageList.add(new MainPageBean("TransparentActivity", U11Activity.class));
