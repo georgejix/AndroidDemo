@@ -27,7 +27,7 @@ public class LaunchActivity extends BaseMvpActivity<LaunchPresenter> implements 
     @SuppressLint("CheckResult")
     @Override
     protected void initEventAndData() {
-        Observable.timer(1000, TimeUnit.MILLISECONDS)
+        Observable.timer(100, TimeUnit.MILLISECONDS)
                 .compose(this.bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(integer -> {
