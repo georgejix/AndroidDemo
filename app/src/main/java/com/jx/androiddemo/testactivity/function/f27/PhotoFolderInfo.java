@@ -23,16 +23,16 @@ import java.util.List;
  * Desction:图片文件夹
  */
 public class PhotoFolderInfo implements Serializable {
-    private int folderId;
+    private long folderId;
     private String folderName;
     private PhotoInfo coverPhoto;
     private List<PhotoInfo> photoList;
 
-    public int getFolderId() {
+    public long getFolderId() {
         return folderId;
     }
 
-    public void setFolderId(int folderId) {
+    public void setFolderId(long folderId) {
         this.folderId = folderId;
     }
 

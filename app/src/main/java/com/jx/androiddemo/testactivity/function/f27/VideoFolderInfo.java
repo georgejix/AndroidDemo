@@ -23,16 +23,16 @@ import java.util.List;
  * Desction:视频文件夹
  */
 public class VideoFolderInfo implements Serializable {
-    private int folderId;
+    private long folderId;
     private String folderName;
     private VideoInfo coverPhoto;
     private List<VideoInfo> videoList;
 
-    public int getFolderId() {
+    public long getFolderId() {
         return folderId;
     }
 
-    public void setFolderId(int folderId) {
+    public void setFolderId(long folderId) {
         this.folderId = folderId;
     }
 

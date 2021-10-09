@@ -118,7 +118,7 @@ public class F27Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 MediaStore.Images.Thumbnails.DATA
         };
         final ArrayList<PhotoFolderInfo> allPhotoFolderList = new ArrayList<>();
-        HashMap<Integer, PhotoFolderInfo> bucketMap = new HashMap<>();
+        HashMap<Long, PhotoFolderInfo> bucketMap = new HashMap<>();
         Cursor cursor = null;
         //所有图片
         PhotoFolderInfo allPhotoFolderInfo = new PhotoFolderInfo();
@@ -133,12 +133,12 @@ public class F27Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 int bucketNameColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
                 final int bucketIdColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_ID);
                 while (cursor.moveToNext()) {
-                    int bucketId = cursor.getInt(bucketIdColumn);
+                    long bucketId = cursor.getLong(bucketIdColumn);
                     String bucketName = cursor.getString(bucketNameColumn);
                     final int dataColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
                     final int imageIdColumn = cursor.getColumnIndex(MediaStore.Images.Media._ID);
                     //int thumbImageColumn = cursor.getColumnIndex(MediaStore.Images.Thumbnails.DATA);
-                    final int imageId = cursor.getInt(imageIdColumn);
+                    final long imageId = cursor.getLong(imageIdColumn);
                     final String path = cursor.getString(dataColumn);
                     //final String thumb = cursor.getString(thumbImageColumn);
                     File file = new File(path);
@@ -196,7 +196,7 @@ public class F27Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 MediaStore.Video.Thumbnails.DATA
         };
         final ArrayList<VideoFolderInfo> allVideoFolderList = new ArrayList<>();
-        HashMap<Integer, VideoFolderInfo> bucketMap = new HashMap<>();
+        HashMap<Long, VideoFolderInfo> bucketMap = new HashMap<>();
         Cursor cursor = null;
         //所有图片
         VideoFolderInfo allVideoFolderInfo = new VideoFolderInfo();
@@ -211,14 +211,14 @@ public class F27Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 int bucketNameColumn = cursor.getColumnIndex(MediaStore.Video.Media.BUCKET_DISPLAY_NAME);
                 final int bucketIdColumn = cursor.getColumnIndex(MediaStore.Video.Media.BUCKET_ID);
                 while (cursor.moveToNext()) {
-                    int bucketId = cursor.getInt(bucketIdColumn);
+                    long bucketId = cursor.getLong(bucketIdColumn);
                     String bucketName = cursor.getString(bucketNameColumn);
                     final int dataColumn = cursor.getColumnIndex(MediaStore.Video.Media.DATA);
                     final int imageIdColumn = cursor.getColumnIndex(MediaStore.Video.Media._ID);
                     final int durationColumn = cursor.getColumnIndex(MediaStore.Video.Media.DURATION);
                     final int sizeColumn = cursor.getColumnIndex(MediaStore.Video.Media.SIZE);
 
-                    final int imageId = cursor.getInt(imageIdColumn);
+                    final long imageId = cursor.getLong(imageIdColumn);
                     final String path = cursor.getString(dataColumn);
                     final long duration = cursor.getLong(durationColumn);
                     final long size = cursor.getLong(sizeColumn);

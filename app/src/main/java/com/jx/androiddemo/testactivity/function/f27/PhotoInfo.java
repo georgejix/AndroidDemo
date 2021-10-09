@@ -25,7 +25,7 @@ import java.io.Serializable;
  */
 public class PhotoInfo implements Serializable {
 
-    private int photoId;
+    private long photoId;
     private String photoPath;
     //private String thumbPath;
     private int width;
@@ -57,11 +57,11 @@ public class PhotoInfo implements Serializable {
         this.photoPath = photoPath;
     }
 
-    public int getPhotoId() {
+    public long getPhotoId() {
         return photoId;
     }
 
-    public void setPhotoId(int photoId) {
+    public void setPhotoId(long photoId) {
         this.photoId = photoId;
     }
     //

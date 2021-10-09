@@ -25,7 +25,7 @@ import java.io.Serializable;
  */
 public class VideoInfo implements Serializable {
 
-    private int videoId;
+    private long videoId;
     private String videoPath;
     private long duration;
     private long size;
@@ -75,11 +75,11 @@ public class VideoInfo implements Serializable {
         this.size = size;
     }
 
-    public int getVideoId() {
+    public long getVideoId() {
         return videoId;
     }
 
-    public void setVideoId(int videoId) {
+    public void setVideoId(long videoId) {
         this.videoId = videoId;
     }
     //
