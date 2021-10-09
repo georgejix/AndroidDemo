@@ -10,7 +10,17 @@
         android:text="choose img" />
 
     <TextView
-        android:id="@+id/tv_choose_content"
+        android:id="@+id/tv_choose_video"
+        style="@style/generalTv"
+        android:text="choose video" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_choose_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
