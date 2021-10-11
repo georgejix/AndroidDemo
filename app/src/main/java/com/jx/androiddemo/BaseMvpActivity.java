@@ -1,7 +1,10 @@
 package com.jx.androiddemo;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 
@@ -46,6 +49,13 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseAppAc
             mPresenter.attachView(this);
         }
         initEventAndData();
+
+        //刘海屏横屏显示，左边留白修复
+        /*if (Build.VERSION.SDK_INT >= 28) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            getWindow().setAttributes(lp);
+        }*/
     }
 
     @Override
