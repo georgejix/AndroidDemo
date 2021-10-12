@@ -160,6 +160,7 @@ public class F28Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
             return;
         }
         tv_title.setText(videoFolderInfo.getFolderName());
+        rv_video.scrollToPosition(0);
         mChooseVideoAdapter.setData(videoFolderInfo.getVideoList());
         mChooseVideoAdapter.notifyDataSetChanged();
     }
