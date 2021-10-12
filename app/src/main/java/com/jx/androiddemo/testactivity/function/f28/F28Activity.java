@@ -125,8 +125,7 @@ public class F28Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                    layout_album.setVisibility(View.VISIBLE == layout_album.getVisibility() ? View.GONE : View.VISIBLE);
-                    img_arrow.setImageResource(View.VISIBLE == layout_album.getVisibility() ? R.mipmap.icon_arrow_down : R.mipmap.icon_arrow_up);
+                    refreshAlbumVisibility();
                     mChooseAlbumAdapter.notifyDataSetChanged();
                 });
         RxView.clicks(tv_complete)
@@ -141,11 +140,21 @@ public class F28Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                    layout_album.setVisibility(View.VISIBLE == layout_album.getVisibility() ? View.GONE : View.VISIBLE);
-                    img_arrow.setImageResource(View.VISIBLE == layout_album.getVisibility() ? R.mipmap.icon_arrow_down : R.mipmap.icon_arrow_up);
+                    refreshAlbumVisibility();
                     mChooseAlbumAdapter.notifyDataSetChanged();
                 });
     }
+
+    private void refreshAlbumVisibility() {
+        if (View.VISIBLE == layout_album.getVisibility()) {
+            layout_album.setVisibility(View.GONE);
+            img_arrow.setImageResource(R.mipmap.icon_arrow_down);
+        } else {
+            layout_album.setVisibility(View.VISIBLE);
+            img_arrow.setImageResource(R.mipmap.icon_arrow_up);
+        }
+    }
+
     private void refreshAlbum(boolean init) {
         if (init) {
             mChooseAlbumAdapter.setData(mVideoFolderList);
