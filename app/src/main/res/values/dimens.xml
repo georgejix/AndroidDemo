@@ -285,6 +285,7 @@
     <dimen name="pxtodp1904">952dp</dimen>
     <dimen name="pxtodp2000">1000dp</dimen>
     <dimen name="pxtodp2240">1120dp</dimen>
+    <dimen name="choose_album_height">50dp</dimen>
 
 
 </resources>
