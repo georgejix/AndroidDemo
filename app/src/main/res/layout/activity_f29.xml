@@ -8,17 +8,25 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_download"
+        style="@style/generalTv"
+        android:text="download" />
+
+    <TextView
         android:id="@+id/tv_filter_mp4"
         style="@style/generalTv"
         android:text="filter mp4" />
+
     <TextView
         android:id="@+id/tv_filter_mov"
         style="@style/generalTv"
         android:text="filter mov" />
+
     <TextView
         android:id="@+id/tv_filter_flv"
         style="@style/generalTv"
         android:text="filter flv" />
+
     <TextView
         android:id="@+id/tv_filter_avi"
         style="@style/generalTv"
