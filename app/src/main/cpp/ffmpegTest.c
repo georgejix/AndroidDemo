@@ -23,46 +23,115 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     //(*env)->ReleaseStringUTFChars(env, jstring_output_path, output_path);
     LOGI("input_path= %s \n output_path= %s \n", input_path, output_path);
 
-    AVFormatContext *avFormatContext;
-    int ret;
 
-    av_register_all();
-    avFormatContext = avformat_alloc_context();
-    if ((ret = avformat_open_input(&avFormatContext, input_path, NULL, NULL)) < 0) {
-        LOGI("open failed %d", ret);
-        return -1;
-    } else {
-        LOGI("open success");
-    }
-
+    //定义参数
+    //上下文
+    AVFormatContext *fmt_ctx = NULL;
+    AVFormatContext *ofmt_ctx = NULL;
+    //支持各种各样的输出文件格式，MP4，FLV，3GP等等
+    AVOutputFormat *output_fmt = NULL;
+    //输入流
+    AVStream *in_stream = NULL;
+    //输出流
+    AVStream *out_stream = NULL;
+    //存储压缩数据
+    AVPacket packet;
+    //要拷贝的流
     int audio_stream_index = -1;
-    AVCodec *avCodec;
-    if ((audio_stream_index = av_find_best_stream(avFormatContext,
-                                                  AVMEDIA_TYPE_AUDIO, -1,
-                                                  -1, &avCodec, 0)) < 0) {
-        LOGI("not find audio");
-        return -1;
-    } else {
-        LOGI("find audio %d", audio_stream_index);
-    }
+    //错误码
+    int err_code;
 
-    AVCodecContext *avCodecContext;
-    avCodecContext = avcodec_alloc_context3(avCodec);
-    if (!avCodecContext) {
-        LOGI("avCodecContext null");
+    avcodec_register_all();
+    av_register_all();
+    //1.打开输入文件，提取参数
+    //打开输入文件，关于输入文件的所有就保存到fmt_ctx中了
+    fmt_ctx = avformat_alloc_context();
+    err_code = avformat_open_input(&fmt_ctx, input_path, NULL, NULL);
+    if (err_code < 0) {
+        LOGI("avformat_open_input fail");
         return -1;
     }
-    avcodec_parameters_to_context(avCodecContext,
-                                  avFormatContext->streams[audio_stream_index]->codecpar);
-    av_opt_set_int(avCodecContext, "refcounted_frames", 1, 0);
-
-    if ((ret = avcodec_open2(avCodecContext, avCodec, NULL)) < 0) {
-        LOGI("avcodec_open2 fail %d", ret);
+    //找到最好的音频流
+    audio_stream_index = av_find_best_stream(fmt_ctx, AVMEDIA_TYPE_AUDIO, -1, -1, NULL, 0);
+    if (audio_stream_index < 0) {
+        LOGI("av_find_best_stream fail");
         return -1;
-    } else {
-        LOGI("avcodec_open2 success");
+    }
+    //拿到文件中音频流
+    in_stream = fmt_ctx->streams[audio_stream_index];
+    //参数信息
+    AVCodecParameters *in_codecpar = in_stream->codecpar;
+
+//  //拿到文件中音频流 或者 视频流，所有流都在streams数组中
+//  in_stream = fmt_ctx->streams[1];
+//  //找到最好的视频流
+//  video_stream_index = av_find_best_stream(fmt_ctx, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
+//  packet.dts = av_rescale_q_rnd(packet.dts, in_stream->time_base, out_stream->time_base, (AV_ROUND_NEAR_INF|AV_ROUND_PASS_MINMAX));
+
+
+    //2.准备输出文件，输出流
+    // 输出上下文
+    ofmt_ctx = avformat_alloc_context();
+    //根据目标文件名生成最适合的输出容器
+    output_fmt = av_guess_format(NULL, output_path, NULL);
+    if (!output_fmt) {
+        LOGI("av_guess_format fail");
+        return -1;
+    }
+    ofmt_ctx->oformat = output_fmt;
+    //新建输出流
+    out_stream = avformat_new_stream(ofmt_ctx, NULL);
+    if (!out_stream) {
+        LOGI("avformat_new_stream fail");
+        return -1;
     }
 
-    LOGI("finish");
+    //3. 数据拷贝
+    //3.1 参数信息
+    // 将参数信息拷贝到输出流中，我们只是抽取音频流，并不做音频处理，所以这里只是Copy
+    if ((err_code = avcodec_parameters_copy(out_stream->codecpar, in_codecpar)) < 0) {
+        LOGI("avcodec_parameters_copy fail");
+        return -1;
+    }
+    //3.2 初始化AVIOContext
+    //初始化AVIOContext,文件操作由它完成
+    if ((err_code = avio_open(&ofmt_ctx->pb, output_path, AVIO_FLAG_WRITE)) < 0) {
+        LOGI("avio_open fail");
+        return -1;
+    }
+
+    //3.3 开始拷贝
+    //初始化 AVPacket， 我们从文件中读出的数据会暂存在其中
+    av_init_packet(&packet);
+    packet.data = NULL;
+    packet.size = 0;
+    // 写头部信息
+    if (avformat_write_header(ofmt_ctx, NULL) < 0) {
+        LOGI("avformat_write_header fail");
+        return -1;
+    }
+    //每读出一帧数据
+    while (av_read_frame(fmt_ctx, &packet) >= 0) {
+        if (packet.stream_index == audio_stream_index) {
+            //时间基计算，音频pts和dts一致
+            packet.pts = av_rescale_q_rnd(packet.pts, in_stream->time_base, out_stream->time_base,
+                                          (AV_ROUND_NEAR_INF | AV_ROUND_PASS_MINMAX));
+            packet.dts = packet.pts;
+            packet.duration = av_rescale_q(packet.duration, in_stream->time_base,
+                                           out_stream->time_base);
+            packet.pos = -1;
+            packet.stream_index = 0;
+            //将包写到输出媒体文件
+            av_interleaved_write_frame(ofmt_ctx, &packet);
+            //减少引用计数，避免内存泄漏
+            av_packet_unref(&packet);
+        }
+    }
+    //写尾部信息
+    av_write_trailer(ofmt_ctx);
+    //最后别忘了释放内存
+    avformat_close_input(&fmt_ctx);
+    avio_close(ofmt_ctx->pb);
+    LOGI("complete");
     return 0;
 }
