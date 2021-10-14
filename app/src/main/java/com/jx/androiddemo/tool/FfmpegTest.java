@@ -17,7 +17,7 @@ public class FfmpegTest {
         System.loadLibrary("swscale");
     }
 
-    public native int test(String input_path);
+    public native int test(String input_path,String output_path);
 
     public void onProgressCallBack(long i, long m){
         Log.d(TAG, i + "," + m);
