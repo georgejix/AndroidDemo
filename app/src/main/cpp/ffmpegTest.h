@@ -3,7 +3,9 @@
 
 #include <jni.h>
 
-JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
-  (JNIEnv *, jclass);
+JNIEXPORT jint
+
+JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
+        (JNIEnv *, jclass, jstring);
 
 #endif

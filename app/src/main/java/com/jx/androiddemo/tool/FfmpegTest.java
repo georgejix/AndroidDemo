@@ -9,7 +9,6 @@ public class FfmpegTest {
         System.loadLibrary("ffmpegTest");
 
         System.loadLibrary("avcodec");
-        System.loadLibrary("avdevice");
         System.loadLibrary("avfilter");
         System.loadLibrary("avformat");
         System.loadLibrary("avutil");
@@ -18,7 +17,7 @@ public class FfmpegTest {
         System.loadLibrary("swscale");
     }
 
-    public native int test();
+    public native int test(String input_path);
 
     public void onProgressCallBack(long i, long m){
         Log.d(TAG, i + "," + m);

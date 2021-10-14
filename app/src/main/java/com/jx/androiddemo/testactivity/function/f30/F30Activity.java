@@ -62,9 +62,10 @@ public class F30Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void download() {
-        String url = "https://v26-web.douyinvod.com/29195f4d4c577bf0a8e24b08bc0143ef/61665946/video/tos/cn/tos-cn-ve-15/1ce4d80e5d3743f08e2161583a43e104/?a=6383&br=3312&bt=3312&cd=0%7C0%7C0&ch=26&cr=0&cs=0&cv=1&dr=0&ds=4&er=&ft=jal9wj--bz7ThW_TfLct&l=021634093859543fdbddc0200fff0050a9138570000c0f760b4ec&lr=all&mime_type=video_mp4&net=0&pl=0&qs=0&rc=M3V2MzU6ZjVxODMzNGkzM0ApODM4Mzw5OmU5Nzg8OzdkNWc2Xm0wcjRnZmRgLS1kLTBzczQwLy4zNWMwNTM0M2NgL146Yw%3D%3D&vl=&vr=";
+        String url2 = "https://vd2.bdstatic.com/mda-mjbzwb7wzwnuvqhj/sc/cae_h264/1634083355852877186/mda-mjbzwb7wzwnuvqhj.mp4";
+        String url = "https://v26-web.douyinvod.com/ba6cbd9169a101377e1b052a933ff956/6167fb2b/video/tos/cn/tos-cn-ve-15/00c85cf7f35c4254810abdf60b9a9460/?a=6383&br=2815&bt=2815&cd=0%7C0%7C0&ch=26&cr=0&cs=0&cv=1&dr=0&ds=4&er=&ft=jal9wj--bz7ThWrr.Lct&l=021634200847341fdbddc0200fff0050a18718f0000001cee4b49&lr=all&mime_type=video_mp4&net=0&pl=0&qs=0&rc=M3lscDY6ZjxzODMzNGkzM0ApaGc2OzY4OmQ6NzUzNDk0PGdnZWdecjRnNWdgLS1kLWFzc2MuLi8uMzZfMDReLjZjLi86Yw%3D%3D&vl=&vr=";
         FfmpegTest ffmpegTest = new FfmpegTest();
-        ffmpegTest.test();
+        ffmpegTest.test(url);
     }
 
 }

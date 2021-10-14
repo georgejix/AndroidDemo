@@ -46,10 +46,10 @@ set_target_properties(avcodec
   PROPERTIES IMPORTED_LOCATION
   ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libavcodec.so)
 
-add_library(avdevice SHARED IMPORTED)
-set_target_properties(avdevice
-  PROPERTIES IMPORTED_LOCATION
-  ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libavdevice.so)
+#add_library(avdevice SHARED IMPORTED)
+#set_target_properties(avdevice
+#  PROPERTIES IMPORTED_LOCATION
+#  ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libavdevice.so)
 
 add_library(avfilter SHARED IMPORTED)
 set_target_properties(avfilter
@@ -115,7 +115,6 @@ target_link_libraries( # Specifies the target library.
         ffmpegTest
 
         avcodec
-        avdevice
         avfilter
         avformat
         avutil
