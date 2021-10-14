@@ -11,201 +11,6 @@
 
 #define LOGI(format, ...)  __android_log_print(ANDROID_LOG_INFO,  "ffmpegtest", format, ##__VA_ARGS__)
 
-const char *filter_descr = "aresample=8000,aformat=sample_fmts=s16:channel_layouts=mono";
-AVFormatContext *fmt_ctx;
-AVCodecContext *dec_ctx;
-AVFilterContext *buffersink_ctx;
-AVFilterContext *buffersrc_ctx;
-AVFilterGraph *filter_graph;
-int audio_stream_index = -1;
-
-int open_input_file(const char *filename) {
-    int ret;
-    AVCodec *dec;
-
-    if ((ret = avformat_open_input(&fmt_ctx, filename, NULL, NULL)) < 0) {
-        LOGI("Cannot open input file\n");
-        return ret;
-    }
-
-    if ((ret = avformat_find_stream_info(fmt_ctx, NULL)) < 0) {
-        LOGI("Cannot find stream information\n");
-        return ret;
-    }
-
-    /* select the audio stream */
-    ret = av_find_best_stream(fmt_ctx, AVMEDIA_TYPE_AUDIO, -1, -1, &dec, 0);
-    if (ret < 0) {
-        LOGI("Cannot find an audio stream in the input file\n");
-        return ret;
-    }
-    audio_stream_index = ret;
-
-    /* create decoding context */
-    dec_ctx = avcodec_alloc_context3(dec);
-    if (!dec_ctx)
-        return AVERROR(ENOMEM);
-    avcodec_parameters_to_context(dec_ctx, fmt_ctx->streams[audio_stream_index]->codecpar);
-    av_opt_set_int(dec_ctx, "refcounted_frames", 1, 0);
-
-    /* init the audio decoder */
-    if ((ret = avcodec_open2(dec_ctx, dec, NULL)) < 0) {
-        LOGI("Cannot open audio decoder\n");
-        return ret;
-    }
-
-    return 0;
-}
-
-
-void freeFilter(AVFilterInOut *inputs, AVFilterInOut *outputs) {
-    avfilter_inout_free(&inputs);
-    avfilter_inout_free(&outputs);
-}
-
-int init_filters(const char *filters_descr) {
-    char args[512];
-    int ret = 0;
-    AVFilter *abuffersrc = avfilter_get_by_name("abuffer");
-    AVFilter *abuffersink = avfilter_get_by_name("abuffersink");
-    AVFilterInOut *outputs = avfilter_inout_alloc();
-    AVFilterInOut *inputs = avfilter_inout_alloc();
-    static const enum AVSampleFormat out_sample_fmts[] = {AV_SAMPLE_FMT_S16, -1};
-    static const int64_t out_channel_layouts[] = {AV_CH_LAYOUT_MONO, -1};
-    static const int out_sample_rates[] = {8000, -1};
-    const AVFilterLink *outlink;
-    AVRational time_base = fmt_ctx->streams[audio_stream_index]->time_base;
-
-    filter_graph = avfilter_graph_alloc();
-    if (!outputs || !inputs || !filter_graph) {
-        freeFilter(inputs, outputs);
-        return -1;
-    }
-
-    /* buffer audio source: the decoded frames from the decoder will be inserted here. */
-    if (!dec_ctx->channel_layout)
-        dec_ctx->channel_layout = av_get_default_channel_layout(dec_ctx->channels);
-    snprintf(args, sizeof(args),
-             "time_base=%d/%d:sample_rate=%d:sample_fmt=%s:channel_layout=0x%"
-    PRIx64,
-            time_base.num, time_base.den, dec_ctx->sample_rate,
-            av_get_sample_fmt_name(dec_ctx->sample_fmt), dec_ctx->channel_layout);
-    ret = avfilter_graph_create_filter(&buffersrc_ctx, abuffersrc, "in",
-                                       args, NULL, filter_graph);
-    if (ret < 0) {
-        LOGI("Cannot create audio buffer source\n");
-        freeFilter(inputs, outputs);
-        return ret;
-    }
-
-    /* buffer audio sink: to terminate the filter chain. */
-    ret = avfilter_graph_create_filter(&buffersink_ctx, abuffersink, "out",
-                                       NULL, NULL, filter_graph);
-    if (ret < 0) {
-        LOGI("Cannot create audio buffer sink\n");
-        freeFilter(inputs, outputs);
-        return ret;
-    }
-
-    ret = av_opt_set_int_list(buffersink_ctx, "sample_fmts", out_sample_fmts, -1,
-                              AV_OPT_SEARCH_CHILDREN);
-    if (ret < 0) {
-        LOGI("Cannot set output sample format\n");
-        freeFilter(inputs, outputs);
-        return ret;
-    }
-
-    ret = av_opt_set_int_list(buffersink_ctx, "channel_layouts", out_channel_layouts, -1,
-                              AV_OPT_SEARCH_CHILDREN);
-    if (ret < 0) {
-        LOGI("Cannot set output channel layout\n");
-        freeFilter(inputs, outputs);
-        return ret;
-    }
-
-    ret = av_opt_set_int_list(buffersink_ctx, "sample_rates", out_sample_rates, -1,
-                              AV_OPT_SEARCH_CHILDREN);
-    if (ret < 0) {
-        LOGI("Cannot set output sample rate\n");
-        freeFilter(inputs, outputs);
-        return ret;
-    }
-
-    /*
-     * Set the endpoints for the filter graph. The filter_graph will
-     * be linked to the graph described by filters_descr.
-     */
-
-    /*
-     * The buffer source output must be connected to the input pad of
-     * the first filter described by filters_descr; since the first
-     * filter input label is not specified, it is set to "in" by
-     * default.
-     */
-    outputs->name = av_strdup("in");
-    outputs->filter_ctx = buffersrc_ctx;
-    outputs->pad_idx = 0;
-    outputs->next = NULL;
-
-    /*
-     * The buffer sink input must be connected to the output pad of
-     * the last filter described by filters_descr; since the last
-     * filter output label is not specified, it is set to "out" by
-     * default.
-     */
-    inputs->name = av_strdup("out");
-    inputs->filter_ctx = buffersink_ctx;
-    inputs->pad_idx = 0;
-    inputs->next = NULL;
-
-    if ((ret = avfilter_graph_parse_ptr(filter_graph, filters_descr,
-                                        &inputs, &outputs, NULL)) < 0) {
-        freeFilter(inputs, outputs);
-        return ret;
-    }
-
-    if ((ret = avfilter_graph_config(filter_graph, NULL)) < 0) {
-        freeFilter(inputs, outputs);
-        return ret;
-    }
-
-    /* Print summary of the sink buffer
-     * Note: args buffer is reused to store channel layout string */
-    outlink = buffersink_ctx->inputs[0];
-    av_get_channel_layout_string(args, sizeof(args), -1, outlink->channel_layout);
-    LOGI("Output: srate:%dHz fmt:%s chlayout:%s\n",
-         (int) outlink->sample_rate,
-         (char *) av_x_if_null(av_get_sample_fmt_name(outlink->format), "?"),
-         args);
-    freeFilter(inputs, outputs);
-    return ret;
-}
-
-
-void print_frame(const AVFrame *frame) {
-    const int n = frame->nb_samples * av_get_channel_layout_nb_channels(frame->channel_layout);
-    const uint16_t *p = (uint16_t *) frame->data[0];
-    const uint16_t *p_end = p + n;
-
-    while (p < p_end) {
-        fputc(*p & 0xff, stdout);
-        fputc(*p >> 8 & 0xff, stdout);
-        p++;
-    }
-    fflush(stdout);
-    LOGI("pts== %d\n", frame->pts);
-}
-
-
-
-void freeMain(AVFrame *frame, AVFrame *filt_frame) {
-    avfilter_graph_free(&filter_graph);
-    avcodec_free_context(&dec_ctx);
-    avformat_close_input(&fmt_ctx);
-    av_frame_free(&frame);
-    av_frame_free(&filt_frame);
-}
-
 JNIEXPORT jint
 
 JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
@@ -218,85 +23,46 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     //(*env)->ReleaseStringUTFChars(env, jstring_output_path, output_path);
     LOGI("input_path= %s \n output_path= %s \n", input_path, output_path);
 
+    AVFormatContext *avFormatContext;
     int ret;
-    AVPacket packet;
-    AVFrame *frame = av_frame_alloc();
-    AVFrame *filt_frame = av_frame_alloc();
-
-    if (!frame || !filt_frame) {
-        LOGI("Could not allocate frame");
-        return -1;
-    }
 
     av_register_all();
-    avfilter_register_all();
-
-    if ((ret = open_input_file(input_path)) < 0) {
-        LOGI("open fail %d", ret);
-        freeMain(frame, filt_frame);
-        return ret;
+    avFormatContext = avformat_alloc_context();
+    if ((ret = avformat_open_input(&avFormatContext, input_path, NULL, NULL)) < 0) {
+        LOGI("open failed %d", ret);
+        return -1;
     } else {
         LOGI("open success");
     }
 
-    if ((ret = init_filters(filter_descr)) < 0) {
-        LOGI("init_filters fail %d", ret);
-        freeMain(frame, filt_frame);
-        return ret;
+    int audio_stream_index = -1;
+    AVCodec *avCodec;
+    if ((audio_stream_index = av_find_best_stream(avFormatContext,
+                                                  AVMEDIA_TYPE_AUDIO, -1,
+                                                  -1, &avCodec, 0)) < 0) {
+        LOGI("not find audio");
+        return -1;
     } else {
-        LOGI("init_filters success");
+        LOGI("find audio %d", audio_stream_index);
     }
 
-    /* read all packets */
-    while (1) {
-        if ((ret = av_read_frame(fmt_ctx, &packet)) < 0)
-            break;
+    AVCodecContext *avCodecContext;
+    avCodecContext = avcodec_alloc_context3(avCodec);
+    if (!avCodecContext) {
+        LOGI("avCodecContext null");
+        return -1;
+    }
+    avcodec_parameters_to_context(avCodecContext,
+                                  avFormatContext->streams[audio_stream_index]->codecpar);
+    av_opt_set_int(avCodecContext, "refcounted_frames", 1, 0);
 
-        if (packet.stream_index == audio_stream_index) {
-            ret = avcodec_send_packet(dec_ctx, &packet);
-            if (ret < 0) {
-                LOGI("Error while sending a packet to the decoder\n");
-                break;
-            }
-
-            while (ret >= 0) {
-                ret = avcodec_receive_frame(dec_ctx, frame);
-                if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
-                    break;
-                } else if (ret < 0) {
-                    LOGI("Error while receiving a frame from the decoder\n");
-                    freeMain(frame, filt_frame);
-                    return ret;
-                }
-
-                if (ret >= 0) {
-                    /* push the audio data from decoded frame into the filtergraph */
-                    if (av_buffersrc_add_frame_flags(buffersrc_ctx, frame,
-                                                     AV_BUFFERSRC_FLAG_KEEP_REF) < 0) {
-                        LOGI("Error while feeding the audio filtergraph\n");
-                        break;
-                    }
-
-                    /* pull filtered audio from the filtergraph */
-                    while (1) {
-                        ret = av_buffersink_get_frame(buffersink_ctx, filt_frame);
-                        if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
-                            break;
-                        if (ret < 0) {
-                            freeMain(frame, filt_frame);
-                            return ret;
-                        }
-                        print_frame(filt_frame);
-                        av_frame_unref(filt_frame);
-                    }
-                    av_frame_unref(frame);
-                }
-            }
-        }
-        av_packet_unref(&packet);
+    if ((ret = avcodec_open2(avCodecContext, avCodec, NULL)) < 0) {
+        LOGI("avcodec_open2 fail %d", ret);
+        return -1;
+    } else {
+        LOGI("avcodec_open2 success");
     }
 
-    freeMain(frame, filt_frame);
-    LOGI("complete\n");
+    LOGI("finish");
     return 0;
 }
