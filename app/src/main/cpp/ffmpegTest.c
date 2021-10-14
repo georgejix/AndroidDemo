@@ -14,14 +14,14 @@
 JNIEXPORT jint
 
 JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
-        (JNIEnv *env, jclass cls, jstring jstring_input_path, jstring jstring_output_path) {
+        (JNIEnv *env, jclass cls, jstring jstring_input_path, jstring jstring_output_name) {
     //输入地址
     const char *input_path = (*env)->GetStringUTFChars(env, jstring_input_path, 0);
     //(*env)->ReleaseStringUTFChars(env, jstring_input_path, input_path);
     //输出地址
-    const char *output_path = (*env)->GetStringUTFChars(env, jstring_output_path, 0);
+    const char *output_name = (*env)->GetStringUTFChars(env, jstring_output_name, 0);
     //(*env)->ReleaseStringUTFChars(env, jstring_output_path, output_path);
-    LOGI("input_path= %s \n output_path= %s \n", input_path, output_path);
+    LOGI("input_path= %s \n output_path= %s \n", input_path, output_name);
 
 
     //定义参数
@@ -62,12 +62,22 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     //参数信息
     AVCodecParameters *in_codecpar = in_stream->codecpar;
 
+
 //  //拿到文件中音频流 或者 视频流，所有流都在streams数组中
 //  in_stream = fmt_ctx->streams[1];
 //  //找到最好的视频流
 //  video_stream_index = av_find_best_stream(fmt_ctx, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
 //  packet.dts = av_rescale_q_rnd(packet.dts, in_stream->time_base, out_stream->time_base, (AV_ROUND_NEAR_INF|AV_ROUND_PASS_MINMAX));
 
+
+    AVCodec *input_codec;
+    input_codec = avcodec_find_decoder(in_codecpar->codec_id);
+    if (!input_codec) {
+        LOGI("avcodec_find_decoder fail");
+        return -1;
+    }
+    char output_path[100];
+    sprintf(output_path, "%s.%s", output_name, input_codec->name);
 
     //2.准备输出文件，输出流
     // 输出上下文
