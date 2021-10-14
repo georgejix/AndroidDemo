@@ -88,8 +88,8 @@ public class F29Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                    //String url = "https://vd2.bdstatic.com/mda-mjbzwb7wzwnuvqhj/sc/cae_h264/1634083355852877186/mda-mjbzwb7wzwnuvqhj.mp4";
-                    String url = "https://v26-web.douyinvod.com/29195f4d4c577bf0a8e24b08bc0143ef/61665946/video/tos/cn/tos-cn-ve-15/1ce4d80e5d3743f08e2161583a43e104/?a=6383&br=3312&bt=3312&cd=0%7C0%7C0&ch=26&cr=0&cs=0&cv=1&dr=0&ds=4&er=&ft=jal9wj--bz7ThW_TfLct&l=021634093859543fdbddc0200fff0050a9138570000c0f760b4ec&lr=all&mime_type=video_mp4&net=0&pl=0&qs=0&rc=M3V2MzU6ZjVxODMzNGkzM0ApODM4Mzw5OmU5Nzg8OzdkNWc2Xm0wcjRnZmRgLS1kLTBzczQwLy4zNWMwNTM0M2NgL146Yw%3D%3D&vl=&vr=";
+                    String url = "https://vd2.bdstatic.com/mda-mjbzwb7wzwnuvqhj/sc/cae_h264/1634083355852877186/mda-mjbzwb7wzwnuvqhj.mp4";
+                    //String url = "https://v26-web.douyinvod.com/29195f4d4c577bf0a8e24b08bc0143ef/61665946/video/tos/cn/tos-cn-ve-15/1ce4d80e5d3743f08e2161583a43e104/?a=6383&br=3312&bt=3312&cd=0%7C0%7C0&ch=26&cr=0&cs=0&cv=1&dr=0&ds=4&er=&ft=jal9wj--bz7ThW_TfLct&l=021634093859543fdbddc0200fff0050a9138570000c0f760b4ec&lr=all&mime_type=video_mp4&net=0&pl=0&qs=0&rc=M3V2MzU6ZjVxODMzNGkzM0ApODM4Mzw5OmU5Nzg8OzdkNWc2Xm0wcjRnZmRgLS1kLTBzczQwLy4zNWMwNTM0M2NgL146Yw%3D%3D&vl=&vr=";
                     String localPath = BaseApplication.getFile() + File.separator + "temp.mp4";
                     mBackHandler.post(() -> {
                         download(url, localPath);

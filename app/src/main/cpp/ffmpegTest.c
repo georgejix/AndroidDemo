@@ -23,7 +23,6 @@ int open_input_file(const char *filename) {
     int ret;
     AVCodec *dec;
 
-    fmt_ctx = avformat_alloc_context();
     if ((ret = avformat_open_input(&fmt_ctx, filename, NULL, NULL)) < 0) {
         LOGI("Cannot open input file\n");
         return ret;
@@ -211,10 +210,12 @@ JNIEXPORT jint
 
 JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
         (JNIEnv *env, jclass cls, jstring jstring_input_path, jstring jstring_output_path) {
+    //输入地址
     const char *input_path = (*env)->GetStringUTFChars(env, jstring_input_path, 0);
-    (*env)->ReleaseStringUTFChars(env, jstring_input_path, input_path);
+    //(*env)->ReleaseStringUTFChars(env, jstring_input_path, input_path);
+    //输出地址
     const char *output_path = (*env)->GetStringUTFChars(env, jstring_output_path, 0);
-    (*env)->ReleaseStringUTFChars(env, jstring_output_path, output_path);
+    //(*env)->ReleaseStringUTFChars(env, jstring_output_path, output_path);
     LOGI("input_path= %s \n output_path= %s \n", input_path, output_path);
 
     int ret;
