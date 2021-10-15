@@ -11,6 +11,12 @@
 
 #define LOGI(format, ...)  __android_log_print(ANDROID_LOG_INFO,  "ffmpegtest", format, ##__VA_ARGS__)
 
+void freeObj(AVFormatContext *fmt_ctx, AVFormatContext *ofmt_ctx) {
+    //最后别忘了释放内存
+    avformat_close_input(&fmt_ctx);
+    avio_close(ofmt_ctx->pb);
+}
+
 JNIEXPORT jint
 
 JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
@@ -20,7 +26,7 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     //(*env)->ReleaseStringUTFChars(env, jstring_input_path, input_path);
     //输出地址
     const char *output_name = (*env)->GetStringUTFChars(env, jstring_output_name, 0);
-    //(*env)->ReleaseStringUTFChars(env, jstring_output_path, output_path);
+    //(*env)->ReleaseStringUTFChars(env, jstring_output_name, output_name);
     LOGI("input_path= %s \n output_path= %s \n", input_path, output_name);
 
 
@@ -49,12 +55,14 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     err_code = avformat_open_input(&fmt_ctx, input_path, NULL, NULL);
     if (err_code < 0) {
         LOGI("avformat_open_input fail");
+        freeObj(fmt_ctx, ofmt_ctx);
         return -1;
     }
     //找到最好的音频流
     audio_stream_index = av_find_best_stream(fmt_ctx, AVMEDIA_TYPE_AUDIO, -1, -1, NULL, 0);
     if (audio_stream_index < 0) {
         LOGI("av_find_best_stream fail");
+        freeObj(fmt_ctx, ofmt_ctx);
         return -1;
     }
     //拿到文件中音频流
@@ -74,6 +82,7 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     input_codec = avcodec_find_decoder(in_codecpar->codec_id);
     if (!input_codec) {
         LOGI("avcodec_find_decoder fail");
+        freeObj(fmt_ctx, ofmt_ctx);
         return -1;
     }
     char output_path[100];
@@ -86,6 +95,7 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     output_fmt = av_guess_format(NULL, output_path, NULL);
     if (!output_fmt) {
         LOGI("av_guess_format fail");
+        freeObj(fmt_ctx, ofmt_ctx);
         return -1;
     }
     ofmt_ctx->oformat = output_fmt;
@@ -93,6 +103,7 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     out_stream = avformat_new_stream(ofmt_ctx, NULL);
     if (!out_stream) {
         LOGI("avformat_new_stream fail");
+        freeObj(fmt_ctx, ofmt_ctx);
         return -1;
     }
 
@@ -101,12 +112,14 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     // 将参数信息拷贝到输出流中，我们只是抽取音频流，并不做音频处理，所以这里只是Copy
     if ((err_code = avcodec_parameters_copy(out_stream->codecpar, in_codecpar)) < 0) {
         LOGI("avcodec_parameters_copy fail");
+        freeObj(fmt_ctx, ofmt_ctx);
         return -1;
     }
     //3.2 初始化AVIOContext
     //初始化AVIOContext,文件操作由它完成
     if ((err_code = avio_open(&ofmt_ctx->pb, output_path, AVIO_FLAG_WRITE)) < 0) {
         LOGI("avio_open fail");
+        freeObj(fmt_ctx, ofmt_ctx);
         return -1;
     }
 
@@ -118,6 +131,7 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     // 写头部信息
     if (avformat_write_header(ofmt_ctx, NULL) < 0) {
         LOGI("avformat_write_header fail");
+        freeObj(fmt_ctx, ofmt_ctx);
         return -1;
     }
     //每读出一帧数据
@@ -139,9 +153,9 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     }
     //写尾部信息
     av_write_trailer(ofmt_ctx);
-    //最后别忘了释放内存
-    avformat_close_input(&fmt_ctx);
-    avio_close(ofmt_ctx->pb);
+    freeObj(fmt_ctx, ofmt_ctx);
+    (*env)->ReleaseStringUTFChars(env, jstring_input_path, input_path);
+    (*env)->ReleaseStringUTFChars(env, jstring_output_name, output_name);
     LOGI("complete");
     return 0;
 }
