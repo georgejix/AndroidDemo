@@ -134,9 +134,16 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
         freeObj(fmt_ctx, ofmt_ctx);
         return -1;
     }
+
+    jclass clazz = (*env)->GetObjectClass(env, cls);
+    jmethodID mID = (*env)->GetMethodID(env, clazz, "onProgressCallBack",
+                                        "(JJLjava/lang/String;)V");
+
     //每读出一帧数据
     while (av_read_frame(fmt_ctx, &packet) >= 0) {
         if (packet.stream_index == audio_stream_index) {
+            (*env)->CallVoidMethod(env, cls, mID, in_stream->duration, packet.pts,
+                                   (*env)->NewStringUTF(env, output_path));
             //时间基计算，音频pts和dts一致
             packet.pts = av_rescale_q_rnd(packet.pts, in_stream->time_base, out_stream->time_base,
                                           (AV_ROUND_NEAR_INF | AV_ROUND_PASS_MINMAX));
@@ -156,6 +163,10 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     freeObj(fmt_ctx, ofmt_ctx);
     (*env)->ReleaseStringUTFChars(env, jstring_input_path, input_path);
     (*env)->ReleaseStringUTFChars(env, jstring_output_name, output_name);
+    jmethodID mCompleteId = (*env)->GetMethodID(env, clazz, "complete",
+                                                "(I)V");
+    (*env)->CallVoidMethod(env, cls, mCompleteId, 0);
+
     LOGI("complete");
     return 0;
 }

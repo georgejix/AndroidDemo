@@ -5,7 +5,7 @@ import android.util.Log;
 public class FfmpegTest {
     private static final String TAG = "FfmpegTest";
 
-    static{
+    static {
         System.loadLibrary("ffmpegTest");
 
         System.loadLibrary("avcodec");
@@ -17,13 +17,13 @@ public class FfmpegTest {
         System.loadLibrary("swscale");
     }
 
-    public native int test(String input_path,String output_path);
+    public native int test(String input_path, String output_path);
 
-    public void onProgressCallBack(long i, long m){
-        Log.d(TAG, i + "," + m);
+    public void onProgressCallBack(long total, long current, String name) {
+        Log.d(TAG, String.format("total=%d,current=%d,name=%s", total, current, name));
     }
 
-    public void myCallback(int a) {
-        Log.e(TAG, "Callback: " + a);
+    public void complete(int ret) {
+        Log.e(TAG, "complete: " + ret);
     }
 }
