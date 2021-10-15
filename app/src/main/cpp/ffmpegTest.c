@@ -13,8 +13,12 @@
 
 void freeObj(AVFormatContext *fmt_ctx, AVFormatContext *ofmt_ctx) {
     //最后别忘了释放内存
-    avformat_close_input(&fmt_ctx);
-    avio_close(ofmt_ctx->pb);
+    if (fmt_ctx) {
+        avformat_close_input(&fmt_ctx);
+    }
+    if (ofmt_ctx) {
+        avio_close(ofmt_ctx->pb);
+    }
 }
 
 JNIEXPORT jint
