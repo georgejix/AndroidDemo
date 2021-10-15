@@ -1,6 +1,9 @@
 package com.jx.androiddemo.testactivity.function.f28;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.view.View;
@@ -8,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +26,7 @@ import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 import com.jx.androiddemo.tool.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -96,10 +102,42 @@ public class F28Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
         HandlerThread handlerThread = new HandlerThread("back");
         handlerThread.start();
         mBackHandler = new Handler(handlerThread.getLooper());
-        mBackHandler.post(() -> {
-            mVideoFolderList = ChooseVideoFromAlbumUtil.getAllVideoFolder(this);
-            tv_title.post(() -> refreshAlbum(true));
-        });
+        checkPermission();
+    }
+
+    private void checkPermission() {
+        List<String> permissionLists = new ArrayList<>();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            permissionLists.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            permissionLists.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!permissionLists.isEmpty()) {
+            ActivityCompat.requestPermissions(this, permissionLists.toArray(new String[permissionLists.size()]), 0);
+        } else {
+            mBackHandler.post(() -> {
+                mVideoFolderList = ChooseVideoFromAlbumUtil.getAllVideoFolder(this);
+                tv_title.post(() -> refreshAlbum(true));
+            });
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (0 == requestCode) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                mBackHandler.post(() -> {
+                    mVideoFolderList = ChooseVideoFromAlbumUtil.getAllVideoFolder(this);
+                    tv_title.post(() -> refreshAlbum(true));
+                });
+            }
+        }
     }
 
     @SuppressLint("CheckResult")

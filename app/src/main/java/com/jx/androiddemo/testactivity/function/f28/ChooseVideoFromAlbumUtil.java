@@ -45,9 +45,6 @@ public class ChooseVideoFromAlbumUtil {
                     final String path = cursor.getString(dataColumn);
                     final long duration = cursor.getLong(durationColumn);
                     final long size = cursor.getLong(sizeColumn);
-                    for (String name : cursor.getColumnNames()) {
-                        Log.d("F27", name + ":" + cursor.getString(cursor.getColumnIndex(name)));
-                    }
                     File file = new File(path);
                     if (file.exists() && file.length() > 0) {
                         final VideoInfo videoInfo = new VideoInfo();
