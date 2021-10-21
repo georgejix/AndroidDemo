@@ -78,7 +78,7 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
             FileInputStream fileInputStream = new FileInputStream(new File(yuvPath));
             byte in[] = new byte[fileInputStream.available()];
             fileInputStream.read(in);
-            transNv12ToNv21(in);
+            //transNv12ToNv21(in);
             //filter(in);
             NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT, WIDTH, HEIGHT);
             Bitmap bitmap = nv21ToBitmap.nv21ToBitmap(in);
@@ -89,8 +89,15 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void filter(byte in[]) {
-        for (int index = 0; index < WIDTH * HEIGHT; index++) {
-            in[index] = (byte) (in[index] / 2);
+        //亮度减半
+        /*for (int index = 0; index < WIDTH * HEIGHT; index++) {
+            int temp = in[index] + 128;
+            temp /= 2;
+            in[index] = -128;
+        }*/
+        //去除色度，变成灰白图
+        for (int index = WIDTH * HEIGHT; index < in.length; index++) {
+            in[index] = -128;
         }
     }
 
