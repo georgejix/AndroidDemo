@@ -111,7 +111,9 @@ public class F23Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        img.setImageBitmap(bitmap);
+                        if (null != img) {
+                            img.setImageBitmap(bitmap);
+                        }
                     }
                 });
             }

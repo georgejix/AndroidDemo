@@ -35,10 +35,6 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     @BindView(R.id.img_bitmap)
     ImageView bitmapImg;
 
-    static {
-        System.loadLibrary("opencv_java");
-    }
-
     @Override
     protected void initInject() {
         getActivityComponent().inject(this);
@@ -59,7 +55,6 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     private void initView() {
         yuvPath = BaseApplication.getFile() + File.separator + "yuv1.yuv";
         transform();
-        saveYuvToPic();
         saveYuvToPic2();
     }
 
@@ -105,14 +100,6 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
             in[index] = in[index + 1];
             in[index + 1] = temp;
         }
-    }
-
-
-    private void saveYuvToPic() {
-        Mat mat = new Mat(480, 640, CvType.CV_8UC1);
-        byte bytes[] = new byte[480 * 640];
-        mat.put(0, 0, bytes);
-        Highgui.imwrite(BaseApplication.getFile() + File.separator + "yuvtopic.jpg", mat);
     }
 
     private void saveYuvToPic2() {
