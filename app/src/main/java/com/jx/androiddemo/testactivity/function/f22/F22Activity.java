@@ -79,12 +79,35 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
             byte in[] = new byte[fileInputStream.available()];
             fileInputStream.read(in);
             //transNv12ToNv21(in);
-            filter(in);
+            //filter(in);
+            liangduhalf(in);
+            //huibaitu(in);
             NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT, WIDTH, HEIGHT);
             Bitmap bitmap = nv21ToBitmap.nv21ToBitmap(in);
             bitmapImg.setImageBitmap(bitmap);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void liangduhalf(byte in[]){
+        //亮度减半
+        for (int index = 0; index < WIDTH * HEIGHT; index++) {
+            int temp = in[index];
+            if (temp > 0) {
+                temp /= 2;
+            } else {
+                temp = (temp + 255) / 2;
+            }
+            in[index] = (byte) temp;
+        }
+
+    }
+
+    private void huibaitu(byte in[]){
+        //去除色度，变成灰白图
+        for (int index = WIDTH * HEIGHT; index < in.length; index++) {
+            in[index] = -128;
         }
     }
 
@@ -97,27 +120,12 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
 
         //y全-1，uv全127->白色
         //y全-1，uv全-128->白色
-        /*for (int i = 0; i < WIDTH * HEIGHT; i++) {
+        for (int i = 0; i < WIDTH * HEIGHT; i++) {
             in[i] = -127;
         }
         for (int i = WIDTH * HEIGHT; i < in.length; i++) {
             in[i] = -128;
-        }*/
-
-        //亮度减半
-        for (int index = 0; index < WIDTH * HEIGHT; index++) {
-            int temp = in[index];
-            if (temp > 0) {
-                temp /= 2;
-            } else {
-                temp = (temp + 255) / 2;
-            }
-            in[index] = (byte) temp;
         }
-        //去除色度，变成灰白图
-        /*for (int index = WIDTH * HEIGHT; index < in.length; index++) {
-            in[index] = -128;
-        }*/
     }
 
     private void transNv12ToNv21(byte in[]) {
