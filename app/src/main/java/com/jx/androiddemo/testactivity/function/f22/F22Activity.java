@@ -13,10 +13,6 @@ import com.jx.androiddemo.R;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,7 +26,7 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     private final static String TAG = "YuvToBitmapActivity";
 
     private String yuvPath = "";
-    private final int WIDTH = 1280, HEIGHT = 720;
+    private final int WIDTH = 2160, HEIGHT = 3840;
 
     @BindView(R.id.img_bitmap)
     ImageView bitmapImg;
@@ -53,7 +49,7 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
-        yuvPath = BaseApplication.getFile() + File.separator + "yuv1.yuv";
+        yuvPath = BaseApplication.getFile() + File.separator + "yuv2.yuv";
         transform();
         saveYuvToPic2();
     }
@@ -83,11 +79,18 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
             byte in[] = new byte[fileInputStream.available()];
             fileInputStream.read(in);
             transNv12ToNv21(in);
-            NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT);
+            //filter(in);
+            NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT, WIDTH, HEIGHT);
             Bitmap bitmap = nv21ToBitmap.nv21ToBitmap(in);
             bitmapImg.setImageBitmap(bitmap);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void filter(byte in[]) {
+        for (int index = 0; index < WIDTH * HEIGHT; index++) {
+            in[index] = (byte) (in[index] / 2);
         }
     }
 
@@ -101,6 +104,7 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
             in[index + 1] = temp;
         }
     }
+
 
     private void saveYuvToPic2() {
         File file = new File(BaseApplication.getFile() + File.separator + "yuvtopic2.jpg");
