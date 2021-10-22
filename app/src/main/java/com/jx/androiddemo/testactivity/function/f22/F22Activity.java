@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.jx.androiddemo.BaseApplication;
@@ -82,6 +83,7 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
             //filter(in);
             liangduhalf(in);
             //huibaitu(in);
+            //tiaowen(in);
             NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT, WIDTH, HEIGHT);
             Bitmap bitmap = nv21ToBitmap.nv21ToBitmap(in);
             bitmapImg.setImageBitmap(bitmap);
@@ -90,8 +92,8 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
         }
     }
 
-    private void liangduhalf(byte in[]){
-        //亮度减半
+    //亮度减半
+    private void liangduhalf(byte in[]) {
         for (int index = 0; index < WIDTH * HEIGHT; index++) {
             int temp = in[index];
             if (temp > 0) {
@@ -104,11 +106,33 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
 
     }
 
-    private void huibaitu(byte in[]){
-        //去除色度，变成灰白图
+    //去除色度，变成灰白图
+    private void huibaitu(byte in[]) {
         for (int index = WIDTH * HEIGHT; index < in.length; index++) {
             in[index] = -128;
         }
+    }
+
+    //生成条纹图片
+    private void tiaowen(byte in[]) {
+        for (int h = 0; h < HEIGHT; h++) {
+
+            int ty = (255 / 10) * (h * 10 / HEIGHT);
+            if (ty > 127) {
+                ty -= 256;
+            }
+            byte y = (byte) ty;
+            Log.d(TAG, ty + "");
+
+            for (int w = 0; w < WIDTH; w++) {
+                in[h * WIDTH + w] = y;
+            }
+        }
+
+        for (int i = WIDTH * HEIGHT; i < in.length; i++) {
+            in[i] = -128;
+        }
+
     }
 
     private void filter(byte in[]) {
