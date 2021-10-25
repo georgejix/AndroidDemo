@@ -6,11 +6,14 @@ import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseApplication;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
+import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
@@ -32,6 +35,19 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     @BindView(R.id.img_bitmap)
     ImageView bitmapImg;
 
+    @BindView(R.id.tv_quan_bai)
+    View tv_quan_bai;
+    @BindView(R.id.tv_quan_hei)
+    View tv_quan_hei;
+    @BindView(R.id.tv_origin_pic)
+    View tv_origin_pic;
+    @BindView(R.id.tv_half_liang_du)
+    View tv_half_liang_du;
+    @BindView(R.id.tv_hui_bai)
+    View tv_hui_bai;
+    @BindView(R.id.tv_tiao_wen)
+    View tv_tiao_wen;
+
     @Override
     protected void initInject() {
         getActivityComponent().inject(this);
@@ -51,8 +67,7 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
 
     private void initView() {
         yuvPath = BaseApplication.getFile() + File.separator + "yuv2.yuv";
-        transform();
-        saveYuvToPic2();
+        //saveYuvToPic2();
     }
 
     @SuppressLint("CheckResult")
@@ -66,24 +81,55 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 });
 
         //点击
-        /*RxView.clicks(null)
+        RxView.clicks(tv_quan_bai)
                 .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                });*/
+                    filterPic(FilterEnum.QUAN_BAI);
+                });
+        RxView.clicks(tv_quan_hei)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    filterPic(FilterEnum.QUAN_HEI);
+                });
+        RxView.clicks(tv_origin_pic)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    originPic();
+                });
+        RxView.clicks(tv_half_liang_du)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    filterPic(FilterEnum.LIANG_DU_HALF);
+                });
+        RxView.clicks(tv_hui_bai)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    filterPic(FilterEnum.HUI_BAI);
+                });
+        RxView.clicks(tv_tiao_wen)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    filterPic(FilterEnum.TIAO_WEN);
+                });
     }
 
-    private void transform() {
+    private void originPic() {
         try {
             FileInputStream fileInputStream = new FileInputStream(new File(yuvPath));
             byte in[] = new byte[fileInputStream.available()];
             fileInputStream.read(in);
-            //transNv12ToNv21(in);
-            //filter(in);
-            liangduhalf(in);
-            //huibaitu(in);
-            //tiaowen(in);
             NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT, WIDTH, HEIGHT);
             Bitmap bitmap = nv21ToBitmap.nv21ToBitmap(in);
             bitmapImg.setImageBitmap(bitmap);
@@ -92,8 +138,107 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
         }
     }
 
+    private void filterPic(FilterEnum filterEnum) {
+        switch (filterEnum) {
+            case QUAN_BAI:
+                try {
+                    byte in[] = new byte[WIDTH * HEIGHT * 3 / 2];
+                    quanbaiFilter(in);
+                    NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT, WIDTH, HEIGHT);
+                    Bitmap bitmap = nv21ToBitmap.nv21ToBitmap(in);
+                    bitmapImg.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case QUAN_HEI:
+                try {
+                    byte in[] = new byte[WIDTH * HEIGHT * 3 / 2];
+                    quanheiFilter(in);
+                    NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT, WIDTH, HEIGHT);
+                    Bitmap bitmap = nv21ToBitmap.nv21ToBitmap(in);
+                    bitmapImg.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case LIANG_DU_HALF:
+                try {
+                    FileInputStream fileInputStream = new FileInputStream(new File(yuvPath));
+                    byte in[] = new byte[fileInputStream.available()];
+                    fileInputStream.read(in);
+                    liangduhalfFilter(in);
+                    NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT, WIDTH, HEIGHT);
+                    Bitmap bitmap = nv21ToBitmap.nv21ToBitmap(in);
+                    bitmapImg.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case HUI_BAI:
+                try {
+                    FileInputStream fileInputStream = new FileInputStream(new File(yuvPath));
+                    byte in[] = new byte[fileInputStream.available()];
+                    fileInputStream.read(in);
+                    huibaituFilter(in);
+                    NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT, WIDTH, HEIGHT);
+                    Bitmap bitmap = nv21ToBitmap.nv21ToBitmap(in);
+                    bitmapImg.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case TIAO_WEN:
+                try {
+                    byte in[] = new byte[WIDTH * HEIGHT * 3 / 2];
+                    tiaowenFilter(in);
+                    NV21ToBitmap nv21ToBitmap = new NV21ToBitmap(this, WIDTH, HEIGHT, WIDTH, HEIGHT);
+                    Bitmap bitmap = nv21ToBitmap.nv21ToBitmap(in);
+                    bitmapImg.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+    }
+
+    //生成全白/全黑图片
+    private void quanbaiFilter(byte in[]) {
+        //y全0，uv全127->黑色
+        //y全0，uv全-128->黑色
+
+        //y全-128，uv全-128->灰色
+        //y全127，uv全-128->灰色
+
+        //y全-1，uv全127->白色
+        //y全-1，uv全-128->白色
+        for (int i = 0; i < WIDTH * HEIGHT; i++) {
+            in[i] = -1;
+        }
+        for (int i = WIDTH * HEIGHT; i < in.length; i++) {
+            in[i] = -128;
+        }
+    }
+
+    private void quanheiFilter(byte in[]) {
+        //y全0，uv全127->黑色
+        //y全0，uv全-128->黑色
+
+        //y全-128，uv全-128->灰色
+        //y全127，uv全-128->灰色
+
+        //y全-1，uv全127->白色
+        //y全-1，uv全-128->白色
+        for (int i = 0; i < WIDTH * HEIGHT; i++) {
+            in[i] = 0;
+        }
+        for (int i = WIDTH * HEIGHT; i < in.length; i++) {
+            in[i] = -128;
+        }
+    }
+
     //亮度减半
-    private void liangduhalf(byte in[]) {
+    private void liangduhalfFilter(byte in[]) {
         for (int index = 0; index < WIDTH * HEIGHT; index++) {
             int temp = in[index];
             if (temp > 0) {
@@ -107,14 +252,14 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     //去除色度，变成灰白图
-    private void huibaitu(byte in[]) {
+    private void huibaituFilter(byte in[]) {
         for (int index = WIDTH * HEIGHT; index < in.length; index++) {
             in[index] = -128;
         }
     }
 
     //生成条纹图片
-    private void tiaowen(byte in[]) {
+    private void tiaowenFilter(byte in[]) {
         for (int h = 0; h < HEIGHT; h++) {
 
             int ty = (255 / 10) * (h * 10 / HEIGHT);
@@ -133,23 +278,6 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
             in[i] = -128;
         }
 
-    }
-
-    private void filter(byte in[]) {
-        //y全0，uv全127->黑色
-        //y全0，uv全-128->黑色
-
-        //y全-128，uv全-128->灰色
-        //y全127，uv全-128->灰色
-
-        //y全-1，uv全127->白色
-        //y全-1，uv全-128->白色
-        for (int i = 0; i < WIDTH * HEIGHT; i++) {
-            in[i] = -127;
-        }
-        for (int i = WIDTH * HEIGHT; i < in.length; i++) {
-            in[i] = -128;
-        }
     }
 
     private void transNv12ToNv21(byte in[]) {

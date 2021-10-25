@@ -32,6 +32,7 @@ public class LaunchActivity extends BaseMvpActivity<LaunchPresenter> implements 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(integer -> {
                     Navigator.navigateToMainActivity(this);
+                    finish();
                 });
     }
 }
