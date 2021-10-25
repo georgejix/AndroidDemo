@@ -303,4 +303,16 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
         } catch (Exception e) {
         }
     }
+
+    /**
+     * rgb转yuv公式
+     * Y= 0.299*R+0.587*G+0.114*B
+     * U=-0.147*R-0.289*G+0.463*B
+     * V= 0.615*R-0.515*G-0.100*B
+     *
+     * y = (unsigned char)( ( 66 * r + 129 * g +  25 * b + 128) >> 8) + 16;
+     * u = (unsigned char)( ( -38 * r -  74 * g + 112 * b + 128) >> 8) + 128;
+     * v = (unsigned char)( ( 112 * r -  94 * g -  18 * b + 128) >> 8) + 128;
+     *
+     */
 }
