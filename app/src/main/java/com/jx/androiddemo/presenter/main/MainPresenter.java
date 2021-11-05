@@ -29,6 +29,7 @@ import com.jx.androiddemo.testactivity.function.f28.F28Activity;
 import com.jx.androiddemo.testactivity.function.f29.F29Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f30.F30Activity;
+import com.jx.androiddemo.testactivity.function.f31.F31Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
 import com.jx.androiddemo.testactivity.function.f5.F5Activity;
 import com.jx.androiddemo.testactivity.function.f6.F6Activity;
@@ -115,6 +116,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             add("系统相册选择视频，带ui", F28Activity.class);
             add("sdk提取网络视频中音频", F29Activity.class);
             add("ffmpeg提取网络视频中音频", F30Activity.class);
+            add("选择本地音频", F31Activity.class);
 
 
             add("---------------------------------", null);
