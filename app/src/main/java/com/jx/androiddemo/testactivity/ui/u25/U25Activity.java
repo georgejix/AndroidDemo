@@ -52,25 +52,25 @@ public class U25Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
         tempAdvList.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp05%2F1Z9291J4442Y1-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639624199&t=f79003c73c175773791316899df4da3d");
 
         List<String> advList = new ArrayList();
+        advList.add(tempAdvList.get(tempAdvList.size() - 1));
         advList.addAll(tempAdvList);
-        advList.addAll(tempAdvList);
-        advList.addAll(tempAdvList);
+        advList.add(tempAdvList.get(0));
 
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(mContext);
         viewPagerAdapter.addDataAll(advList);
         mViewPager2.setAdapter(viewPagerAdapter);
-        mViewPager2.setCurrentItem(tempAdvList.size(), false);
+        mViewPager2.setCurrentItem(1, false);
         mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (0.0 == positionOffset) {
-                    if (position < tempAdvList.size()) {
-                        mViewPager2.setCurrentItem(position + tempAdvList.size(), false);
-                        Log.d(TAG, "jump from " + position + " to " + (position + tempAdvList.size()));
-                    } else if (position >= tempAdvList.size() * 2) {
-                        mViewPager2.setCurrentItem(position - tempAdvList.size(), false);
-                        Log.d(TAG, "jump from " + position + " to " + (position - tempAdvList.size()));
+                    if (0 == position) {
+                        mViewPager2.setCurrentItem(advList.size() - 2, false);
+                        Log.d(TAG, "jump from " + position + " to " + (advList.size() - 2));
+                    } else if (advList.size() - 1 == position) {
+                        mViewPager2.setCurrentItem(1, false);
+                        Log.d(TAG, "jump from " + position + " to 1");
                     }
                 }
             }
