@@ -53,6 +53,7 @@ import com.jx.androiddemo.testactivity.ui.u21.U21Activity;
 import com.jx.androiddemo.testactivity.ui.u22.U22Activity;
 import com.jx.androiddemo.testactivity.ui.u23.U23Activity;
 import com.jx.androiddemo.testactivity.ui.u24.U24Activity;
+import com.jx.androiddemo.testactivity.ui.u25.U25Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
 import com.jx.androiddemo.testactivity.ui.u5.U5Activity;
@@ -146,6 +147,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             add("loading", U22Activity.class);
             add("一行两列linearlayout", U23Activity.class);
             add("ConstraintLayout", U24Activity.class);
+            add("循环图片轮播", U25Activity.class);
 
 
         }

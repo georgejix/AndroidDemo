@@ -1,20 +1,32 @@
 package com.jx.androiddemo.testactivity.ui.u25;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
-import com.jakewharton.rxbinding2.view.RxView;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class U25Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+    @BindView(R.id.adv_viewpager2)
+    ViewPager2 mViewPager2;
+
+    private Timer mTimer;
+    private TimerTask mTimerTask;
+    private boolean mCanScroll = true;
 
     @Override
     protected void initInject() {
@@ -34,6 +46,68 @@ public class U25Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
+        List<String> tempAdvList = new ArrayList();
+        tempAdvList.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ffile01.16sucai.com%2Fd%2Ffile%2F2011%2F1007%2F20111007124744976.jpg&refer=http%3A%2F%2Ffile01.16sucai.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639624199&t=6c70e33c44c5b0c2b8e52299787df171");
+        tempAdvList.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ffile02.16sucai.com%2Fd%2Ffile%2F2014%2F0427%2F071875652097059bbbffe106f9ce3a93.jpg&refer=http%3A%2F%2Ffile02.16sucai.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639624199&t=a3864e40c07c07bc5e4aaf30a1a5b278");
+        tempAdvList.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp05%2F1Z9291J4442Y1-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639624199&t=f79003c73c175773791316899df4da3d");
+
+        List<String> advList = new ArrayList();
+        advList.addAll(tempAdvList);
+        advList.addAll(tempAdvList);
+        advList.addAll(tempAdvList);
+
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(mContext);
+        viewPagerAdapter.addDataAll(advList);
+        mViewPager2.setAdapter(viewPagerAdapter);
+        mViewPager2.setCurrentItem(tempAdvList.size(), false);
+        mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (0.0 == positionOffset) {
+                    if (position < tempAdvList.size()) {
+                        mViewPager2.setCurrentItem(position + tempAdvList.size(), false);
+                        Log.d(TAG, "jump from " + position + " to " + (position + tempAdvList.size()));
+                    } else if (position >= tempAdvList.size() * 2) {
+                        mViewPager2.setCurrentItem(position - tempAdvList.size(), false);
+                        Log.d(TAG, "jump from " + position + " to " + (position - tempAdvList.size()));
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                mCanScroll = ViewPager2.SCROLL_STATE_DRAGGING != state;
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (null != mTimerTask) {
+            mTimerTask.cancel();
+            mTimerTask = null;
+        }
+        if (null != mTimer) {
+            mTimer.cancel();
+            mTimer = null;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTimer = new Timer();
+        mTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if (mCanScroll && null != mViewPager2) {
+                    mViewPager2.setCurrentItem(mViewPager2.getCurrentItem() + 1);
+                }
+            }
+        };
+        mTimer.schedule(mTimerTask, 3000, 3000);
     }
 
     @SuppressLint("CheckResult")
@@ -54,4 +128,5 @@ public class U25Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 {
                 });*/
     }
+
 }
