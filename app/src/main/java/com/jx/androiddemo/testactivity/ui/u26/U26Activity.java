@@ -1,6 +1,10 @@
 package com.jx.androiddemo.testactivity.ui.u26;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
@@ -9,8 +13,6 @@ import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -21,6 +23,11 @@ public class U26Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
 
     @BindView(R.id.auto_scroll_vp)
     AutoScrollViewPager mAutoScrollViewPager;
+
+    @BindView(R.id.rv_point)
+    RecyclerView mPointRv;
+
+    private PointAdapter mPointAdapter;
 
     @Override
     protected void initInject() {
@@ -46,6 +53,19 @@ public class U26Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
         tempAdvList.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp05%2F1Z9291J4442Y1-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639624199&t=f79003c73c175773791316899df4da3d");
 
         mAutoScrollViewPager.setData(tempAdvList);
+        mAutoScrollViewPager.setListener((position, totalCount) -> {
+            Log.d(TAG, position + "," + totalCount);
+            if (null == mPointAdapter) {
+                return;
+            }
+            mPointAdapter.setCheckedIndex(position);
+            mPointAdapter.notifyDataSetChanged();
+        });
+
+        mPointRv.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false));
+        mPointAdapter = new PointAdapter(mContext);
+        mPointAdapter.addDataAll(tempAdvList);
+        mPointRv.setAdapter(mPointAdapter);
     }
 
     @SuppressLint("CheckResult")

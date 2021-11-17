@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class AutoScrollViewPager extends RelativeLayout {
+public class AutoScrollViewPager extends FrameLayout {
     private final String TAG = "AutoScrollViewPager";
     private Context mContext;
     private ViewPager2 mViewPager2;
@@ -25,7 +25,9 @@ public class AutoScrollViewPager extends RelativeLayout {
     private TimerTask mTimerTask;
     private boolean mCanScroll = true;
     private List<String> advList = new ArrayList();
+    private int mRealSize;
     private ViewPagerAdapter mViewPagerAdapter;
+    private Listener mListener;
 
     public AutoScrollViewPager(Context context) {
         super(context);
@@ -49,12 +51,17 @@ public class AutoScrollViewPager extends RelativeLayout {
             advList.addAll(data);
             advList.add(data.get(0));
         }
+        mRealSize = null != data ? data.size() : 0;
         mViewPagerAdapter.addDataAll(advList);
         mViewPagerAdapter.notifyDataSetChanged();
         if (advList.size() > 0) {
             mViewPager2.setCurrentItem(1, false);
         }
         startTimer();
+    }
+
+    public void setListener(Listener listener) {
+        this.mListener = listener;
     }
 
     private void initView(Context context) {
@@ -82,6 +89,14 @@ public class AutoScrollViewPager extends RelativeLayout {
             public void onPageScrollStateChanged(int state) {
                 mCanScroll = ViewPager2.SCROLL_STATE_DRAGGING != state;
             }
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                if (null != mListener && advList.size() >= 3) {
+                    mViewPager2.post(() -> mListener.change(((position - 1) % (mRealSize)), mRealSize));
+                }
+            }
         });
         addView(view);
     }
@@ -90,7 +105,7 @@ public class AutoScrollViewPager extends RelativeLayout {
         if (null != mTimer) {
             stopTimer();
         }
-        if (0 == advList.size()) {
+        if (0 == mRealSize) {
             Log.d(TAG, "startTimer return");
             return;
         }
@@ -105,7 +120,7 @@ public class AutoScrollViewPager extends RelativeLayout {
                 }
             }
         };
-        mTimer.schedule(mTimerTask, 3000, 3000);
+        mTimer.schedule(mTimerTask, 5000, 5000);
     }
 
     public void stopTimer() {
@@ -118,5 +133,9 @@ public class AutoScrollViewPager extends RelativeLayout {
             mTimer.cancel();
             mTimer = null;
         }
+    }
+
+    public interface Listener {
+        void change(int position, int totalCount);
     }
 }
