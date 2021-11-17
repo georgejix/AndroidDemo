@@ -2,19 +2,25 @@ package com.jx.androiddemo.testactivity.ui.u26;
 
 import android.annotation.SuppressLint;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.jx.androiddemo.BaseMvpActivity;
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.constant.Constants;
 import com.jx.androiddemo.testactivity.function.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.function.empty.EmptyPresenter;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class U26Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
+
+    @BindView(R.id.auto_scroll_vp)
+    AutoScrollViewPager mAutoScrollViewPager;
 
     @Override
     protected void initInject() {
@@ -34,6 +40,12 @@ public class U26Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
+        List<String> tempAdvList = new ArrayList();
+        tempAdvList.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ffile01.16sucai.com%2Fd%2Ffile%2F2011%2F1007%2F20111007124744976.jpg&refer=http%3A%2F%2Ffile01.16sucai.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639624199&t=6c70e33c44c5b0c2b8e52299787df171");
+        tempAdvList.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ffile02.16sucai.com%2Fd%2Ffile%2F2014%2F0427%2F071875652097059bbbffe106f9ce3a93.jpg&refer=http%3A%2F%2Ffile02.16sucai.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639624199&t=a3864e40c07c07bc5e4aaf30a1a5b278");
+        tempAdvList.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp05%2F1Z9291J4442Y1-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639624199&t=f79003c73c175773791316899df4da3d");
+
+        mAutoScrollViewPager.setData(tempAdvList);
     }
 
     @SuppressLint("CheckResult")
@@ -53,5 +65,17 @@ public class U26Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .subscribe(o ->
                 {
                 });*/
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mAutoScrollViewPager.stopTimer();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAutoScrollViewPager.startTimer();
     }
 }
