@@ -26,12 +26,12 @@
     <TextView
         android:id="@+id/tv_change_full_screen4"
         style="@style/generalTv"
-        android:text="显示所以系统组件" />
+        android:text="显示所有系统组件" />
 
     <TextView
         android:id="@+id/tv_change_full_screen5"
         style="@style/generalTv"
-        android:text="隐藏所以系统组件" />
+        android:text="隐藏所有系统组件" />
 
     <TextView
         android:id="@+id/tv_add_view_in_child_thread"
