@@ -161,9 +161,4 @@ public class U27Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        showHidePop();
-    }
 }
