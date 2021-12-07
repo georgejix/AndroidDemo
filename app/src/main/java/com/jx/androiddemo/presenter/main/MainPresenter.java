@@ -59,6 +59,7 @@ import com.jx.androiddemo.testactivity.ui.u27.U27Activity;
 import com.jx.androiddemo.testactivity.ui.u28.U28Activity;
 import com.jx.androiddemo.testactivity.ui.u29.U29Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
+import com.jx.androiddemo.testactivity.ui.u30.U30Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
 import com.jx.androiddemo.testactivity.ui.u5.U5Activity;
 import com.jx.androiddemo.testactivity.ui.u6.U6Activity;
@@ -121,7 +122,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             add("系统相册选择视频，带ui", F28Activity.class);
             add("sdk提取网络视频中音频", F29Activity.class);
             add("ffmpeg提取网络视频中音频", F30Activity.class);
-            add("选择本地音频", F31Activity.class);
+            add("loading", F31Activity.class);
 
 
             add("---------------------------------", null);
@@ -156,6 +157,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             add("悬浮窗口", U27Activity.class);
             add("弹框提示", U28Activity.class);
             add("可拖动悬浮窗口", U29Activity.class);
+            add("覆盖翻页", U30Activity.class);
 
 
         }
