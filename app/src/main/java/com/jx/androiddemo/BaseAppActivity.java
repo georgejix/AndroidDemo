@@ -7,13 +7,13 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.CheckResult;
 import androidx.annotation.NonNull;
 
+import com.jx.androiddemo.event.NoticeEvent;
+import com.jx.arch.BuildConfig;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.RxLifecycle;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
-import com.jx.androiddemo.event.NoticeEvent;
-import com.jx.arch.BuildConfig;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -26,14 +26,12 @@ import me.yokeyword.fragmentation.SupportActivity;
 /**
  * <基础activity>
  */
-public class BaseAppActivity extends SupportActivity implements LifecycleProvider<ActivityEvent>
-{
+public class BaseAppActivity extends SupportActivity implements LifecycleProvider<ActivityEvent> {
     private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
 
     @Override
     @CallSuper
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         EventBus.getDefault().register(this);
@@ -41,39 +39,32 @@ public class BaseAppActivity extends SupportActivity implements LifecycleProvide
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(NoticeEvent event)
-    {
+    public void onEventMainThread(NoticeEvent event) {
     }
 
     @Override
     @CallSuper
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
 //        lifecycleSubject.onNext(ActivityEvent.RESUME);
-        if (!BuildConfig.ON_OFF)
-        {
+        if (!BuildConfig.ON_OFF) {
         }
     }
 
     @Override
     @CallSuper
-    protected void onPause()
-    {
+    protected void onPause() {
 //        lifecycleSubject.onNext(ActivityEvent.PAUSE);
         super.onPause();
-        if (!BuildConfig.ON_OFF)
-        {
+        if (!BuildConfig.ON_OFF) {
         }
     }
 
     @Override
     @CallSuper
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         BaseApplication.getInstance().delActivity(this);
-        if (EventBus.getDefault().isRegistered(this))
-        {
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
         lifecycleSubject.onNext(ActivityEvent.DESTROY);
@@ -83,40 +74,90 @@ public class BaseAppActivity extends SupportActivity implements LifecycleProvide
     @Override
     @NonNull
     @CheckResult
-    public final Observable<ActivityEvent> lifecycle()
-    {
+    public final Observable<ActivityEvent> lifecycle() {
         return lifecycleSubject.hide();
     }
 
     @Override
     @NonNull
     @CheckResult
-    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event)
-    {
+    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
         return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
     }
 
     @Override
     @NonNull
     @CheckResult
-    public final <T> LifecycleTransformer<T> bindToLifecycle()
-    {
+    public final <T> LifecycleTransformer<T> bindToLifecycle() {
         return RxLifecycleAndroid.bindActivity(lifecycleSubject);
     }
 
     @Override
     @CallSuper
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
 //        lifecycleSubject.onNext(ActivityEvent.START);
     }
 
     @Override
     @CallSuper
-    protected void onStop()
-    {
+    protected void onStop() {
 //        lifecycleSubject.onNext(ActivityEvent.STOP);
         super.onStop();
     }
+
+    /*private String[] mRequestPermissions;
+    private int mRequestPermissionCode;
+    ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
+            result -> {
+                boolean hasDeny = false;
+                for (String permission : mRequestPermissions) {
+                    if (null == permission) {
+                        continue;
+                    }
+                    if (ContextCompat.checkSelfPermission(mContext, permission) !=
+                            PackageManager.PERMISSION_GRANTED) {
+                        hasDeny = true;
+                    }
+                }
+                if (hasDeny) {
+                    permissionsGet(false, mRequestPermissionCode);
+                } else {
+                    permissionsGet(true, mRequestPermissionCode);
+                }
+            });
+
+    //申请权限
+    public void requestPermission(String[] permissions, int code) {
+        if (null == permissions) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            permissionsGet(true, mRequestPermissionCode);
+            return;
+        }
+        mRequestPermissions = permissions;
+        mRequestPermissionCode = code;
+        List<String> requestPermissions = new ArrayList<>();
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(mContext, permission) !=
+                    PackageManager.PERMISSION_GRANTED) {
+                requestPermissions.add(permission);
+            }
+        }
+        if (0 != requestPermissions.size()) {
+            String[] permissionArray = new String[requestPermissions.size()];
+            for (int i = 0; i < requestPermissions.size(); i++) {
+                permissionArray[i] = requestPermissions.get(i);
+            }
+            permissionLauncher.launch(permissionArray);
+        } else {
+            permissionsGet(true, mRequestPermissionCode);
+        }
+    }
+
+    //申请权限回调
+    public void permissionsGet(boolean get, int code) {
+
+    }*/
 }
