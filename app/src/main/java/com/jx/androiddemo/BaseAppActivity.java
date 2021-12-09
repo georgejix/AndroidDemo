@@ -106,38 +106,15 @@ public class BaseAppActivity extends SupportActivity implements LifecycleProvide
         super.onStop();
     }
 
-    /*private String[] mRequestPermissions;
-    private int mRequestPermissionCode;
-    ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
-            result -> {
-                boolean hasDeny = false;
-                for (String permission : mRequestPermissions) {
-                    if (null == permission) {
-                        continue;
-                    }
-                    if (ContextCompat.checkSelfPermission(mContext, permission) !=
-                            PackageManager.PERMISSION_GRANTED) {
-                        hasDeny = true;
-                    }
-                }
-                if (hasDeny) {
-                    permissionsGet(false, mRequestPermissionCode);
-                } else {
-                    permissionsGet(true, mRequestPermissionCode);
-                }
-            });
-
     //申请权限
-    public void requestPermission(String[] permissions, int code) {
+    /*public void requestPermission(String[] permissions, int code) {
         if (null == permissions) {
             return;
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            permissionsGet(true, mRequestPermissionCode);
+            permissionsGet(true, code);
             return;
         }
-        mRequestPermissions = permissions;
-        mRequestPermissionCode = code;
         List<String> requestPermissions = new ArrayList<>();
         for (String permission : permissions) {
             if (ContextCompat.checkSelfPermission(mContext, permission) !=
@@ -150,9 +127,27 @@ public class BaseAppActivity extends SupportActivity implements LifecycleProvide
             for (int i = 0; i < requestPermissions.size(); i++) {
                 permissionArray[i] = requestPermissions.get(i);
             }
+            ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
+                    result -> {
+                        boolean hasDeny = false;
+                        for (String permission : permissions) {
+                            if (null == permission) {
+                                continue;
+                            }
+                            if (ContextCompat.checkSelfPermission(mContext, permission) !=
+                                    PackageManager.PERMISSION_GRANTED) {
+                                hasDeny = true;
+                            }
+                        }
+                        if (hasDeny) {
+                            permissionsGet(false, code);
+                        } else {
+                            permissionsGet(true, code);
+                        }
+                    });
             permissionLauncher.launch(permissionArray);
         } else {
-            permissionsGet(true, mRequestPermissionCode);
+            permissionsGet(true, code);
         }
     }
 
