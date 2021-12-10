@@ -9,6 +9,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.jx.androiddemo.R;
@@ -42,6 +43,14 @@ public class GeneralLoadingView extends View {
     }
 
     @Override
+    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        if (View.VISIBLE == getVisibility()) {
+            invalidate();
+        }
+    }
+
+    @Override
     @SuppressLint("DrawAllocation")
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -58,10 +67,12 @@ public class GeneralLoadingView extends View {
 
             canvas.restore();
         }
-        postDelayed(() -> {
-            mStartDegree = (mStartDegree + 30) % 360;
-            invalidate();
-        }, 50);
+        if (View.VISIBLE == getVisibility()) {
+            postDelayed(() -> {
+                mStartDegree = (mStartDegree + 30) % 360;
+                invalidate();
+            }, 50);
+        }
     }
 
 }
