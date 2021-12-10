@@ -78,4 +78,7 @@
         <attr name="backgroundColor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="GeneralLoading">
+        <attr name="loading_color" format="color" />
+    </declare-styleable>
 </resources>

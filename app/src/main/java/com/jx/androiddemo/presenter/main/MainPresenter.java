@@ -157,7 +157,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             add("悬浮窗口", U27Activity.class);
             add("弹框提示", U28Activity.class);
             add("可拖动悬浮窗口", U29Activity.class);
-            add("覆盖翻页", U30Activity.class);
+            add("loading", U30Activity.class);
 
 
         }
