@@ -66,6 +66,11 @@ import com.jx.androiddemo.testactivity.ui.u29.U29Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3_1Activity;
 import com.jx.androiddemo.testactivity.ui.u30.U30Activity;
+import com.jx.androiddemo.testactivity.ui.u31.U31Activity;
+import com.jx.androiddemo.testactivity.ui.u32.U32Activity;
+import com.jx.androiddemo.testactivity.ui.u33.U33Activity;
+import com.jx.androiddemo.testactivity.ui.u34.U34Activity;
+import com.jx.androiddemo.testactivity.ui.u35.U35Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
 import com.jx.androiddemo.testactivity.ui.u5.U5Activity;
 import com.jx.androiddemo.testactivity.ui.u6.U6Activity;
@@ -216,4 +221,14 @@ public interface ActivityComponent {
     void inject(U29Activity u29Activity);
 
     void inject(U30Activity u30Activity);
+
+    void inject(U31Activity u31Activity);
+
+    void inject(U32Activity u32Activity);
+
+    void inject(U33Activity u33Activity);
+
+    void inject(U34Activity u34Activity);
+
+    void inject(U35Activity u35Activity);
 }
