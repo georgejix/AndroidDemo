@@ -21,7 +21,7 @@ public class U32Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_empty;
+        return R.layout.activity_u32;
     }
 
     @SuppressLint("CheckResult")
