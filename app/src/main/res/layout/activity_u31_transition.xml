@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingTop="24dp">
@@ -10,7 +9,8 @@
     <TextView
         android:id="@+id/tv_hello"
         style="@style/generalTv"
-        android:text="hello world" />
+        android:text="hello world"
+        android:textColor="@color/red" />
 
     <TextView
         style="@style/generalTv"
