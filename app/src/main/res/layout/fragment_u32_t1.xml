@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_hello1"
+        style="@style/generalTv"
+        android:text="hello world1" />
+    <TextView
+        style="@style/generalTv"
+        android:text="hello world2" />
+    <TextView
+        style="@style/generalTv"
+        android:text="hello world3" />
+</LinearLayout>
