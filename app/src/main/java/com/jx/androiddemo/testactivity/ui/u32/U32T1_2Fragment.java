@@ -3,10 +3,9 @@ package com.jx.androiddemo.testactivity.ui.u32;
 import android.content.Context;
 import android.os.Bundle;
 import android.transition.ChangeBounds;
+import android.transition.ChangeClipBounds;
 import android.transition.ChangeTransform;
 import android.transition.Slide;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
 import android.transition.TransitionSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,14 +15,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.SharedElementCallback;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.jx.androiddemo.R;
-
-import java.util.List;
-import java.util.Map;
 
 public class U32T1_2Fragment extends Fragment
 {
@@ -51,13 +46,19 @@ public class U32T1_2Fragment extends Fragment
                 mListener.click();
             }
         });
+        //设置相同名称
         ViewCompat.setTransitionName(tv_hello1, "tv_hello1");
         setExitTransition(new Slide(Gravity.LEFT));
         setEnterTransition(new Slide(Gravity.RIGHT));
-        Transition transition =
-                TransitionInflater.from(getContext())
-                        .inflateTransition(R.transition.image_shared_element_transition);
-        setSharedElementEnterTransition(transition);
+        /*setSharedElementEnterTransition(TransitionInflater.from(getContext())
+                        .inflateTransition(R.transition.image_shared_element_transition));*/
+        //设置进入共享动画
+        TransitionSet transitionSet = new TransitionSet();
+        transitionSet.addTransition(new ChangeBounds());
+        transitionSet.addTransition(new ChangeTransform());
+        transitionSet.addTransition(new ChangeClipBounds());
+        setSharedElementEnterTransition(transitionSet);
+
 
         /*setEnterSharedElementCallback(new SharedElementCallback()
         {

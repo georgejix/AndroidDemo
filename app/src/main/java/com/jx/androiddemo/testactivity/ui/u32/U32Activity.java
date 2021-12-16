@@ -93,7 +93,7 @@ public class U32Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     private void showFragment1()
     {
         getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
-                .addSharedElement(mF0.tv_hello1, "tv_hello1")
+                .addSharedElement(mF0.tv_hello1, "tv_hello1")//添加共享元素
                 .replace(R.id.layout_frame, mF1).commit();
     }
 }

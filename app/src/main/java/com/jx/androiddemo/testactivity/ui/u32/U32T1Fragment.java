@@ -3,7 +3,6 @@ package com.jx.androiddemo.testactivity.ui.u32;
 import android.content.Context;
 import android.os.Bundle;
 import android.transition.Slide;
-import android.transition.TransitionInflater;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,14 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.SharedElementCallback;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.jx.androiddemo.R;
-
-import java.util.List;
-import java.util.Map;
 
 public class U32T1Fragment extends Fragment
 {
@@ -47,9 +42,16 @@ public class U32T1Fragment extends Fragment
                 mListener.click();
             }
         });
+        //设置相同名称
         ViewCompat.setTransitionName(tv_hello1, "tv_hello1");
-        setExitTransition(TransitionInflater.from(getContext())
-                .inflateTransition(R.transition.grid_exit_transition));
+        /*setExitTransition(TransitionInflater.from(getContext())
+                .inflateTransition(R.transition.grid_exit_transition));*/
+       /* TransitionSet transitionSet = new TransitionSet();
+        transitionSet.addTransition(new Fade());
+        transitionSet.addTarget(tv_hello1);
+        setExitTransition(transitionSet);*/
+        setExitTransition(new Slide(Gravity.RIGHT));
+        setEnterTransition(new Slide(Gravity.LEFT));
 
         /*setExitSharedElementCallback(new SharedElementCallback()
         {
