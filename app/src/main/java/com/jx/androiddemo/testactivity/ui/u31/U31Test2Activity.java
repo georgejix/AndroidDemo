@@ -1,6 +1,7 @@
 package com.jx.androiddemo.testactivity.ui.u31;
 
 import android.os.Bundle;
+import android.view.Window;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,10 @@ public class U31Test2Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        /**
+         *1、打开FEATURE_CONTENT_TRANSITIONS开关(可选)，这个开关默认是打开的
+         */
+        requestWindowFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_u31_test2);
         initView();

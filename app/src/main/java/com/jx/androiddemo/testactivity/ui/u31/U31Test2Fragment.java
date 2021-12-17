@@ -40,7 +40,22 @@ public class U31Test2Fragment extends Fragment {
             }
         });
         ViewCompat.setTransitionName(tv_hello1, "tv_hello");
-        setSharedElementReturnTransition(new Slide(Gravity.RIGHT));
+        setExitTransition(new Slide(Gravity.RIGHT));
+        setEnterTransition(new Slide(Gravity.LEFT));
+        /*setExitTransition(TransitionInflater.from(getContext())
+                .inflateTransition(R.transition.grid_exit_transition));*/
+       /* TransitionSet transitionSet = new TransitionSet();
+        transitionSet.addTransition(new Fade());
+        transitionSet.addTarget(tv_hello1);
+        setExitTransition(transitionSet);*/
+        /*setExitSharedElementCallback(new SharedElementCallback()
+        {
+            @Override
+            public void onMapSharedElements(List<String> names, Map<String, View> sharedElements)
+            {
+                sharedElements.put(names.get(0),tv_hello1);
+            }
+        });*/
         return view;
     }
 

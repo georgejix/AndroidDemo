@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.transition.ChangeBounds;
 import android.transition.ChangeTransform;
 import android.transition.Fade;
+import android.transition.Slide;
 import android.transition.TransitionSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,13 +48,24 @@ public class U31Test2_2Fragment extends Fragment {
             }
         });
         ViewCompat.setTransitionName(tv_hello1, "tv_hello");
-        setEnterTransition(new Fade());
-        setExitTransition(new Fade());
+        setExitTransition(new Slide(Gravity.LEFT));
+        setEnterTransition(new Slide(Gravity.RIGHT));
+        /*setSharedElementEnterTransition(TransitionInflater.from(getContext())
+                        .inflateTransition(R.transition.image_shared_element_transition));*/
+        //设置进入共享动画
         TransitionSet transitionSet = new TransitionSet();
         transitionSet.addTransition(new ChangeBounds());
         transitionSet.addTransition(new ChangeTransform());
         setSharedElementEnterTransition(transitionSet);
         setSharedElementReturnTransition(transitionSet);
+        /*setEnterSharedElementCallback(new SharedElementCallback()
+        {
+            @Override
+            public void onMapSharedElements(List<String> names, Map<String, View> sharedElements)
+            {
+                sharedElements.put(names.get(0),tv_hello1);
+            }
+        });*/
         return view;
     }
 
