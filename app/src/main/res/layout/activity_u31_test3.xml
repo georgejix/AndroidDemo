@@ -5,18 +5,18 @@
     android:orientation="vertical"
     android:paddingTop="24dp">
 
-    <TextView
-        android:id="@+id/tv_test1"
-        style="@style/generalTv"
-        android:text="activity跳转activity" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="400dp" />
 
     <TextView
-        android:id="@+id/tv_test2"
+        android:id="@+id/tv_pre"
         style="@style/generalTv"
-        android:text="fragment跳fragment" />
+        android:text="pre" />
 
     <TextView
-        android:id="@+id/tv_test3"
+        android:id="@+id/tv_next"
         style="@style/generalTv"
-        android:text="viewpager切换动画" />
+        android:text="next" />
 </LinearLayout>

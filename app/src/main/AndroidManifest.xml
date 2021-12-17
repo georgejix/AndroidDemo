@@ -131,6 +131,7 @@
         <activity android:name=".testactivity.ui.u31.U31Test1Activity" />
         <activity android:name=".testactivity.ui.u31.U31Test1_2Activity" />
         <activity android:name=".testactivity.ui.u31.U31Test2Activity" />
+        <activity android:name=".testactivity.ui.u31.U31Test3Activity" />
         <activity android:name=".testactivity.ui.u32.U32Activity" />
         <activity android:name=".testactivity.ui.u33.U33Activity" />
         <activity android:name=".testactivity.ui.u34.U34Activity" />

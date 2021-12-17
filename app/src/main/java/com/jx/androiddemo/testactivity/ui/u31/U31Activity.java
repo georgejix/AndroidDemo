@@ -23,6 +23,8 @@ public class U31Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     TextView tv_test1;
     @BindView(R.id.tv_test2)
     TextView tv_test2;
+    @BindView(R.id.tv_test3)
+    TextView tv_test3;
 
     @Override
     protected void initInject() {
@@ -68,6 +70,13 @@ public class U31Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .subscribe(o ->
                 {
                     startActivity(new Intent(mContext, U31Test2Activity.class));
+                });
+        RxView.clicks(tv_test3)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    startActivity(new Intent(mContext, U31Test3Activity.class));
                 });
     }
 }
