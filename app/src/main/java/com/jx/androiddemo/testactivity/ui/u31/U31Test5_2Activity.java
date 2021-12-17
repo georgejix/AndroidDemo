@@ -12,13 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.jx.androiddemo.R;
 
 import org.jetbrains.annotations.NotNull;
 
 public class U31Test5_2Activity extends FragmentActivity {
-    private ViewPager viewpager;
+    private ViewPager2 viewpager2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,18 +34,18 @@ public class U31Test5_2Activity extends FragmentActivity {
     }
 
     private void initView() {
-        viewpager = findViewById(R.id.viewpager);
-        viewpager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        viewpager2 = findViewById(R.id.viewpager2);
+        viewpager2.setAdapter(new FragmentStateAdapter(getSupportFragmentManager(), getLifecycle()) {
+            @Override
+            public int getItemCount() {
+                return 3;
+            }
+
             @NonNull
             @NotNull
             @Override
-            public Fragment getItem(int position) {
-                return new U31Test5Fragment(U31Test5_2Activity.this, position);
-            }
-
-            @Override
-            public int getCount() {
-                return 3;
+            public Fragment createFragment(int i) {
+                return new U31Test5Fragment(U31Test5_2Activity.this, i);
             }
         });
         TransitionSet transitionSet = new TransitionSet();

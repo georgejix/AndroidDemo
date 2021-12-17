@@ -44,8 +44,8 @@ public class U31Test5Fragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onResume() {
+        super.onResume();
         if (0 == mIndex) {
             getActivity().startPostponedEnterTransition();
         }
