@@ -54,6 +54,7 @@ public class U31Test3Activity extends FragmentActivity {
                 mPosition = position;
             }
         });
+        view_pager.setPageTransformer(new DepthPageTransformer());
     }
 
     private void onClick(View view) {
