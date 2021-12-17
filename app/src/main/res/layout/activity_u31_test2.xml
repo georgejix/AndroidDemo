@@ -5,14 +5,8 @@
     android:orientation="vertical"
     android:paddingTop="24dp">
 
-    <TextView
-        android:id="@+id/tv_test1"
-        style="@style/generalTv"
-        android:text="activity跳转activity" />
-
-    <TextView
-        android:id="@+id/tv_test2"
-        style="@style/generalTv"
-        android:text="fragment跳fragment" />
-
+    <FrameLayout
+        android:id="@+id/layout_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

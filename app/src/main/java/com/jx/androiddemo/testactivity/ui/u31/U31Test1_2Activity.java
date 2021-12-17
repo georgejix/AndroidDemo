@@ -13,13 +13,13 @@ import androidx.core.view.ViewCompat;
 
 import com.jx.androiddemo.R;
 
-public class TransitionActivity extends Activity {
+public class U31Test1_2Activity extends Activity {
     private TextView tv_hello;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_u31_transition);
+        setContentView(R.layout.activity_u31_test1_2);
         tv_hello = findViewById(R.id.tv_hello);
 
         /**
