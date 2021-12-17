@@ -6,22 +6,23 @@
     android:paddingTop="24dp">
 
     <TextView
-        android:id="@+id/tv_test1"
+        android:id="@+id/tv_hello1"
         style="@style/generalTv"
-        android:text="activity跳转activity" />
+        android:text="hello world1" />
 
     <TextView
-        android:id="@+id/tv_test2"
         style="@style/generalTv"
-        android:text="fragment跳fragment" />
+        android:text="hello world2" />
 
     <TextView
-        android:id="@+id/tv_test3"
         style="@style/generalTv"
-        android:text="viewpager切换动画" />
+        android:text="hello world3" />
 
     <TextView
-        android:id="@+id/tv_test4"
         style="@style/generalTv"
-        android:text="activity跳转activity的fragment" />
+        android:text="hello world4" />
+
+    <TextView
+        style="@style/generalTv"
+        android:text="hello world5" />
 </LinearLayout>
