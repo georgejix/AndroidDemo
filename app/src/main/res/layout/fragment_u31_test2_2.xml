@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="24dp">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_test1"
+        android:id="@+id/tv_hello1"
         style="@style/generalTv"
-        android:text="activity跳转activity" />
+        android:text="Hello world1" />
 
     <TextView
-        android:id="@+id/tv_test2"
         style="@style/generalTv"
-        android:text="fragment跳fragment" />
+        android:text="Hello world2" />
 
+    <TextView
+        style="@style/generalTv"
+        android:text="Hello world3" />
 </LinearLayout>
