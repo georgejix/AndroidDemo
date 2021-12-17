@@ -5,14 +5,20 @@ import android.transition.ChangeBounds;
 import android.transition.ChangeTransform;
 import android.transition.TransitionSet;
 import android.view.Window;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.jx.androiddemo.R;
 
-public class U31Test4_2Activity extends FragmentActivity {
+import org.jetbrains.annotations.NotNull;
+
+public class U31Test5_2Activity extends FragmentActivity {
+    private ViewPager viewpager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,17 +27,32 @@ public class U31Test4_2Activity extends FragmentActivity {
          */
         requestWindowFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_u31_test4_2);
+        setContentView(R.layout.activity_u31_test5_2);
         initView();
     }
 
     private void initView() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.layout_frame, new U31Test4Fragment(this)).commit();
+        viewpager = findViewById(R.id.viewpager);
+        viewpager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+            @NonNull
+            @NotNull
+            @Override
+            public Fragment getItem(int position) {
+                return new U31Test5Fragment(U31Test5_2Activity.this, position);
+            }
+
+            @Override
+            public int getCount() {
+                return 3;
+            }
+        });
         TransitionSet transitionSet = new TransitionSet();
         transitionSet.addTransition(new ChangeBounds());
         transitionSet.addTransition(new ChangeTransform());
         getWindow().setSharedElementEnterTransition(transitionSet);
         getWindow().setSharedElementReturnTransition(transitionSet);
+        //开启延时，必须配套调用startPostponedEnterTransition，否则页面卡死
+        postponeEnterTransition();
     }
 
 }
