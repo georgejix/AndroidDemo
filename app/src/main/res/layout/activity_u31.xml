@@ -34,4 +34,9 @@
         android:id="@+id/tv_test6"
         style="@style/generalTv"
         android:text="最简略的activity跳转activity" />
+
+    <TextView
+        android:id="@+id/tv_test7"
+        style="@style/generalTv"
+        android:text="字体，颜色" />
 </LinearLayout>

@@ -2,13 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     android:paddingTop="24dp">
 
     <TextView
         android:id="@+id/tv_hello1"
         style="@style/generalTv"
-        android:text="hello world1" />
+        android:layout_height="wrap_content"
+        android:text="hello world"
+        android:textColor="@color/red"
+        android:textSize="50sp" />
 
     <TextView
         style="@style/generalTv"

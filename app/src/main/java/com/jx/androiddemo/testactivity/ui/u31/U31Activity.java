@@ -31,6 +31,8 @@ public class U31Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     TextView tv_test5;
     @BindView(R.id.tv_test6)
     TextView tv_test6;
+    @BindView(R.id.tv_test7)
+    TextView tv_test7;
 
     @Override
     protected void initInject() {
@@ -104,6 +106,14 @@ public class U31Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .subscribe(o ->
                 {
                     startActivity(new Intent(mContext, U31Test6Activity.class));
+                });
+        RxView.clicks(tv_test7)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    //https://www.jianshu.com/p/fa1c8deeaa57
+                    startActivity(new Intent(mContext, U31Test7Activity.class));
                 });
     }
 }
