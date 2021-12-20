@@ -59,44 +59,44 @@ public class U31Test7_2Activity extends Activity {
             }
 
             @Override
-            public void onSharedElementStart(List<String> sharedElementNames, List<View> sharedElements, List<View> sharedElementSnapshots) {
-                super.onSharedElementStart(sharedElementNames, sharedElements, sharedElementSnapshots);
-                if (sharedElements != null && sharedElementSnapshots != null) {
-                    for (int i = 0; i < sharedElements.size(); i++) {
-                        View snapshotView = sharedElementSnapshots.get(i);
-                        View shareElementView = sharedElements.get(i);
+            public void onSharedElementStart(List<String> sharedElementNames, List<View> currentPageViewList, List<View> prePageViewList) {
+                super.onSharedElementStart(sharedElementNames, currentPageViewList, prePageViewList);
+                if (currentPageViewList != null && prePageViewList != null) {
+                    for (int i = 0; i < currentPageViewList.size(); i++) {
+                        View prePageView = prePageViewList.get(i);
+                        View currentPageView = currentPageViewList.get(i);
                         ShareElementInfo shareElementInfo = null;
                         if (isEnter.get()) {
                             //进入时使用前一个Activity传过来的值
-                            shareElementInfo = ShareElementInfo.getFromView(snapshotView);
+                            shareElementInfo = ShareElementInfo.getFromView(prePageView);
                         } else {
                             //退出时使用当前Activity设置的值
-                            shareElementInfo = ShareElementInfo.getFromView(shareElementView);
+                            shareElementInfo = ShareElementInfo.getFromView(currentPageView);
                         }
                         if (shareElementInfo != null) {
                             shareElementInfo.setEnter(isEnter.get());
-                            ShareElementInfo.saveToView(shareElementView, shareElementInfo);
+                            ShareElementInfo.saveToView(currentPageView, shareElementInfo);
                         }
                     }
                 }
             }
 
             @Override
-            public void onSharedElementEnd(List<String> sharedElementNames, List<View> sharedElements, List<View> sharedElementSnapshots) {
-                super.onSharedElementEnd(sharedElementNames, sharedElements, sharedElementSnapshots);
-                for (int i = 0; sharedElements != null && i < sharedElements.size(); i++) {
-                    View shareElementView = sharedElements.get(i);
-                    ShareElementInfo shareElementInfo = ShareElementInfo.getFromView(shareElementView);
+            public void onSharedElementEnd(List<String> sharedElementNames, List<View> currentPageViewList, List<View> prePageViewList) {
+                super.onSharedElementEnd(sharedElementNames, currentPageViewList, prePageViewList);
+                for (int i = 0; currentPageViewList != null && i < currentPageViewList.size(); i++) {
+                    View currentPageView = currentPageViewList.get(i);
+                    ShareElementInfo shareElementInfo = ShareElementInfo.getFromView(currentPageView);
                     if (shareElementInfo != null) {
                         if (isEnter.get()) {
-                            shareElementInfo.captureToViewInfo(shareElementView);
+                            shareElementInfo.captureToViewInfo(currentPageView);
                         } else {
-                            View snapshotView = sharedElementSnapshots == null ? null : sharedElementSnapshots.get(i);
-                            ShareElementInfo infoFromSnapshot = ShareElementInfo.getFromView(snapshotView);
+                            View prePageView = prePageViewList == null ? null : prePageViewList.get(i);
+                            ShareElementInfo infoFromSnapshot = ShareElementInfo.getFromView(prePageView);
                             if (infoFromSnapshot != null) {
                                 shareElementInfo.setFromViewBundle(infoFromSnapshot.getFromViewBundle());
                             }
-                            shareElementInfo.captureToViewInfo(shareElementView);
+                            shareElementInfo.captureToViewInfo(currentPageView);
                         }
                         shareElementInfo.setEnter(isEnter.get());
                     }
