@@ -11,6 +11,7 @@ import android.transition.TransitionValues;
 import android.util.Property;
 import android.util.TypedValue;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.TextView;
 
 /**
@@ -62,6 +63,7 @@ public class ChangeTextTransition extends Transition {
         float startTextSize = (float) startValues.values.get(PROPNAME_TEXTSIZE);
         final float endTextSize = (float) endValues.values.get(PROPNAME_TEXTSIZE);
         ObjectAnimator textSizeAnimator = ObjectAnimator.ofFloat(view, new TextSizeProperty(), startTextSize, endTextSize);
+        textSizeAnimator.setInterpolator(new AccelerateInterpolator());
 
         int startTextColor = (int) startValues.values.get(PROPNAME_TEXTCOLOR);
         int endTextColor = (int) endValues.values.get(PROPNAME_TEXTCOLOR);
