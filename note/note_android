@@ -95,3 +95,6 @@ int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
 textView.measure(w, h);
 int tvh = textView.getMeasuredHeight();
 int tvw = textView.getMeasuredWidth();
+
+//获取方法被谁调用
+StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
