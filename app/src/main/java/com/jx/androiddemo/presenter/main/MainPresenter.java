@@ -61,6 +61,7 @@ import com.jx.androiddemo.testactivity.ui.u29.U29Activity;
 import com.jx.androiddemo.testactivity.ui.u3.U3Activity;
 import com.jx.androiddemo.testactivity.ui.u30.U30Activity;
 import com.jx.androiddemo.testactivity.ui.u31.U31Activity;
+import com.jx.androiddemo.testactivity.ui.u32.U32Activity;
 import com.jx.androiddemo.testactivity.ui.u4.U4Activity;
 import com.jx.androiddemo.testactivity.ui.u5.U5Activity;
 import com.jx.androiddemo.testactivity.ui.u6.U6Activity;
@@ -160,6 +161,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             add("可拖动悬浮窗口", U29Activity.class);
             add("loading", U30Activity.class);
             add("共享动画", U31Activity.class);
+            add("viewpager2", U32Activity.class);
 
 
         }
