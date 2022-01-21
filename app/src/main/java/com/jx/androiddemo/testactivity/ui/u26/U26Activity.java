@@ -26,7 +26,7 @@ public class U26Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     @BindView(R.id.rv_point)
     RecyclerView mPointRv;
 
-    private SlieshowPointAdapter mSlieshowPointAdapter;
+    private SlideshowPointAdapter mSlideshowPointAdapter;
 
     @Override
     protected void initInject() {
@@ -54,16 +54,16 @@ public class U26Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
         mSlideshowView.setData(tempAdvList);
         mSlideshowView.setListener((position, totalCount) -> {
             Log.d(TAG, position + "," + totalCount);
-            if (null == mSlieshowPointAdapter) {
+            if (null == mSlideshowPointAdapter) {
                 return;
             }
-            mSlieshowPointAdapter.setCheckedIndex(position);
-            mSlieshowPointAdapter.notifyDataSetChanged();
+            mSlideshowPointAdapter.setCheckedIndex(position);
+            mSlideshowPointAdapter.notifyDataSetChanged();
         });
 
-        mSlieshowPointAdapter = new SlieshowPointAdapter(mContext);
-        mSlieshowPointAdapter.addDataAll(tempAdvList);
-        mPointRv.setAdapter(mSlieshowPointAdapter);
+        mSlideshowPointAdapter = new SlideshowPointAdapter(mContext);
+        mSlideshowPointAdapter.addDataAll(tempAdvList);
+        mPointRv.setAdapter(mSlideshowPointAdapter);
     }
 
     @SuppressLint("CheckResult")

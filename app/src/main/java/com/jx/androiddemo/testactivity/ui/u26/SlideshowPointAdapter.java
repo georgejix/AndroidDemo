@@ -10,11 +10,11 @@ import com.jx.rvhelper.base.ViewHolder;
 
 import javax.inject.Inject;
 
-public class SlieshowPointAdapter extends CommonAdapter<String> {
+public class SlideshowPointAdapter extends CommonAdapter<String> {
     private int mCheckedIndex = 0;
 
     @Inject
-    public SlieshowPointAdapter(Context context) {
+    public SlideshowPointAdapter(Context context) {
         super(context, R.layout.item_u26_slideshow_point);
     }
 
