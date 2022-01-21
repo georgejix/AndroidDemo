@@ -13,7 +13,7 @@ import javax.inject.Inject;
 public class ViewPagerAdapter extends CommonAdapter<String> {
     @Inject
     public ViewPagerAdapter(Context context) {
-        super(context, R.layout.item_u25_view_pager);
+        super(context, R.layout.item_u25_slideshow_pic);
     }
 
     @Override

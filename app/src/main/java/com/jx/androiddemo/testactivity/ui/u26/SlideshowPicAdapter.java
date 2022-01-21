@@ -10,10 +10,10 @@ import com.jx.rvhelper.base.ViewHolder;
 
 import javax.inject.Inject;
 
-public class ViewPagerAdapter extends CommonAdapter<String> {
+public class SlideshowPicAdapter extends CommonAdapter<String> {
     @Inject
-    public ViewPagerAdapter(Context context) {
-        super(context, R.layout.item_u25_view_pager);
+    public SlideshowPicAdapter(Context context) {
+        super(context, R.layout.item_u25_slideshow_pic);
     }
 
     @Override

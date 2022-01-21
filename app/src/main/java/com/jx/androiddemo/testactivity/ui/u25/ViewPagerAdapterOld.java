@@ -42,7 +42,7 @@ public class ViewPagerAdapterOld extends RecyclerView.Adapter<ViewPagerAdapterOl
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(mLayoutInflater.inflate(R.layout.item_u25_view_pager, parent, false));
+        return new ViewHolder(mLayoutInflater.inflate(R.layout.item_u25_slideshow_pic, parent, false));
     }
 
     @SuppressLint("SetTextI18n")

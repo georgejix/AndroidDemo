@@ -10,14 +10,13 @@ import android.widget.FrameLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.jx.androiddemo.R;
-import com.jx.androiddemo.testactivity.ui.u25.ViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class AutoScrollViewPager extends FrameLayout {
+public class SlideshowView extends FrameLayout {
     private final String TAG = "AutoScrollViewPager";
     private Context mContext;
     private ViewPager2 mViewPager2;
@@ -26,20 +25,20 @@ public class AutoScrollViewPager extends FrameLayout {
     private boolean mCanScroll = true;
     private List<String> advList = new ArrayList();
     private int mRealSize;
-    private ViewPagerAdapter mViewPagerAdapter;
+    private SlideshowPicAdapter mSlideshowPicAdapter;
     private Listener mListener;
 
-    public AutoScrollViewPager(Context context) {
+    public SlideshowView(Context context) {
         super(context);
         initView(context);
     }
 
-    public AutoScrollViewPager(Context context, AttributeSet attrs) {
+    public SlideshowView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
 
-    public AutoScrollViewPager(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SlideshowView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context);
     }
@@ -52,8 +51,8 @@ public class AutoScrollViewPager extends FrameLayout {
             advList.add(data.get(0));
         }
         mRealSize = null != data ? data.size() : 0;
-        mViewPagerAdapter.addDataAll(advList);
-        mViewPagerAdapter.notifyDataSetChanged();
+        mSlideshowPicAdapter.addDataAll(advList);
+        mSlideshowPicAdapter.notifyDataSetChanged();
         if (advList.size() > 0) {
             mViewPager2.setCurrentItem(1, false);
         }
@@ -66,11 +65,11 @@ public class AutoScrollViewPager extends FrameLayout {
 
     private void initView(Context context) {
         mContext = context;
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_auto_scroll_view_pager, null, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_u26_slideshow_view, null, false);
         mViewPager2 = view.findViewById(R.id.adv_viewpager2);
-        mViewPagerAdapter = new ViewPagerAdapter(mContext);
-        mViewPagerAdapter.addDataAll(advList);
-        mViewPager2.setAdapter(mViewPagerAdapter);
+        mSlideshowPicAdapter = new SlideshowPicAdapter(mContext);
+        mSlideshowPicAdapter.addDataAll(advList);
+        mViewPager2.setAdapter(mSlideshowPicAdapter);
         mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
