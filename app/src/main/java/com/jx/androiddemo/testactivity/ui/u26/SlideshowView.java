@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.jx.androiddemo.R;
@@ -17,7 +18,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SlideshowView extends FrameLayout {
-    private final String TAG = "AutoScrollViewPager";
+    private final String TAG = "SlideshowView";
     private Context mContext;
     private ViewPager2 mViewPager2;
     private Timer mTimer;
@@ -57,6 +58,16 @@ public class SlideshowView extends FrameLayout {
             mViewPager2.setCurrentItem(1, false);
         }
         startTimer();
+    }
+
+    @Override
+    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        if (visibility == VISIBLE) {
+            startTimer();
+        } else {
+            stopTimer();
+        }
     }
 
     public void setListener(Listener listener) {
@@ -100,7 +111,7 @@ public class SlideshowView extends FrameLayout {
         addView(view);
     }
 
-    public void startTimer() {
+    private void startTimer() {
         if (null != mTimer) {
             stopTimer();
         }
@@ -122,7 +133,7 @@ public class SlideshowView extends FrameLayout {
         mTimer.schedule(mTimerTask, 5000, 5000);
     }
 
-    public void stopTimer() {
+    private void stopTimer() {
         Log.d(TAG, "stopTimer");
         if (null != mTimerTask) {
             mTimerTask.cancel();

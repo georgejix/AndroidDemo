@@ -84,16 +84,4 @@ public class U26Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 {
                 });*/
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mSlideshowView.stopTimer();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mSlideshowView.startTimer();
-    }
 }
