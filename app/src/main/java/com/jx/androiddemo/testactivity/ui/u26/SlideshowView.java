@@ -111,7 +111,7 @@ public class SlideshowView extends FrameLayout {
         addView(view);
     }
 
-    private void startTimer() {
+    public void startTimer() {
         if (null != mTimer) {
             stopTimer();
         }
@@ -133,7 +133,7 @@ public class SlideshowView extends FrameLayout {
         mTimer.schedule(mTimerTask, 5000, 5000);
     }
 
-    private void stopTimer() {
+    public void stopTimer() {
         Log.d(TAG, "stopTimer");
         if (null != mTimerTask) {
             mTimerTask.cancel();
