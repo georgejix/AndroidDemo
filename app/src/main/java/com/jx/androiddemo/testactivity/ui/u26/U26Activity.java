@@ -62,7 +62,6 @@ public class U26Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
             mPointAdapter.notifyDataSetChanged();
         });
 
-        mPointRv.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false));
         mPointAdapter = new PointAdapter(mContext);
         mPointAdapter.addDataAll(tempAdvList);
         mPointRv.setAdapter(mPointAdapter);
