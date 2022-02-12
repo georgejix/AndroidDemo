@@ -103,3 +103,5 @@ StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 如果app被后台杀掉，又重新恢复：
     restoreState.bundle会有内容,页面实例化时通过intent传的参数会保留
     viewpager2的adapter重新set一遍时，当前打开的fragment不会重新实例化，连续调用2次setAdapter可以解决这个问题
+
+//ConstraintLayout内使用recyclerview，容易产生因为多次测量，导致recyclerview高度不断变化，recyclerview抖动的问题
