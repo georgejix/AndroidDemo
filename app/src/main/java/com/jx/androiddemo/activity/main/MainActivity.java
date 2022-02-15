@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -103,5 +104,17 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 showMsg(getString(R.string.access_camera_permission));
             }
         }
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK || event.getKeyCode() == KeyEvent.KEYCODE_SOFT_LEFT) {
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.MAIN");
+            intent.addCategory("android.intent.category.HOME");
+            startActivity(intent);
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }
