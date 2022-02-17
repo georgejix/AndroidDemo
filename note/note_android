@@ -105,3 +105,10 @@ StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
     viewpager2的adapter重新set一遍时，当前打开的fragment不会重新实例化，连续调用2次setAdapter可以解决这个问题
 
 //ConstraintLayout内使用recyclerview，容易产生因为多次测量，导致recyclerview高度不断变化，recyclerview抖动的问题
+
+
+问题：
+ViewPager包含多个Fragment，每个Fragment里面又有RecyclerView，当从Fragment跳转到下一个Fragment时，当前Fragment里的RecyclerView不能刷新
+解决办法：
+由于ViewPager的缓存问题，导致的，增加Fragment的缓存数量就可解决
+viewPager.setOffscreenPageLimit(3);
