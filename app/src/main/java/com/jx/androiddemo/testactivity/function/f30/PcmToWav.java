@@ -124,7 +124,7 @@ public class PcmToWav {
         // 头部字段的大小(不包括前面4字节的标识符RIFF以及fileLength本身的4字节)
         header.fileLength = TOTAL_SIZE + (44 - 8);
         header.FmtHdrLeth = 16;
-        header.BitsPerSample = 16;
+        header.BitsPerSample = 8;
         header.Channels = 1;
         header.FormatTag = 0x0001;
         header.SamplesPerSec = 16000;

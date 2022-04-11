@@ -7,9 +7,11 @@
 #include "libavfilter/buffersink.h"
 #include "libavfilter/buffersrc.h"
 #include "libavutil/opt.h"
-
+#include "libswresample/swresample.h"
+#include "libavutil/samplefmt.h"
 
 #define LOGI(format, ...)  __android_log_print(ANDROID_LOG_INFO,  "ffmpegtest", format, ##__VA_ARGS__)
+#define MAX_AUDIO_FARME_SIZE 48000 * 2
 
 void freeObj(AVFormatContext *fmt_ctx, AVFormatContext *ofmt_ctx) {
     //最后别忘了释放内存
@@ -253,6 +255,15 @@ JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
         return -1;
     }
     outfile = fopen(output_name, "wb");
+    SwrContext *swrCtx = swr_alloc();
+    swr_alloc_set_opts(swrCtx,
+                       1, AV_SAMPLE_FMT_U8, 16000,
+                       c->channels, c->sample_fmt, c->sample_rate,
+                       0, NULL);
+    swr_init(swrCtx);
+    uint8_t *out_buffer = (uint8_t *)av_malloc(MAX_AUDIO_FARME_SIZE);
+
+
     //每读出一帧数据
     while (av_read_frame(fmt_ctx, &packet) >= 0) {
         if (packet.stream_index == audio_stream_index) {
@@ -262,12 +273,14 @@ JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
 
             if (avcodec_send_packet(c, &packet) < 0) continue;
             if (avcodec_receive_frame(c, decoded_frame) < 0) continue;
-            fwrite(decoded_frame->data[0], 1, decoded_frame->nb_samples, outfile);
+            int len = swr_convert(swrCtx, &out_buffer, MAX_AUDIO_FARME_SIZE, (const uint8_t **) decoded_frame->data, decoded_frame->nb_samples);
+            fwrite(out_buffer, 1, len, outfile);
             //减少引用计数，避免内存泄漏
             av_packet_unref(&packet);
         }
     }
     fclose(outfile);
+    swr_free(&swrCtx);
     av_frame_free(&decoded_frame);
 
     freeObj2(fmt_ctx);
