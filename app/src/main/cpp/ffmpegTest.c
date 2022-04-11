@@ -141,7 +141,7 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
 
     jclass clazz = (*env)->GetObjectClass(env, cls);
     jmethodID mID = (*env)->GetMethodID(env, clazz, "onProgressCallBack",
-                                        "(JJLjava/lang/String;)V");
+                                        "(ILjava/lang/String;)V");
 
     //每读出一帧数据
     while (av_read_frame(fmt_ctx, &packet) >= 0) {
@@ -169,7 +169,113 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     (*env)->ReleaseStringUTFChars(env, jstring_output_name, output_name);
     jmethodID mCompleteId = (*env)->GetMethodID(env, clazz, "complete",
                                                 "(I)V");
-    (*env)->CallVoidMethod(env, cls, mCompleteId, 0);
+    (*env)->CallVoidMethod(env, cls, mCompleteId, 0, (*env)->NewStringUTF(env, output_path));
+
+    LOGI("complete");
+    return 0;
+}
+
+void freeObj2(AVFormatContext *fmt_ctx) {
+    //最后别忘了释放内存
+    if (fmt_ctx) {
+        avformat_close_input(&fmt_ctx);
+    }
+}
+
+JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
+        (JNIEnv *env, jclass cls, jstring jstring_input_path, jstring jstring_output_name
+        ) {
+    //输入地址
+    const char *input_path = (*env)->GetStringUTFChars(env, jstring_input_path, 0);
+    //(*env)->ReleaseStringUTFChars(env, jstring_input_path, input_path);
+    //输出地址
+    const char *output_name = (*env)->GetStringUTFChars(env, jstring_output_name, 0);
+    //(*env)->ReleaseStringUTFChars(env, jstring_output_name, output_name);
+    LOGI("input_path= %s \n output_path= %s \n", input_path, output_name);
+
+    //定义参数
+    //上下文
+    AVFormatContext *fmt_ctx = NULL;
+    //存储压缩数据
+    AVPacket packet;
+    //要拷贝的流
+    int audio_stream_index = -1;
+    //错误码
+    int err_code;
+    AVFrame *decoded_frame = NULL;
+    FILE *outfile;
+    AVCodecContext *c = NULL;
+    AVCodec *dec;
+
+    avcodec_register_all();
+    av_register_all();
+
+    fmt_ctx = avformat_alloc_context();
+    err_code = avformat_open_input(&fmt_ctx, input_path, NULL, NULL);
+    if (err_code < 0) {
+        LOGI("avformat_open_input fail");
+        freeObj2(fmt_ctx);
+        return -1;
+    }
+    audio_stream_index = av_find_best_stream(fmt_ctx, AVMEDIA_TYPE_AUDIO, -1, -1, &dec, 0);
+    if (audio_stream_index < 0) {
+        LOGI("av_find_best_stream fail");
+        freeObj2(fmt_ctx);
+        return -1;
+    }
+    c = avcodec_alloc_context3(dec);
+    if (!c) {
+        LOGI("Could not allocate audio codec context\n");
+        freeObj2(fmt_ctx);
+        return -1;
+    }
+    avcodec_parameters_to_context(c, fmt_ctx->streams[audio_stream_index]->codecpar);
+    if (avcodec_open2(c, dec, NULL) < 0) {
+        LOGI("Could not open codec\n");
+        freeObj2(fmt_ctx);
+        return -1;
+    }
+
+    //3.3 开始拷贝
+    //初始化 AVPacket， 我们从文件中读出的数据会暂存在其中
+    av_init_packet(&packet);
+    packet.data = NULL;
+    packet.size = 0;
+
+    jclass clazz = (*env)->GetObjectClass(env, cls);
+    jmethodID mID = (*env)->GetMethodID(env, clazz, "onProgressCallBack",
+                                        "(JJLjava/lang/String;)V");
+
+    decoded_frame = av_frame_alloc();
+    if (!decoded_frame) {
+        LOGI("Could not allocate audio frame\n");
+        freeObj2(fmt_ctx);
+        return -1;
+    }
+    outfile = fopen(output_name, "wb");
+    //每读出一帧数据
+    while (av_read_frame(fmt_ctx, &packet) >= 0) {
+        if (packet.stream_index == audio_stream_index) {
+            (*env)->CallVoidMethod(env, cls, mID, fmt_ctx->streams[audio_stream_index]->duration,
+                                   packet.pts,
+                                   (*env)->NewStringUTF(env, output_name));
+
+            if (avcodec_send_packet(c, &packet) < 0) continue;
+            if (avcodec_receive_frame(c, decoded_frame) < 0) continue;
+            fwrite(decoded_frame->data[0], 1, decoded_frame->nb_samples, outfile);
+            //减少引用计数，避免内存泄漏
+            av_packet_unref(&packet);
+        }
+    }
+    fclose(outfile);
+    av_frame_free(&decoded_frame);
+
+    freeObj2(fmt_ctx);
+    (*env)->ReleaseStringUTFChars(env, jstring_input_path, input_path);
+    (*env)->ReleaseStringUTFChars(env, jstring_output_name, output_name);
+    jmethodID mCompleteId = (*env)->GetMethodID(env, clazz, "complete",
+                                                "(ILjava/lang/String;)V");
+    (*env)->CallVoidMethod(env, cls, mCompleteId, 0, (*env)->NewStringUTF(env, output_name));
 
     LOGI("complete");
     return 0;
