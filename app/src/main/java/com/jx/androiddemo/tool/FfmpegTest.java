@@ -2,8 +2,6 @@ package com.jx.androiddemo.tool;
 
 import android.util.Log;
 
-import com.jx.androiddemo.testactivity.function.f30.PcmToWav;
-
 public class FfmpegTest {
     private static final String TAG = "FfmpegTest";
 
@@ -29,8 +27,5 @@ public class FfmpegTest {
 
     public void complete(int ret, String name) {
         Log.e(TAG, "complete: " + ret + name);
-        if (null != name) {
-            PcmToWav.makePCMFileToWAVFile(name, name.substring(0, name.length() - 4) + ".wav", false);
-        }
     }
 }

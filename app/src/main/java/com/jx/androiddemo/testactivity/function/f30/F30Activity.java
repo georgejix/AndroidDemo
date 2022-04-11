@@ -65,8 +65,8 @@ public class F30Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void download() {
-        String url2 = BaseApplication.getFile() + File.separator + "2_avi.avi";
-        String out = BaseApplication.getFile() + File.separator + "f30.pcm";
+        String url2 = BaseApplication.getFile() + File.separator + "temp.mp4";
+        String out = BaseApplication.getFile() + File.separator + "f30.wav";
 
         FfmpegTest ffmpegTest = new FfmpegTest();
         ffmpegTest.test2(url2, out);

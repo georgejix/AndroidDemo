@@ -184,6 +184,41 @@ void freeObj2(AVFormatContext *fmt_ctx) {
     }
 }
 
+typedef struct WavHeader {
+    uint32_t chunk_id;   // "RIFF"
+    uint32_t chunk_size; // (44-8) + pcm_data_len
+    uint32_t format;     // "WAVE"
+    uint32_t sub_chunk_1_id;     // "fmt "
+    uint32_t sub_chunk_1_size;   // 16 (PCM)
+    uint16_t audio_format;       //  1 - PCM
+    uint16_t num_channels;       // 1-mono, 2-stero
+    uint32_t sample_rate;
+    uint32_t byte_rate;          // sample_rate * block_align
+    uint16_t block_align;        // num_channels * bit_per_sample
+    uint16_t bit_per_sample;
+    uint32_t sub_chunk_2_id;     // "data"
+    uint32_t sub_chunk_2_size;   //  pcm_data_len
+} WavHeader;
+
+void writeWavHeader(WavHeader *wavHeader, int32_t pcm_data_len, FILE *wav_file) {
+    memcpy(&wavHeader->chunk_id, "RIFF", 4);
+    wavHeader->chunk_size = 36 + pcm_data_len;
+    memcpy(&wavHeader->format, "WAVE", 4);
+    memcpy(&wavHeader->sub_chunk_1_id, "fmt ", 4);
+    wavHeader->sub_chunk_1_size = 16;
+    wavHeader->audio_format = 1;
+    wavHeader->num_channels = 1;
+    wavHeader->sample_rate = 16000;
+    wavHeader->bit_per_sample = 8;
+    wavHeader->block_align = wavHeader->num_channels * wavHeader->bit_per_sample / 8;
+    wavHeader->byte_rate = wavHeader->sample_rate * wavHeader->block_align;
+    memcpy(&wavHeader->sub_chunk_2_id, "data", 4);
+    wavHeader->sub_chunk_2_size = pcm_data_len;
+
+    // 写wav头、PCM数据
+    fwrite(wavHeader, 1, sizeof(WavHeader), wav_file);
+}
+
 JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
         (JNIEnv *env, jclass cls, jstring jstring_input_path, jstring jstring_output_name
         ) {
@@ -254,15 +289,19 @@ JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
         freeObj2(fmt_ctx);
         return -1;
     }
-    outfile = fopen(output_name, "wb");
+    outfile = fopen(output_name, "wb+");
     SwrContext *swrCtx = swr_alloc();
     swr_alloc_set_opts(swrCtx,
                        1, AV_SAMPLE_FMT_U8, 16000,
                        c->channels, c->sample_fmt, c->sample_rate,
                        0, NULL);
     swr_init(swrCtx);
-    uint8_t *out_buffer = (uint8_t *)av_malloc(MAX_AUDIO_FARME_SIZE);
+    uint8_t *out_buffer = (uint8_t *) av_malloc(MAX_AUDIO_FARME_SIZE);
 
+
+    int32_t pcm_data_len = 0;
+    WavHeader *wavHeader = malloc(sizeof(WavHeader));
+    writeWavHeader(wavHeader, pcm_data_len, outfile);
 
     //每读出一帧数据
     while (av_read_frame(fmt_ctx, &packet) >= 0) {
@@ -273,13 +312,19 @@ JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
 
             if (avcodec_send_packet(c, &packet) < 0) continue;
             if (avcodec_receive_frame(c, decoded_frame) < 0) continue;
-            int len = swr_convert(swrCtx, &out_buffer, MAX_AUDIO_FARME_SIZE, (const uint8_t **) decoded_frame->data, decoded_frame->nb_samples);
+            int len = swr_convert(swrCtx, &out_buffer, MAX_AUDIO_FARME_SIZE,
+                                  (const uint8_t **) decoded_frame->data,
+                                  decoded_frame->nb_samples);
+            pcm_data_len += len;
             fwrite(out_buffer, 1, len, outfile);
             //减少引用计数，避免内存泄漏
             av_packet_unref(&packet);
         }
     }
+    fseek(outfile, 0, SEEK_SET);
+    writeWavHeader(wavHeader, pcm_data_len, outfile);
     fclose(outfile);
+
     swr_free(&swrCtx);
     av_frame_free(&decoded_frame);
 
