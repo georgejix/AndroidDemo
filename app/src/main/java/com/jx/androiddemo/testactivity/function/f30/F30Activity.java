@@ -68,6 +68,11 @@ public class F30Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
         String url2 = BaseApplication.getFile() + File.separator + "temp.mp4";
         String out = BaseApplication.getFile() + File.separator + "f30.wav";
 
+        File f = new File(out);
+        if (f.exists()) {
+            f.delete();
+        }
+
         FfmpegTest ffmpegTest = new FfmpegTest();
         ffmpegTest.test2(url2, out);
     }
