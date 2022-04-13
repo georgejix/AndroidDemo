@@ -112,3 +112,6 @@ ViewPager包含多个Fragment，每个Fragment里面又有RecyclerView，当从F
 解决办法：
 由于ViewPager的缓存问题，导致的，增加Fragment的缓存数量就可解决
 viewPager.setOffscreenPageLimit(3);
+
+android studio打开c++代码提示：
+setting->other settings->clangd->code completion->不要选only clangd completion就行
