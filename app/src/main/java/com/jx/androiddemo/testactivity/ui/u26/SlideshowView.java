@@ -81,6 +81,7 @@ public class SlideshowView extends FrameLayout {
         mSlideshowPicAdapter = new SlideshowPicAdapter(mContext);
         mSlideshowPicAdapter.addDataAll(advList);
         mViewPager2.setAdapter(mSlideshowPicAdapter);
+        mViewPager2.setOffscreenPageLimit(3);
         mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
