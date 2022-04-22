@@ -90,6 +90,7 @@
         <activity android:name=".testactivity.function.f29.F29Activity" />
         <activity android:name=".testactivity.function.f30.F30Activity" />
         <activity android:name=".testactivity.function.f31.F31Activity" />
+        <activity android:name=".testactivity.function.f32.F32Activity" />
 
         <activity android:name=".testactivity.ui.u1.U1Activity" />
         <activity android:name=".testactivity.ui.u2.U2Activity" />

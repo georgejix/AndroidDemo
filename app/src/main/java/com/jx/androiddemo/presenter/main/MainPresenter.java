@@ -30,6 +30,7 @@ import com.jx.androiddemo.testactivity.function.f29.F29Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f30.F30Activity;
 import com.jx.androiddemo.testactivity.function.f31.F31Activity;
+import com.jx.androiddemo.testactivity.function.f32.F32Activity;
 import com.jx.androiddemo.testactivity.function.f4.F4Activity;
 import com.jx.androiddemo.testactivity.function.f5.F5Activity;
 import com.jx.androiddemo.testactivity.function.f6.F6Activity;
@@ -127,6 +128,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addLeft("sdk提取网络视频中音频", F29Activity.class);
             addLeft("ffmpeg提取网络视频中音频", F30Activity.class);
             addLeft("loading", F31Activity.class);
+            addLeft("音频播放", F32Activity.class);
         }
 
         Collections.reverse(mLeftList);

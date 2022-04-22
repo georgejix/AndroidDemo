@@ -32,6 +32,7 @@ import com.jx.androiddemo.testactivity.function.f29.F29Activity;
 import com.jx.androiddemo.testactivity.function.f3.F3Activity;
 import com.jx.androiddemo.testactivity.function.f30.F30Activity;
 import com.jx.androiddemo.testactivity.function.f31.F31Activity;
+import com.jx.androiddemo.testactivity.function.f32.F32Activity;
 import com.jx.androiddemo.testactivity.function.f4.Camera2Activity;
 import com.jx.androiddemo.testactivity.function.f4.Camera3Activity;
 import com.jx.androiddemo.testactivity.function.f4.CameraActivity;
@@ -159,6 +160,8 @@ public interface ActivityComponent {
     void inject(F30Activity f30Activity);
 
     void inject(F31Activity f31Activity);
+
+    void inject(F32Activity f32Activity);
 
     void inject(U1Activity u1Activity);
 
