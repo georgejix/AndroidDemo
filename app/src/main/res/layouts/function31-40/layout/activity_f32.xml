@@ -2,10 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="24dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="audio" />
+        android:id="@+id/tv_load"
+        style="@style/generalTv"
+        android:onClick="onClick"
+        android:text="load" />
+
+    <TextView
+        android:id="@+id/tv_play"
+        style="@style/generalTv"
+        android:onClick="onClick"
+        android:text="play" />
+
+    <TextView
+        android:id="@+id/tv_pause"
+        style="@style/generalTv"
+        android:onClick="onClick"
+        android:text="pause" />
+
+    <TextView
+        android:id="@+id/tv_resume"
+        style="@style/generalTv"
+        android:onClick="onClick"
+        android:text="resume" />
+
+    <TextView
+        android:id="@+id/tv_stop"
+        style="@style/generalTv"
+        android:onClick="onClick"
+        android:text="stop" />
+
+    <TextView
+        android:id="@+id/tv_release"
+        style="@style/generalTv"
+        android:onClick="onClick"
+        android:text="release" />
 </LinearLayout>
