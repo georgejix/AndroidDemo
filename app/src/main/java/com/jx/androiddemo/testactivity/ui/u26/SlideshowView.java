@@ -125,10 +125,12 @@ public class SlideshowView extends FrameLayout {
         mTimerTask = new TimerTask() {
             @Override
             public void run() {
-                if (mCanScroll && null != mViewPager2) {
-                    mViewPager2.setCurrentItem(mViewPager2.getCurrentItem() + 1 <= advList.size() - 1 ?
-                            mViewPager2.getCurrentItem() + 1 : mViewPager2.getCurrentItem());
-                }
+                mViewPager2.post(()->{
+                    if (mCanScroll && null != mViewPager2) {
+                        mViewPager2.setCurrentItem(mViewPager2.getCurrentItem() + 1 <= advList.size() - 1 ?
+                                mViewPager2.getCurrentItem() + 1 : mViewPager2.getCurrentItem());
+                    }
+                });
             }
         };
         mTimer.schedule(mTimerTask, 5000, 5000);
