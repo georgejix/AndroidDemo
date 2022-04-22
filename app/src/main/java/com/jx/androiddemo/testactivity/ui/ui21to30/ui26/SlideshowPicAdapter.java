@@ -1,0 +1,24 @@
+package com.jx.androiddemo.testactivity.ui.ui21to30.ui26;
+
+import android.content.Context;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.jx.androiddemo.R;
+import com.jx.rvhelper.adapter.CommonAdapter;
+import com.jx.rvhelper.base.ViewHolder;
+
+import javax.inject.Inject;
+
+public class SlideshowPicAdapter extends CommonAdapter<String> {
+    @Inject
+    public SlideshowPicAdapter(Context context) {
+        super(context, R.layout.item_u25_slideshow_pic);
+    }
+
+    @Override
+    protected void convert(ViewHolder holder, String bean, int position) {
+        ImageView img = holder.getView(R.id.img);
+        Glide.with(mContext).load(bean).into(img);
+    }
+}

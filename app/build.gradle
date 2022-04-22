@@ -18,6 +18,19 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['src/main/jniLibs']
+            res.srcDirs=[
+                    'src/main/res/layouts/function1-10',
+                    'src/main/res/layouts/function11-20',
+                    'src/main/res/layouts/function21-30',
+                    'src/main/res/layouts/function31-40',
+                    'src/main/res/layouts/function41-50',
+                    'src/main/res/layouts/ui1-10',
+                    'src/main/res/layouts/ui11-20',
+                    'src/main/res/layouts/ui21-30',
+                    'src/main/res/layouts/ui31-40',
+                    'src/main/res/layouts/ui41-50',
+                    'src/main/res'
+            ]
         }
     }
 
