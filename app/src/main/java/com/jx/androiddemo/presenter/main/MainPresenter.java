@@ -71,6 +71,7 @@ import com.jx.androiddemo.testactivity.ui.u8.U8Activity;
 import com.jx.androiddemo.testactivity.ui.u9.U9Activity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -78,7 +79,8 @@ import javax.inject.Inject;
 public class MainPresenter extends BaseRxPresenter<MainContract.View> implements MainContract.Presenter {
     private final Context context;
 
-    private List<MainPageBean> mMainPageList;
+    private List<MainPageBean> mLeftList = new ArrayList<>();
+    private List<MainPageBean> mRightList = new ArrayList<>();
 
 
     @Inject
@@ -92,88 +94,92 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
     }
 
     @Override
-    public List<MainPageBean> getMainPageList() {
-        if (null == mMainPageList) {
-            mMainPageList = new ArrayList<>();
-            add("简单线程,jni", F1Activity.class);
-            add("序列化和aidl", F2Activity.class);
-            add("handler", F3Activity.class);
-            add("相机", F4Activity.class);
-            add("CountDownLatch", F5Activity.class);
-            add("nsd", F6Activity.class);
-            add("net", F7Activity.class);
-            add("xml", F8Activity.class);
-            add("intentService", F9Activity.class);
-            add("Thumbnail", F10Activity.class);
-            add("DeviceAwake", F11Activity.class);
-            add("Http", F12Activity.class);
-            add("thread", F13Activity.class);
-            add("timer", F14Activity.class);
-            add("notification", F15Activity.class);
-            add("sqlite", F16Activity.class);
-            add("contentProvider", F17Activity.class);
-            add("service", F18Activity.class);
-            add("自定义handler", F19Activity.class);
-            add("sharedPreference", F20Activity.class);
-            add("mediaPlayer", F21Activity.class);
-            add("显示yuv图片", F22Activity.class);
-            add("mp4toYuv", F23Activity.class);
-            add("surfaceView", F24Activity.class);
-            add("videoView", F25Activity.class);
-            add("observer", F26Activity.class);
-            add("系统相册选择图片", F27Activity.class);
-            add("系统相册选择视频，带ui", F28Activity.class);
-            add("sdk提取网络视频中音频", F29Activity.class);
-            add("ffmpeg提取网络视频中音频", F30Activity.class);
-            add("loading", F31Activity.class);
-
-
-            add("---------------------------------", null);
-
-
-            add("全屏切换，子线程addView", U1Activity.class);
-            add("上拉加载，下拉刷新", U2Activity.class);
-            add("activity生命周期,popupWindow", U3Activity.class);
-            add("bitmap加载显示", U4Activity.class);
-            add("openglES", U5Activity.class);
-            add("animation", U6Activity.class);
-            add("圆角图片", U7Activity.class);
-            add("TouchEvent,popupWindow", U8Activity.class);
-            add("VelocityTracker", U9Activity.class);
-            add("input显示隐藏密码", U10Activity.class);
-            add("TransparentActivity", U11Activity.class);
-            add("dialogActivity", U12Activity.class);
-            add("CheckBox", U13Activity.class);
-            add("TestSomeView", U14Activity.class);
-            add("imageView", U15Activity.class);
-            add("相机选择照片，拍照", U16Activity.class);
-            add("选择日期", U17Activity.class);
-            add("选择日期2", U18Activity.class);
-            add("Bezier曲线", U19Activity.class);
-            add("梯形", U20Activity.class);
-            add("事件分发", U21Activity.class);
-            add("loading", U22Activity.class);
-            add("一行两列linearlayout", U23Activity.class);
-            add("ConstraintLayout", U24Activity.class);
-            add("循环图片轮播", U25Activity.class);
-            add("封装循环图片轮播", U26Activity.class);
-            add("悬浮窗口", U27Activity.class);
-            add("弹框提示", U28Activity.class);
-            add("可拖动悬浮窗口", U29Activity.class);
-            add("loading", U30Activity.class);
-            add("共享动画", U31Activity.class);
-            add("viewpager2", U32Activity.class);
-            add("清除图片", U33Activity.class);
-
-
+    public List<MainPageBean> getLeftList() {
+        if (0 == mLeftList.size()) {
+            addLeft("简单线程,jni", F1Activity.class);
+            addLeft("序列化和aidl", F2Activity.class);
+            addLeft("handler", F3Activity.class);
+            addLeft("相机", F4Activity.class);
+            addLeft("CountDownLatch", F5Activity.class);
+            addLeft("nsd", F6Activity.class);
+            addLeft("net", F7Activity.class);
+            addLeft("xml", F8Activity.class);
+            addLeft("intentService", F9Activity.class);
+            addLeft("Thumbnail", F10Activity.class);
+            addLeft("DeviceAwake", F11Activity.class);
+            addLeft("Http", F12Activity.class);
+            addLeft("thread", F13Activity.class);
+            addLeft("timer", F14Activity.class);
+            addLeft("notification", F15Activity.class);
+            addLeft("sqlite", F16Activity.class);
+            addLeft("contentProvider", F17Activity.class);
+            addLeft("service", F18Activity.class);
+            addLeft("自定义handler", F19Activity.class);
+            addLeft("sharedPreference", F20Activity.class);
+            addLeft("mediaPlayer", F21Activity.class);
+            addLeft("显示yuv图片", F22Activity.class);
+            addLeft("mp4toYuv", F23Activity.class);
+            addLeft("surfaceView", F24Activity.class);
+            addLeft("videoView", F25Activity.class);
+            addLeft("observer", F26Activity.class);
+            addLeft("系统相册选择图片", F27Activity.class);
+            addLeft("系统相册选择视频，带ui", F28Activity.class);
+            addLeft("sdk提取网络视频中音频", F29Activity.class);
+            addLeft("ffmpeg提取网络视频中音频", F30Activity.class);
+            addLeft("loading", F31Activity.class);
         }
-        return mMainPageList;
+
+        Collections.reverse(mLeftList);
+        return mLeftList;
     }
 
-    private void add(String name, Class clazz) {
-        if (null == mMainPageList) {
-            return;
+    @Override
+    public List<MainPageBean> getRightList() {
+        if (0 == mRightList.size()) {
+            addRight("全屏切换，子线程addView", U1Activity.class);
+            addRight("上拉加载，下拉刷新", U2Activity.class);
+            addRight("activity生命周期,popupWindow", U3Activity.class);
+            addRight("bitmap加载显示", U4Activity.class);
+            addRight("openglES", U5Activity.class);
+            addRight("animation", U6Activity.class);
+            addRight("圆角图片", U7Activity.class);
+            addRight("TouchEvent,popupWindow", U8Activity.class);
+            addRight("VelocityTracker", U9Activity.class);
+            addRight("input显示隐藏密码", U10Activity.class);
+            addRight("TransparentActivity", U11Activity.class);
+            addRight("dialogActivity", U12Activity.class);
+            addRight("CheckBox", U13Activity.class);
+            addRight("TestSomeView", U14Activity.class);
+            addRight("imageView", U15Activity.class);
+            addRight("相机选择照片，拍照", U16Activity.class);
+            addRight("选择日期", U17Activity.class);
+            addRight("选择日期2", U18Activity.class);
+            addRight("Bezier曲线", U19Activity.class);
+            addRight("梯形", U20Activity.class);
+            addRight("事件分发", U21Activity.class);
+            addRight("loading", U22Activity.class);
+            addRight("一行两列linearlayout", U23Activity.class);
+            addRight("ConstraintLayout", U24Activity.class);
+            addRight("循环图片轮播", U25Activity.class);
+            addRight("封装循环图片轮播", U26Activity.class);
+            addRight("悬浮窗口", U27Activity.class);
+            addRight("弹框提示", U28Activity.class);
+            addRight("可拖动悬浮窗口", U29Activity.class);
+            addRight("loading", U30Activity.class);
+            addRight("共享动画", U31Activity.class);
+            addRight("viewpager2", U32Activity.class);
+            addRight("清除图片", U33Activity.class);
         }
-        mMainPageList.add(new MainPageBean(name, clazz));
+
+        Collections.reverse(mRightList);
+        return mRightList;
+    }
+
+    private void addLeft(String name, Class clazz) {
+        mLeftList.add(new MainPageBean(name, clazz));
+    }
+
+    private void addRight(String name, Class clazz) {
+        mRightList.add(new MainPageBean(name, clazz));
     }
 }

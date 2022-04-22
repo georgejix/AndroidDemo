@@ -12,6 +12,8 @@ public class MainContract {
     }
 
     public interface Presenter extends BasePresenter<View> {
-        List<MainPageBean> getMainPageList();
+        List<MainPageBean> getLeftList();
+
+        List<MainPageBean> getRightList();
     }
 }

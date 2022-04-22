@@ -29,11 +29,15 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContract.View {
 
-    @BindView(R.id.rv_page)
-    RecyclerView mPageRV;
+    @BindView(R.id.rv_page_left)
+    RecyclerView mPageLeftRV;
+    @BindView(R.id.rv_page_right)
+    RecyclerView mPageRightRV;
 
     @Inject
-    MainPageListAdapter mMainPageListAdapter;
+    MainPageListAdapter mLeftAdapter;
+    @Inject
+    MainPageListAdapter mRightAdapter;
 
     @Override
     protected void initInject() {
@@ -68,14 +72,12 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     }
 
     private void initView() {
-        mPageRV.setLayoutManager(new LinearLayoutManager(this));
-        mMainPageListAdapter.clearData();
-        mMainPageListAdapter.addDataAll(mPresenter.getMainPageList());
-        mMainPageListAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+        mLeftAdapter.addDataAll(mPresenter.getLeftList());
+        mLeftAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, Object o, int position) {
-                if (null != mPresenter.getMainPageList().get(position).clazz) {
-                    startActivity(new Intent(mContext, mPresenter.getMainPageList().get(position).clazz));
+                if (null != mPresenter.getLeftList().get(position).clazz) {
+                    startActivity(new Intent(mContext, mPresenter.getLeftList().get(position).clazz));
                 }
             }
 
@@ -84,7 +86,23 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 return false;
             }
         });
-        mPageRV.setAdapter(mMainPageListAdapter);
+        mPageLeftRV.setAdapter(mLeftAdapter);
+
+        mRightAdapter.addDataAll(mPresenter.getRightList());
+        mRightAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, Object o, int position) {
+                if (null != mPresenter.getRightList().get(position).clazz) {
+                    startActivity(new Intent(mContext, mPresenter.getRightList().get(position).clazz));
+                }
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, Object o, int position) {
+                return false;
+            }
+        });
+        mPageRightRV.setAdapter(mRightAdapter);
     }
 
     private void checkPermission() {
