@@ -56,7 +56,16 @@ public class F33Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
         list.add(mPath1);
         list.add(mPath2);
         list.add(mPath3);
-        mAudioAdapter.init(new Handler());
+        list.add(mPath1);
+        list.add(mPath2);
+        list.add(mPath3);
+        list.add(mPath1);
+        list.add(mPath2);
+        list.add(mPath3);
+        list.add(mPath1);
+        list.add(mPath2);
+        list.add(mPath3);
+        mAudioAdapter.init();
         mAudioAdapter.addDataAll(list);
         mAudioRv.setAdapter(mAudioAdapter);
     }
