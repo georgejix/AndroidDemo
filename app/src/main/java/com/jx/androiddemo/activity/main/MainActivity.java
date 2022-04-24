@@ -10,7 +10,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jx.androiddemo.BaseMvpActivity;
@@ -18,6 +17,7 @@ import com.jx.androiddemo.R;
 import com.jx.androiddemo.adapter.main.MainPageListAdapter;
 import com.jx.androiddemo.contract.main.MainContract;
 import com.jx.androiddemo.presenter.main.MainPresenter;
+import com.jx.androiddemo.tool.DisplayUtils;
 import com.jx.androiddemo.tool.PermissionUtil;
 import com.jx.rvhelper.adapter.MultiItemTypeAdapter;
 
@@ -29,6 +29,8 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContract.View {
 
+    @BindView(R.id.layout_root)
+    View mRootLayout;
     @BindView(R.id.rv_page_left)
     RecyclerView mPageLeftRV;
     @BindView(R.id.rv_page_right)
@@ -103,6 +105,10 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
             }
         });
         mPageRightRV.setAdapter(mRightAdapter);
+        int toolBarHeight = DisplayUtils.getToolBarHeight(mContext);
+        if (toolBarHeight > 0) {
+            mRootLayout.setPadding(0, toolBarHeight, 0, 0);
+        }
     }
 
     private void checkPermission() {
