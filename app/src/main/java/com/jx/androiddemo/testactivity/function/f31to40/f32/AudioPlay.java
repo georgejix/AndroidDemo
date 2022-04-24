@@ -20,8 +20,8 @@ public class AudioPlay {
     private MediaPlayer mUtilPlayer;
     private final AtomicBoolean mIsPlaying = new AtomicBoolean(false);
     private Listener mListener;
-    private Handler mHandler;
-    private HandlerThread mHandlerThread;
+    private final Handler mHandler;
+    private final HandlerThread mHandlerThread;
     private final int REFRESH_TIME = 1001;
 
     private AudioPlay() {
@@ -41,9 +41,7 @@ public class AudioPlay {
                 currentDurationChange(0);
             }
         });
-        mPlayer.setOnSeekCompleteListener(mp -> {
-            Log.d(TAG, "onSeekComplete");
-        });
+        mPlayer.setOnSeekCompleteListener(mp -> Log.d(TAG, "onSeekComplete"));
         mHandlerThread = new HandlerThread("audioHandler");
         mHandlerThread.start();
         mHandler = new Handler(mHandlerThread.getLooper()) {
