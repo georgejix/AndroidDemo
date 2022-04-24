@@ -91,6 +91,7 @@
         <activity android:name=".testactivity.function.f21to30.f30.F30Activity" />
         <activity android:name=".testactivity.function.f31to40.f31.F31Activity" />
         <activity android:name=".testactivity.function.f31to40.f32.F32Activity" />
+        <activity android:name=".testactivity.function.f31to40.f33.F33Activity" />
 
         <activity android:name=".testactivity.ui.ui1to10.ui1.U1Activity" />
         <activity android:name=".testactivity.ui.ui1to10.ui2.U2Activity" />
