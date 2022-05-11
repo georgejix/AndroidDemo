@@ -200,7 +200,8 @@ typedef struct WavHeader {
     uint32_t sub_chunk_2_size;   //  pcm_data_len
 } WavHeader;
 
-void writeWavHeader(WavHeader *wavHeader, int32_t pcm_data_len, FILE *wav_file, int channels) {
+void
+writeWavHeader(WavHeader *wavHeader, int32_t pcm_data_len, FILE *wav_file, int channels, int rate) {
     memcpy(&wavHeader->chunk_id, "RIFF", 4);
     wavHeader->chunk_size = 36 + pcm_data_len;
     memcpy(&wavHeader->format, "WAVE", 4);
@@ -208,7 +209,7 @@ void writeWavHeader(WavHeader *wavHeader, int32_t pcm_data_len, FILE *wav_file, 
     wavHeader->sub_chunk_1_size = 16;
     wavHeader->audio_format = 1;
     wavHeader->num_channels = channels;
-    wavHeader->sample_rate = 16000;
+    wavHeader->sample_rate = rate;
     wavHeader->bit_per_sample = 16;
     wavHeader->block_align = wavHeader->num_channels * wavHeader->bit_per_sample / 8;
     wavHeader->byte_rate = wavHeader->sample_rate * wavHeader->block_align;
@@ -292,7 +293,7 @@ JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
     outfile = fopen(output_name, "wb+");
     SwrContext *swrCtx = swr_alloc();
     swr_alloc_set_opts(swrCtx,
-                       c->channels, AV_SAMPLE_FMT_S16, 16000,
+                       c->channels, AV_SAMPLE_FMT_S16, c->sample_rate,
                        c->channels, c->sample_fmt, c->sample_rate,
                        0, NULL);
     swr_init(swrCtx);
@@ -304,7 +305,7 @@ JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
 
     int32_t pcm_data_len = 0;
     WavHeader *wavHeader = malloc(sizeof(WavHeader));
-    writeWavHeader(wavHeader, pcm_data_len, outfile, 1);
+    writeWavHeader(wavHeader, pcm_data_len, outfile, 1, 16000);
 
     //每读出一帧数据
     while (av_read_frame(fmt_ctx, &packet) >= 0) {
@@ -318,22 +319,17 @@ JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
             int len = swr_convert(swrCtx, out_buffers, MAX_AUDIO_FARME_SIZE,
                                   (const uint8_t **) decoded_frame->data,
                                   decoded_frame->nb_samples);
-            if (len > decoded_frame->nb_samples * 16000 / c->sample_rate + 10) {
-                pcm_data_len += len * 2;
-                fwrite(out_buffers[0], 2, len, outfile);
-            } else {
-                pcm_data_len += len * 2 * (c->channels <= 2 ? c->channels : 2);
-                for (int i = 0; i < len; i++) {
-                    for (int j = 0; j < c->channels && j < 2; j++)
-                        fwrite(out_buffers[j] + i * 2, 2, 1, outfile);
-                }
+            pcm_data_len += len * 2 * (c->channels <= 2 ? c->channels : 2);
+            for (int i = 0; i < len; i++) {
+                for (int j = 0; j < c->channels && j < 2; j++)
+                    fwrite(out_buffers[j] + i * 2, 2, 1, outfile);
             }
             //减少引用计数，避免内存泄漏
             av_packet_unref(&packet);
         }
     }
     fseek(outfile, 0, SEEK_SET);
-    writeWavHeader(wavHeader, pcm_data_len, outfile, c->channels);
+    writeWavHeader(wavHeader, pcm_data_len, outfile, c->channels, c->sample_rate);
     fclose(outfile);
 
     swr_free(&swrCtx);
