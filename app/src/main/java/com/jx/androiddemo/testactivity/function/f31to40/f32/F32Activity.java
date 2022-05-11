@@ -13,6 +13,7 @@ import com.jx.androiddemo.testactivity.empty.EmptyContract;
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter;
 import com.jx.androiddemo.tool.ClickListenerUtil;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -30,9 +31,10 @@ public class F32Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     @BindView(R.id.img_play_pause)
     ImageView mPlayPauseImg;
 
-    private String mPath1 = "https://guiyu-tici.oss-cn-shanghai.aliyuncs.com/tici/149-2-20220411173608441.wav";
+    //private String mPath1 = "https://guiyu-tici.oss-cn-shanghai.aliyuncs.com/tici/149-2-20220411173608441.wav";
     private String mPath2 = "https://guiyu-tici.oss-cn-shanghai.aliyuncs.com/tici/149-2-20220331174043925.aac";
     private String mPath3 = "https://guiyu-tici.oss-cn-shanghai.aliyuncs.com/tici/149-2-20220222095449261.aac";
+    private String mPath1 = "";
 
     @Override
     protected void initInject() {
@@ -53,6 +55,7 @@ public class F32Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
 
     @SuppressLint({"SetTextI18n", "CheckResult"})
     private void initView() {
+        mPath1 = getExternalCacheDir() + File.separator + "f30.wav";
         AudioPlay.getInstance().setListener(new AudioPlay.Listener() {
             @SuppressLint("SetTextI18n")
             @Override
