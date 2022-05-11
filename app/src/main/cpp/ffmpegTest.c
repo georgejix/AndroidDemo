@@ -316,7 +316,7 @@ JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
             if (avcodec_receive_frame(c, decoded_frame) < 0) continue;
             if (-1 == initSwr) {
                 swr_alloc_set_opts(swrCtx,
-                                   c->channels, AV_SAMPLE_FMT_S16, 16000,
+                                   1, AV_SAMPLE_FMT_S16, 16000,
                                    c->channels, c->sample_fmt, c->sample_rate,
                                    0, NULL);
                 swr_init(swrCtx);
@@ -326,17 +326,14 @@ JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
             int len = swr_convert(swrCtx, out_buffers, MAX_AUDIO_FARME_SIZE,
                                   (const uint8_t **) decoded_frame->data,
                                   decoded_frame->nb_samples);
-            pcm_data_len += len * 2 * (c->channels <= 2 ? c->channels : 2);
-            for (int i = 0; i < len; i++) {
-                for (int j = 0; j < c->channels && j < 2; j++)
-                    fwrite(out_buffers[j] + i * 2, 2, 1, outfile);
-            }
+            pcm_data_len += len * 2;
+            fwrite(out_buffers[0], 2, len, outfile);
             //减少引用计数，避免内存泄漏
             av_packet_unref(&packet);
         }
     }
     fseek(outfile, 0, SEEK_SET);
-    writeWavHeader(wavHeader, pcm_data_len, outfile, c->channels);
+    writeWavHeader(wavHeader, pcm_data_len, outfile, 1);
     fclose(outfile);
 
     swr_free(&swrCtx);

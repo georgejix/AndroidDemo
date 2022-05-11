@@ -72,7 +72,7 @@ public class F30Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
 
     private void download()
     {
-        String url2 = BaseApplication.getFile() + File.separator + "temp.mp4";
+        String url2 = BaseApplication.getFile() + File.separator + "temp6.mp4";
         String out = getExternalCacheDir() + File.separator + "f30.wav";
 
         File f = new File(out);
