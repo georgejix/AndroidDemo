@@ -88,6 +88,10 @@ class AudioPlayerUtil(val mLooper: Looper, val lifecycle: Lifecycle) {
                 }
             }
         }
+        mPlayer.setOnErrorListener { mp, what, extra ->
+            Log.d(TAG, "error")
+            true
+        }
         mSeekBar?.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {}
             override fun onStartTrackingTouch(seekBar: SeekBar) {
