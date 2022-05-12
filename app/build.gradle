@@ -1,7 +1,8 @@
 import java.text.SimpleDateFormat
 
 apply plugin: 'com.android.application'
-
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
@@ -195,6 +196,9 @@ dependencies {
     implementation 'androidx.core:core:1.5.0-alpha05'
     //viewpager
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    //kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.0.2'
 
     //Development
     implementation developmentDependencies.leakCanary
