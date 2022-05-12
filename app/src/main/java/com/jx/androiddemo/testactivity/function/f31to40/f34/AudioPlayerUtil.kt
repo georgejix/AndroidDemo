@@ -125,7 +125,7 @@ class AudioPlayerUtil(val mLooper: Looper, val lifecycle: Lifecycle) {
                 mPath?.apply {
                     mPlayer.reset()
                     mPlayer.setDataSource(this)
-                    mPlayer.prepare()
+                    mPlayer.prepareAsync()
                 }
             } catch (e: Exception) {
             }
