@@ -76,6 +76,9 @@ git commit --amend
 删除远端分支
 git push origin --delete branchName
 
+刷新git远程删除的分支
+git remote prune origin
+
 c++常用库
 https://www.cnblogs.com/skyus/articles/8524408.html
 
