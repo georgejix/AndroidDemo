@@ -5,4 +5,14 @@
     android:orientation="vertical"
     android:paddingTop="24dp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.jx.androiddemo.testactivity.ui.ui31to40.ui34.DragView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 </LinearLayout>

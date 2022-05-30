@@ -72,6 +72,7 @@ import com.jx.androiddemo.testactivity.ui.ui21to30.ui30.U30Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui31.U31Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui32.U32Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui33.U33Activity;
+import com.jx.androiddemo.testactivity.ui.ui31to40.ui34.U34Activity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -175,6 +176,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addRight("共享动画", U31Activity.class);
             addRight("viewpager2", U32Activity.class);
             addRight("清除图片", U33Activity.class);
+            addRight("拖拽icon", U34Activity.class);
         }
 
         Collections.reverse(mRightList);
