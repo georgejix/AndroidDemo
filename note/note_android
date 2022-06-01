@@ -115,3 +115,6 @@ viewPager.setOffscreenPageLimit(3);
 
 android studio打开c++代码提示：
 setting->other settings->clangd->code completion->不要选only clangd completion就行
+
+一次打包所有flavor渠道包：
+根目录运行gradlew assembleRelease
