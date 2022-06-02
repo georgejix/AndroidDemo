@@ -118,3 +118,6 @@ setting->other settings->clangd->code completion->不要选only clangd completio
 
 一次打包所有flavor渠道包：
 根目录运行gradlew assembleRelease
+
+gradle打包单个flavor：
+gradlew :GuiyuPrompter:assembleAliRelease
