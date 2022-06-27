@@ -121,3 +121,8 @@ setting->other settings->clangd->code completion->不要选only clangd completio
 
 gradle打包单个flavor：
 gradlew :GuiyuPrompter:assembleAliRelease
+
+易闪退点：
+dialog.show(),在activity已经destroy之后显示
+Glide.with(mContext),用application.context
+onNewIntent后activity view对象空指针
