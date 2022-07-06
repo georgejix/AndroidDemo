@@ -95,4 +95,7 @@ while [ $? == 1 ]; do
 done
 echo "======sync sucessed !======"
 
+sed替换命令：
+sed -i "s/sp\"/dp\"/g" `grep sp\" -rl si_script/src/main/res/`
+
 
