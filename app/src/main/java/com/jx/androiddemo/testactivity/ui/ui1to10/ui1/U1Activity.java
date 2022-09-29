@@ -68,6 +68,11 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
     }
 
     private void initView() {
+        //刘海屏抢夺状态栏控制权
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            getWindow().getAttributes().layoutInDisplayCutoutMode =
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+        }
         //api30判断导航栏显示与否
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (null != getWindow() && null != getWindow().getDecorView()) {
