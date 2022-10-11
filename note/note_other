@@ -98,4 +98,7 @@ echo "======sync sucessed !======"
 sed替换命令：
 sed -i "s/sp\"/dp\"/g" `grep sp\" -rl si_script/src/main/res/`
 
+xargs命令多参数
+find . -name "*.apk" | xargs -I {} cp {} .
+
 
