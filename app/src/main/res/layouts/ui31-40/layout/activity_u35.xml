@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ccc"
     android:orientation="vertical"
     android:paddingTop="24dp">
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:id="@+id/layout_pop"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="其基础编译器（他们将其改为kompiler——开创了一系列以K字打头的用语——甚至连 contributors这类词他们也用改成了kontributors）可以被独立出来并嵌入到 Maven、Ant 或 Gradle 工具链中。这使得在 IDE 中开发的代码能够利用已有的机制来构建，从而尽可能的减少了在新环境中使用所受的干预，哪怕与那些没有安装 Kotlin 插件的开发人员一起合作项目也没有问题。"
+            android:textColor="#000"
+            android:textSize="14dp" />
+    </LinearLayout>
+</FrameLayout>
