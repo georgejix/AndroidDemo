@@ -74,6 +74,7 @@ import com.jx.androiddemo.testactivity.ui.ui31to40.ui32.U32Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui33.U33Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui34.U34Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui35.U35Activity;
+import com.jx.androiddemo.testactivity.ui.ui31to40.ui36.U36Activity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -179,6 +180,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addRight("清除图片", U33Activity.class);
             addRight("拖拽icon", U34Activity.class);
             addRight("拖拽旋转缩放view", U35Activity.class);
+            addRight("图片镜像", U36Activity.class);
         }
 
         Collections.reverse(mRightList);

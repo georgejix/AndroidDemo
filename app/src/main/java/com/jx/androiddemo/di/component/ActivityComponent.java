@@ -80,6 +80,7 @@ import com.jx.androiddemo.testactivity.ui.ui1to10.ui6.U6Activity;
 import com.jx.androiddemo.testactivity.ui.ui1to10.ui7.U7Activity;
 import com.jx.androiddemo.testactivity.ui.ui1to10.ui8.U8Activity;
 import com.jx.androiddemo.testactivity.ui.ui1to10.ui9.U9Activity;
+import com.jx.androiddemo.testactivity.ui.ui31to40.ui36.U36Activity;
 
 import dagger.Component;
 
@@ -240,4 +241,6 @@ public interface ActivityComponent {
     void inject(U34Activity u34Activity);
 
     void inject(U35Activity u35Activity);
+
+    void inject(U36Activity u36Activity);
 }
