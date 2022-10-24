@@ -21,6 +21,7 @@ import kotlin.math.sqrt
 class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
     private val mPopMinWidth: Int by lazy { resources.getDimensionPixelOffset(R.dimen.pxtodp300) }
     private val mPopMinHeight: Int by lazy { resources.getDimensionPixelOffset(R.dimen.pxtodp80) }
+    private var mImgPer: Double = 0.0
 
     enum class TouchEnum {
         DRAG,
@@ -44,7 +45,8 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     private fun initView() {
         layout_pop.setOnTouchListener(mTouchListener)
-        img.setOnTouchListener(mImgTouchListener)
+        layout_img.setOnTouchListener(mImgTouchListener)
+        img_scale_bg.setOnTouchListener(mImgTouchListener2)
     }
 
     @SuppressLint("CheckResult")
@@ -61,9 +63,9 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
             TAG, "layout_pop: width=${layout_pop.width} height=${layout_pop.height}" +
                     " marginLeft=${params1.leftMargin} marginBottom=${params1.bottomMargin}"
         )
-        val params2 = img.layoutParams as FrameLayout.LayoutParams
+        val params2 = layout_img.layoutParams as FrameLayout.LayoutParams
         Log.d(
-            TAG, "layout_pop: width=${img.width} height=${img.height}" +
+            TAG, "layout_pop: width=${layout_img.width} height=${layout_img.height}" +
                     " marginLeft=${params2.leftMargin} marginBottom=${params2.bottomMargin}"
         )
     }
@@ -119,7 +121,6 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                         justClick = true
                     }
                     MotionEvent.ACTION_MOVE -> {
-                        pointerCount
                         if (TouchEnum.DRAG == mTouchEnum) {
                             val changeX = rawX - downX
                             val changeY = rawY - downY
@@ -181,7 +182,7 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                         }
                         if (TouchEnum.ZOOM != mTouchEnum && 2 == pointerCount) {
                             mTouchEnum = TouchEnum.ZOOM
-                            downWidth = img.width
+                            downWidth = layout_img.width
                             var difX = abs(getX(0) - getX(1))
                             var difY = abs(getY(0) - getY(1))
                             downDifLength = sqrt(
@@ -195,13 +196,15 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                         mTouchEnum = null
                     }
                     MotionEvent.ACTION_DOWN -> {
+                        if (0.0 == mImgPer) {
+                            mImgPer = layout_img.height * 1.0 / layout_img.width
+                        }
                         mTouchEnum = TouchEnum.DRAG
                         downX = rawX
                         downY = rawY
                         justClick = true
                     }
                     MotionEvent.ACTION_MOVE -> {
-                        pointerCount
                         if (TouchEnum.DRAG == mTouchEnum) {
                             val changeX = rawX - downX
                             val changeY = rawY - downY
@@ -210,10 +213,10 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                                     justClick = false
                                 }
                             }
-                            val params = img.layoutParams as FrameLayout.LayoutParams
-                            params.leftMargin = img.marginLeft + changeX.toInt()
-                            params.bottomMargin = img.marginBottom - changeY.toInt()
-                            img.layoutParams = params
+                            val params = layout_img.layoutParams as FrameLayout.LayoutParams
+                            params.leftMargin = layout_img.marginLeft + changeX.toInt()
+                            params.bottomMargin = layout_img.marginBottom - changeY.toInt()
+                            layout_img.layoutParams = params
                             downX = rawX
                             downY = rawY
                         } else if (TouchEnum.ZOOM == mTouchEnum && 2 == pointerCount) {
@@ -224,11 +227,12 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                                         Math.pow(difY.toDouble(), 2.0)
                             ).toInt()
                             val changeLength = currentDifLength - downDifLength
-                            val params = img.layoutParams as FrameLayout.LayoutParams
+                            val params = layout_img.layoutParams as FrameLayout.LayoutParams
                             if (downWidth + changeLength >= mPopMinWidth) {
                                 params.width = downWidth + changeLength
+                                params.height = (mImgPer * params.width).toInt()
                             }
-                            img.layoutParams = params
+                            layout_img.layoutParams = params
                         }
                     }
                     MotionEvent.ACTION_UP -> {
@@ -236,6 +240,64 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                         if (justClick) {
                             onClickPopLayout()
                         }
+                    }
+                }
+            }
+            return true
+        }
+    }
+
+    private var mImgTouchListener2 = object : View.OnTouchListener {
+        var downX = 0f
+        var downY = 0f
+        var downDifLength = 0
+        var downWidth = 0
+        var downLeftMargin = 0
+        var downTopMargin = 0
+
+        @SuppressLint("ClickableViewAccessibility")
+        override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+            event?.apply {
+                when (action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        if (0.0 == mImgPer) {
+                            mImgPer = layout_img.height * 1.0 / layout_img.width
+                        }
+                        downX = layout_img.x
+                        downY = layout_img.y
+                        downWidth = layout_img.width
+                        val params = layout_img.layoutParams as FrameLayout.LayoutParams
+                        downLeftMargin = params.leftMargin
+                        downTopMargin = params.topMargin
+                        val difX = abs(rawX - downX)
+                        val difY = abs(rawY - downY)
+                        downDifLength = sqrt(
+                            Math.pow(difX.toDouble(), 2.0) +
+                                    Math.pow(difY.toDouble(), 2.0)
+                        ).toInt()
+                    }
+                    MotionEvent.ACTION_MOVE -> {
+                        val difX = abs(rawX - downX)
+                        val difY = abs(rawY - downY)
+                        val currentDifLength = sqrt(
+                            Math.pow(difX.toDouble(), 2.0) +
+                                    Math.pow(difY.toDouble(), 2.0)
+                        ).toInt()
+                        val difL = currentDifLength - downDifLength
+                        var changeWidth = sqrt(Math.pow((difL).toDouble(), 2.0))
+                        if (difL < 0) {
+                            changeWidth = 0 - changeWidth
+                        }
+                        val params = layout_img.layoutParams as FrameLayout.LayoutParams
+                        if (downWidth + changeWidth >= mPopMinWidth) {
+                            params.width = downWidth + changeWidth.toInt()
+                            params.height = (mImgPer * params.width).toInt()
+                            params.leftMargin = downLeftMargin + (changeWidth / 2).toInt()
+                            params.topMargin = downTopMargin + (changeWidth / 2).toInt()
+                        }
+                        layout_img.layoutParams = params
+                    }
+                    MotionEvent.ACTION_UP -> {
                     }
                 }
             }
