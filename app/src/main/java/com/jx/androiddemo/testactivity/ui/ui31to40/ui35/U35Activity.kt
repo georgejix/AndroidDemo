@@ -47,6 +47,7 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
         layout_pop.setOnTouchListener(mTouchListener)
         layout_img.setOnTouchListener(mImgTouchListener)
         img_scale_bg.setOnTouchListener(mImgTouchListener2)
+        img_scale_pop.setOnTouchListener(mTouchListener2)
     }
 
     @SuppressLint("CheckResult")
@@ -160,7 +161,48 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
             return true
         }
     }
+    private var mTouchListener2 = object : View.OnTouchListener {
+        var downX = 0f
+        var downY = 0f
+        var downWidth = 0
+        var downHeight = 0
+        var downMarginBottom = 0
+        var downMarginLeft = 0
 
+        @SuppressLint("ClickableViewAccessibility")
+        override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+            event?.apply {
+                when (action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        downX = rawX
+                        downY = rawY
+                        downWidth = layout_pop.width
+                        downHeight = layout_pop.height
+                        val params = layout_pop.layoutParams as FrameLayout.LayoutParams
+                        downMarginBottom = params.bottomMargin
+                        downMarginLeft = params.leftMargin
+                    }
+                    MotionEvent.ACTION_MOVE -> {
+                        val changeWidth = (rawX - downX).toInt()
+                        val changeHeight = (rawY - downY).toInt()
+                        val params = layout_pop.layoutParams as FrameLayout.LayoutParams
+                        if (downWidth + changeWidth >= mPopMinWidth) {
+                            params.width = downWidth + changeWidth
+                            params.leftMargin = downMarginLeft + changeWidth / 2
+                        }
+                        if (downHeight + changeHeight >= mPopMinHeight) {
+                            params.height = downHeight + changeHeight
+                            params.bottomMargin = downMarginBottom - changeHeight
+                        }
+                        layout_pop.layoutParams = params
+                    }
+                    MotionEvent.ACTION_UP -> {
+                    }
+                }
+            }
+            return true
+        }
+    }
     private var mImgTouchListener = object : View.OnTouchListener {
         var justClick = false
         var mTouchEnum: TouchEnum? = null
