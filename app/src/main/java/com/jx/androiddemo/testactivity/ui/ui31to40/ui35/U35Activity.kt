@@ -183,16 +183,16 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                         downMarginLeft = params.leftMargin
                     }
                     MotionEvent.ACTION_MOVE -> {
-                        val changeWidth = (rawX - downX).toInt()
-                        val changeHeight = (rawY - downY).toInt()
+                        val changeWidth = (rawX - downX).toInt() * 2
+                        val changeHeight = (rawY - downY).toInt() * 2
                         val params = layout_pop.layoutParams as FrameLayout.LayoutParams
                         if (downWidth + changeWidth >= mPopMinWidth) {
                             params.width = downWidth + changeWidth
-                            params.leftMargin = downMarginLeft + changeWidth / 2
+                            //params.leftMargin = downMarginLeft + changeWidth / 2
                         }
                         if (downHeight + changeHeight >= mPopMinHeight) {
                             params.height = downHeight + changeHeight
-                            params.bottomMargin = downMarginBottom - changeHeight
+                            params.bottomMargin = downMarginBottom - changeHeight / 2
                         }
                         layout_pop.layoutParams = params
                     }
@@ -334,8 +334,8 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                         if (downWidth + changeWidth >= mPopMinWidth) {
                             params.width = downWidth + changeWidth.toInt()
                             params.height = (mImgPer * params.width).toInt()
-                            params.leftMargin = downLeftMargin + (changeWidth / 2).toInt()
-                            params.topMargin = downTopMargin + (changeWidth / 2).toInt()
+                            //params.leftMargin = downLeftMargin + (changeWidth / 2).toInt()
+                            //params.topMargin = downTopMargin + (changeWidth / 2).toInt()
                         }
                         layout_img.layoutParams = params
                     }
