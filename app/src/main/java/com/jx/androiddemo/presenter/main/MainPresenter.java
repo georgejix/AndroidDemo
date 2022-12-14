@@ -39,6 +39,7 @@ import com.jx.androiddemo.testactivity.function.f31to40.f31.F31Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f32.F32Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f33.F33Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f34.F34Activity;
+import com.jx.androiddemo.testactivity.function.f31to40.f35.F35Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui11.U11Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui12.U12Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui13.U13Activity;
@@ -136,6 +137,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addLeft("音频播放", F32Activity.class);
             addLeft("adapter音频播放", F33Activity.class);
             addLeft("音频播放2", F34Activity.class);
+            addLeft("裁剪缩放", F35Activity.class);
         }
 
         Collections.reverse(mLeftList);

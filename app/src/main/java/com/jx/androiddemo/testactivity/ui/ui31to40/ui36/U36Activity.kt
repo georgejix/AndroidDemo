@@ -40,7 +40,11 @@ class U36Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
         RxView.clicks(layout_bg)
             .throttleFirst(Constants.CLICK_TIME.toLong(), TimeUnit.MILLISECONDS)
             .compose(this.bindToLifecycle())
-            .subscribe { v -> mirror() }
+            .subscribe { v -> mirror2() }
+    }
+
+    private fun mirror2(){
+        img.scaleX = -img.scaleX
     }
 
     private fun mirror() {
