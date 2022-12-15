@@ -183,7 +183,10 @@ class CutImgLayout : LinearLayout {
 
     }
 
-    fun setImgSize(cutPW: Int = 1, cutPH: Int = 1, imgId: Int = R.mipmap.pic5) {
+    fun setImgSize(
+        cutPW: Int, cutPH: Int, imgId: Int, defaultW: Int? = null,
+        defaultH: Int? = null, defaultMarginL: Int? = null, defaultMarginT: Int? = null
+    ) {
         mCutPw = cutPW
         mCutPh = cutPH
         cut_view.setBitmap(imgId)
@@ -217,22 +220,34 @@ class CutImgLayout : LinearLayout {
         Glide.with(BaseApplication.getInstance()).load(imgId)
             .apply(bitmapTransform(BlurTransformation(15)))
             .into(img)
+        mMaxW = imgW
+        mMaxH = imgH
 
         if (cut_view.layoutParams is FrameLayout.LayoutParams) {
             val param2 = cut_view.layoutParams as FrameLayout.LayoutParams
-            val pw = imgW * 1.0 / cutPW
-            val ph = imgH * 1.0 / cutPH
-            if (pw <= ph) {
-                param2.width = imgW
-                param2.height = imgW * cutPH / cutPW
+            if (null != defaultW && null != defaultH) {
+                param2.width = defaultW
+                param2.height = defaultH
+                if (null != defaultMarginL && null != defaultMarginT) {
+                    param2.leftMargin = defaultMarginL
+                    param2.topMargin = defaultMarginT
+                } else {
+                    param2.leftMargin = (imgW - param2.width) / 2
+                    param2.topMargin = (imgH - param2.height) / 2
+                }
             } else {
-                param2.height = imgH
-                param2.width = imgH * cutPW / cutPH
+                val pw = imgW * 1.0 / cutPW
+                val ph = imgH * 1.0 / cutPH
+                if (pw <= ph) {
+                    param2.width = imgW
+                    param2.height = imgW * cutPH / cutPW
+                } else {
+                    param2.height = imgH
+                    param2.width = imgH * cutPW / cutPH
+                }
+                param2.leftMargin = (imgW - param2.width) / 2
+                param2.topMargin = (imgH - param2.height) / 2
             }
-            mMaxW = imgW
-            mMaxH = imgH
-            param2.leftMargin = (imgW - param2.width) / 2
-            param2.topMargin = (imgH - param2.height) / 2
             cut_view.layoutParams = param2
         }
     }

@@ -29,7 +29,7 @@ class F35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
     private fun initView() {
         layout_cut_img.postDelayed({
             layout_cut_img.visibility = View.VISIBLE
-            layout_cut_img.setImgSize()
+            layout_cut_img.setImgSize(1, 1, R.mipmap.pic5, 300, 300, 100, 50)
         }, 500)
         tv_print.setOnClickListener(this::onClick)
     }
