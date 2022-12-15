@@ -7,35 +7,31 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
+import androidx.core.view.marginLeft
+import androidx.core.view.marginTop
 import com.jx.androiddemo.R
 
 class CutView : View {
-    private var mContext: Context? = null
+    private val mContext: Context
     private var mCornerPaint: Paint? = null
     private var mPaint: Paint? = null
     private var mCornerLineWidth = 1
     private var mLineWidth = 1
     private var mLineLength = 1
 
-    enum class TouchEnum {
-        DRAG,
-        ZOOM
-    }
+    constructor(context: Context) : this(context, null)
 
-    constructor(context: Context) : super(context) {
-        init(context)
-    }
-
-    constructor(context: Context, attr: AttributeSet) : super(context, attr) {
+    constructor(context: Context, attr: AttributeSet?) : super(context, attr) {
+        mContext = context
         init(context)
     }
 
     private fun init(context: Context) {
-        mContext = context
-        mCornerLineWidth = mContext?.resources?.getDimensionPixelSize(R.dimen.pxtodp6) ?: 1
-        mLineWidth = mContext?.resources?.getDimensionPixelSize(R.dimen.pxtodp2) ?: 1
-        mLineLength = mContext?.resources?.getDimensionPixelSize(R.dimen.pxtodp28) ?: 1
+        mCornerLineWidth = mContext.resources?.getDimensionPixelSize(R.dimen.pxtodp6) ?: 1
+        mLineWidth = mContext.resources?.getDimensionPixelSize(R.dimen.pxtodp2) ?: 1
+        mLineLength = mContext.resources?.getDimensionPixelSize(R.dimen.pxtodp28) ?: 1
 
         mCornerPaint = Paint()
         mCornerPaint?.color = Color.WHITE
@@ -53,6 +49,8 @@ class CutView : View {
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+        Log.d(F35Activity.TAG, "marginLeft=${marginLeft} marginTop=${marginTop}")
+        Log.d(F35Activity.TAG, "width=${width} height=${height}")
         canvas?.apply {
             mCornerPaint?.let {
                 drawRect(
