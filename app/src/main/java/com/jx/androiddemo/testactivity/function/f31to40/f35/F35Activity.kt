@@ -31,11 +31,13 @@ class F35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
             layout_cut_img.visibility = View.VISIBLE
             layout_cut_img.setImgSize()
         }, 500)
+        tv_print.setOnClickListener(this::onClick)
     }
 
     private fun onClick(view: View) {
         if (!ClickListenerUtil.canClick()) return
         when (view.id) {
+            R.id.tv_print -> layout_cut_img.printParam()
         }
     }
 }

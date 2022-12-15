@@ -25,7 +25,7 @@ ext {
     rxlifecycleComponentsVersion = '2.1.0'
     butterknifeVersion = '10.2.0'
     meFragmentationVersion = '1.0.2'
-    glideVersion = '4.10.0'
+    glideVersion = '4.13.2'
     okhttpVersion = '3.14.9'
     okhttpLoggingVersion = '3.14.9'
     materialishVersion = '1.7'

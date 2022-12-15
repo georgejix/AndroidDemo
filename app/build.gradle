@@ -188,6 +188,7 @@ dependencies {
     implementation presentationDependencies.meFragmentation
     implementation presentationDependencies.glide
     annotationProcessor presentationDependencies.glideCompiler
+    implementation('jp.wasabeef:glide-transformations:4.3.0')
     implementation libraryDependencies.gson
     implementation libraryDependencies.guava
     testImplementation 'junit:junit:4.12'

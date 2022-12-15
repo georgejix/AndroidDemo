@@ -17,4 +17,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_print"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00ff00"
+        android:gravity="center"
+        android:text="print"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,10 +2,7 @@ package com.jx.androiddemo.testactivity.function.f31to40.f35
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -17,15 +14,21 @@ class CutView : View {
     private val mContext: Context
     private var mCornerPaint: Paint? = null
     private var mPaint: Paint? = null
+    private var mImgPaint: Paint? = null
     private var mCornerLineWidth = 1
     private var mLineWidth = 1
     private var mLineLength = 1
+    private var mBitmap: Bitmap? = null
 
     constructor(context: Context) : this(context, null)
 
     constructor(context: Context, attr: AttributeSet?) : super(context, attr) {
         mContext = context
         init(context)
+    }
+
+    fun setBitmap(id: Int) {
+        mBitmap = BitmapFactory.decodeResource(resources, id)
     }
 
     private fun init(context: Context) {
@@ -44,13 +47,16 @@ class CutView : View {
         mPaint?.isAntiAlias = true
         mPaint?.style = Paint.Style.STROKE
         mPaint?.strokeWidth = mLineWidth.toFloat()
+
+        mImgPaint = Paint()
+        mImgPaint?.color = Color.parseColor("#80FFFFFF")
+        mImgPaint?.isAntiAlias = true
+        mImgPaint?.style = Paint.Style.STROKE
     }
 
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        Log.d(F35Activity.TAG, "marginLeft=${marginLeft} marginTop=${marginTop}")
-        Log.d(F35Activity.TAG, "width=${width} height=${height}")
         canvas?.apply {
             mCornerPaint?.let {
                 drawRect(
@@ -108,6 +114,21 @@ class CutView : View {
                         width - w, height - w
                     ), it
                 )
+            }
+            mImgPaint?.let {
+                if (null != mBitmap) {
+                    val clipPath = Path()
+                    clipPath.addRect(0f, 0f, width.toFloat(), height.toFloat(), Path.Direction.CW)
+                    clipPath(clipPath)
+                    val pw = (parent as View).width
+                    val ph = (parent as View).height
+                    drawBitmap(
+                        mBitmap!!, null, Rect(
+                            -marginLeft, -marginTop,
+                            pw - marginLeft, ph - marginTop
+                        ), it
+                    )
+                }
             }
         }
     }

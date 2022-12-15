@@ -12,9 +12,13 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.marginLeft
+import androidx.core.view.marginTop
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.jx.androiddemo.BaseApplication
 import com.jx.androiddemo.R
+import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -87,9 +91,11 @@ class CutImgLayout : LinearLayout {
                                         Math.pow(difY.toDouble(), 2.0)
                             ).toInt()
                         }
-                        val params = cut_view.layoutParams as FrameLayout.LayoutParams
-                        downMarginTop = params.topMargin
-                        downMarginLeft = params.leftMargin
+                        if (cut_view.layoutParams is FrameLayout.LayoutParams) {
+                            val params = cut_view.layoutParams as FrameLayout.LayoutParams
+                            downMarginTop = params.topMargin
+                            downMarginLeft = params.leftMargin
+                        }
                     }
                     MotionEvent.ACTION_POINTER_2_UP -> {
                         //当屏幕上已经有手指离开屏幕，屏幕上还有一个手指
@@ -110,16 +116,18 @@ class CutImgLayout : LinearLayout {
                                     justClick = false
                                 }
                             }
-                            val params = cut_view.layoutParams as FrameLayout.LayoutParams
-                            val newX = params.leftMargin + changeX.toInt()
-                            if (newX >= 0 && newX + cut_view.width <= mMaxW) {
-                                params.leftMargin = params.leftMargin + changeX.toInt()
+                            if (cut_view.layoutParams is FrameLayout.LayoutParams) {
+                                val params = cut_view.layoutParams as FrameLayout.LayoutParams
+                                val newX = params.leftMargin + changeX.toInt()
+                                if (newX >= 0 && newX + cut_view.width <= mMaxW) {
+                                    params.leftMargin = params.leftMargin + changeX.toInt()
+                                }
+                                val newY = params.topMargin + changeY.toInt()
+                                if (newY >= 0 && newY + cut_view.height <= mMaxH) {
+                                    params.topMargin = params.topMargin + changeY.toInt()
+                                }
+                                cut_view.layoutParams = params
                             }
-                            val newY = params.topMargin + changeY.toInt()
-                            if (newY >= 0 && newY + cut_view.height <= mMaxH) {
-                                params.topMargin = params.topMargin + changeY.toInt()
-                            }
-                            cut_view.layoutParams = params
                             downX = rawX
                             downY = rawY
                         } else if (TouchEnum.ZOOM == mTouchEnum && 2 == pointerCount) {
@@ -149,12 +157,14 @@ class CutImgLayout : LinearLayout {
                                 }
                             }
 
-                            val param = cut_view.layoutParams as FrameLayout.LayoutParams
-                            param.width = downWidth + widthChange
-                            param.height = downHeight + heightChange
-                            param.leftMargin = downMarginLeft - widthChange / 2
-                            param.topMargin = downMarginTop - heightChange / 2
-                            cut_view.layoutParams = param
+                            if (cut_view.layoutParams is FrameLayout.LayoutParams) {
+                                val param = cut_view.layoutParams as FrameLayout.LayoutParams
+                                param.width = downWidth + widthChange
+                                param.height = downHeight + heightChange
+                                param.leftMargin = downMarginLeft - widthChange / 2
+                                param.topMargin = downMarginTop - heightChange / 2
+                                cut_view.layoutParams = param
+                            }
                         }
                     }
                     MotionEvent.ACTION_UP -> {
@@ -176,47 +186,61 @@ class CutImgLayout : LinearLayout {
     fun setImgSize(cutPW: Int = 1, cutPH: Int = 1, imgId: Int = R.mipmap.pic5) {
         mCutPw = cutPW
         mCutPh = cutPH
+        cut_view.setBitmap(imgId)
         val layoutW = layout_img.width
         val layoutH = layout_img.height
         val option = BitmapFactory.Options()
         option.inJustDecodeBounds = true
         BitmapFactory.decodeResource(resources, imgId, option)
-        val param1 = img.layoutParams as ConstraintLayout.LayoutParams
         var imgW = 0
         var imgH = 0
-        if (layoutW * 1.0 / option.outWidth <= layoutH * 1.0 / option.outHeight) {
-            param1.width = ConstraintLayout.LayoutParams.MATCH_PARENT
-            param1.height = 0
-            param1.dimensionRatio = "h,${option.outWidth}:${option.outHeight}"
-            imgW = layoutW
-            imgH = layoutW * option.outHeight / option.outWidth
-        } else {
-            param1.width = 0
-            param1.height = ConstraintLayout.LayoutParams.MATCH_PARENT
-            param1.dimensionRatio = "w,${option.outWidth}:${option.outHeight}"
-            imgH = layoutH
-            imgW = layoutH * option.outWidth / option.outHeight
+
+        if (img.layoutParams is ConstraintLayout.LayoutParams) {
+            val param1 = img.layoutParams as ConstraintLayout.LayoutParams
+            if (layoutW * 1.0 / option.outWidth <= layoutH * 1.0 / option.outHeight) {
+                param1.width = ConstraintLayout.LayoutParams.MATCH_PARENT
+                param1.height = 0
+                param1.dimensionRatio = "h,${option.outWidth}:${option.outHeight}"
+                imgW = layoutW
+                imgH = layoutW * option.outHeight / option.outWidth
+            } else {
+                param1.width = 0
+                param1.height = ConstraintLayout.LayoutParams.MATCH_PARENT
+                param1.dimensionRatio = "w,${option.outWidth}:${option.outHeight}"
+                imgH = layoutH
+                imgW = layoutH * option.outWidth / option.outHeight
+            }
+            img.layoutParams = param1
         }
-        img.layoutParams = param1
+
         cut_layout.postInvalidate()
-        Glide.with(BaseApplication.getInstance()).load(imgId).into(img)
+        Glide.with(BaseApplication.getInstance()).load(imgId)
+            .apply(bitmapTransform(BlurTransformation(15)))
+            .into(img)
 
-        val param2 = cut_view.layoutParams as FrameLayout.LayoutParams
-        val pw = imgW * 1.0 / cutPW
-        val ph = imgH * 1.0 / cutPH
-        if (pw <= ph) {
-            param2.width = imgW
-            param2.height = imgW * cutPH / cutPW
-        } else {
-            param2.height = imgH
-            param2.width = imgH * cutPW / cutPH
+        if (cut_view.layoutParams is FrameLayout.LayoutParams) {
+            val param2 = cut_view.layoutParams as FrameLayout.LayoutParams
+            val pw = imgW * 1.0 / cutPW
+            val ph = imgH * 1.0 / cutPH
+            if (pw <= ph) {
+                param2.width = imgW
+                param2.height = imgW * cutPH / cutPW
+            } else {
+                param2.height = imgH
+                param2.width = imgH * cutPW / cutPH
+            }
+            mMaxW = imgW
+            mMaxH = imgH
+            param2.leftMargin = (imgW - param2.width) / 2
+            param2.topMargin = (imgH - param2.height) / 2
+            cut_view.layoutParams = param2
         }
-        mMaxW = imgW
-        mMaxH = imgH
-        param2.leftMargin = (imgW - param2.width) / 2
-        param2.topMargin = (imgH - param2.height) / 2
-        cut_view.layoutParams = param2
+    }
 
-        Log.d(F35Activity.TAG,"width = ${mMaxW} height = ${mMaxH}")
+    fun printParam() {
+        Log.d(
+            F35Activity.TAG,
+            "w=${cut_view.width} h=${cut_view.height} ml=${cut_view.marginLeft} mt=${cut_view.marginTop}"
+        )
     }
 }
