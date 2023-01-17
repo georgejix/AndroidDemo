@@ -1,4 +1,4 @@
-package com.jx.androiddemo.testactivity.function.f31to40.f34
+package com.jx.androiddemo.testactivity.function.f31to40.f32
 
 import android.view.View
 import com.jx.androiddemo.BaseMvpActivity
@@ -7,7 +7,7 @@ import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
 import com.jx.androiddemo.tool.ClickListenerUtil
 
-class F34Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
+class F32Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     override fun initInject() {
         activityComponent.inject(this)
