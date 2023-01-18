@@ -126,3 +126,7 @@ gradlew :GuiyuPrompter:assembleAliRelease
 dialog.show(),在activity已经destroy之后显示
 Glide.with(mContext),用application.context
 onNewIntent后activity view对象空指针
+
+adb远程连接
+adb tcpip 5555
+adb connect ip:5555
