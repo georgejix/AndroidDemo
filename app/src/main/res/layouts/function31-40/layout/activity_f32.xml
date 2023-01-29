@@ -22,4 +22,14 @@
         style="@style/generalTv"
         android:background="#ccc"
         android:text="print3" />
+    <TextView
+        android:id="@+id/tv_4"
+        style="@style/generalTv"
+        android:background="#ccc"
+        android:text="协变" />
+    <TextView
+        android:id="@+id/tv_5"
+        style="@style/generalTv"
+        android:background="#ccc"
+        android:text="逆变" />
 </LinearLayout>
