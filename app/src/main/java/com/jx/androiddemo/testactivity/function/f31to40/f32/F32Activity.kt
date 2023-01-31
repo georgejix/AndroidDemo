@@ -55,7 +55,7 @@ class F32Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                 mFoodProduction.produce()
                 mFastFoodProduction.produce()
                 mBurgerProduction.produce()
-             }
+            }
         RxView.clicks(tv_5)
             .throttleFirst(Constants.CLICK_TIME.toLong(), TimeUnit.MILLISECONDS)
             .compose(this.bindToLifecycle())

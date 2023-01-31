@@ -136,6 +136,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addLeft("ffmpeg提取网络视频中音频", F30Activity.class);
             addLeft("loading", F31Activity.class);
             addLeft("闭包问题,kt协变逆变", F32Activity.class);
+            addLeft("网络请求", F33Activity.class);
             addLeft("裁剪缩放", F35Activity.class);
             addLeft("音频播放", F36Activity.class);
         }

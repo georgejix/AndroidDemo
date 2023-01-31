@@ -207,4 +207,6 @@ dependencies {
     implementation project(path: ':appfw') // 业务中心
     implementation project(path: ':rvhelper')   //adapter
     implementation project(path: ':pullrefreshview')    //下拉刷新
+
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
 }
