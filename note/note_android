@@ -130,3 +130,7 @@ onNewIntent后activity view对象空指针
 adb远程连接
 adb tcpip 5555
 adb connect ip:5555
+
+gradlew打包命令
+gradlew :app:assembleRelease
+gradlew :app:assembleAliRelease
