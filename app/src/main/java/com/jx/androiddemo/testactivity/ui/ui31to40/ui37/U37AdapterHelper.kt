@@ -1,6 +1,5 @@
 package com.jx.androiddemo.testactivity.ui.ui31to40.ui37
 
-import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
@@ -11,10 +10,14 @@ class U37AdapterHelper(val mAdapter: U37Adapter) : ItemTouchHelper.Callback() {
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
     ): Int {
-        return makeMovementFlags(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN or
-                    ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT, 0
-        )
+        if (mAdapter.getData().size - 1 == viewHolder.adapterPosition) {
+            return makeMovementFlags(0, 0)
+        } else {
+            return makeMovementFlags(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN or
+                        ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT, 0
+            )
+        }
     }
 
     override fun onMove(
@@ -26,6 +29,9 @@ class U37AdapterHelper(val mAdapter: U37Adapter) : ItemTouchHelper.Callback() {
         val from = viewHolder.adapterPosition
         val to = target.adapterPosition
         val data = mAdapter.getData()
+        if (to == data.size - 1) {
+            return false
+        }
         if (from < to) {
             for (i in from until to) {
                 Collections.swap(data, i, i + 1)

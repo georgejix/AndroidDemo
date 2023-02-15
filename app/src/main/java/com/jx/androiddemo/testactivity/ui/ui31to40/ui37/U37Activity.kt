@@ -13,7 +13,7 @@ class U37Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
     private var mU37Adapter: U37Adapter? = null
     private var mItemTouchHelper: ItemTouchHelper? = null
 
-    companion object{
+    companion object {
         val TAG = "U37Activity"
     }
 
