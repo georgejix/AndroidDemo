@@ -150,6 +150,7 @@
         <activity android:name=".testactivity.ui.ui31to40.ui34.U34Activity" />
         <activity android:name=".testactivity.ui.ui31to40.ui35.U35Activity" />
         <activity android:name=".testactivity.ui.ui31to40.ui36.U36Activity" />
+        <activity android:name=".testactivity.ui.ui31to40.ui37.U37Activity" />
 
         <!-- aidl -->
         <service

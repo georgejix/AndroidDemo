@@ -38,7 +38,6 @@ import com.jx.androiddemo.testactivity.function.f21to30.f30.F30Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f31.F31Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f32.F32Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f33.F33Activity;
-import com.jx.androiddemo.testactivity.function.f31to40.f34.F34Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f35.F35Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f36.F36Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui11.U11Activity;
@@ -71,6 +70,7 @@ import com.jx.androiddemo.testactivity.ui.ui21to30.ui27.U27Activity;
 import com.jx.androiddemo.testactivity.ui.ui21to30.ui28.U28Activity;
 import com.jx.androiddemo.testactivity.ui.ui21to30.ui29.U29Activity;
 import com.jx.androiddemo.testactivity.ui.ui21to30.ui30.U30Activity;
+import com.jx.androiddemo.testactivity.ui.ui31to40.ui37.U37Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui31.U31Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui32.U32Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui33.U33Activity;
@@ -184,6 +184,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addRight("拖拽icon", U34Activity.class);
             addRight("拖拽旋转缩放view", U35Activity.class);
             addRight("图片镜像", U36Activity.class);
+            addRight("recyclerview拖动排序", U37Activity.class);
         }
 
         Collections.reverse(mRightList);
