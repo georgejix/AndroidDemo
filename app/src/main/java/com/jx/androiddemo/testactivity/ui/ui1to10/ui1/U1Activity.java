@@ -45,6 +45,8 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
 
     @BindView(R.id.tv_add_view_in_child_thread)
     TextView tv_add_view_in_child_thread;
+    @BindView(R.id.tv_add_view_in_child_thread2)
+    TextView tv_add_view_in_child_thread2;
 
     private HandlerThread mHandlerThread;
 
@@ -127,6 +129,13 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
                 .subscribe(o ->
                 {
                     optViewInChildThread();
+                });
+        RxView.clicks(tv_add_view_in_child_thread2)
+                .throttleFirst(Constants.CLICK_TIME, TimeUnit.MILLISECONDS)
+                .compose(this.bindToLifecycle())
+                .subscribe(o ->
+                {
+                    optViewInChildThread2();
                 });
     }
 
@@ -219,6 +228,7 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
                 return false;
             });
         }
+        Log.d(TAG, null == mChildThreadTv ? "MSG_ADD_TV" : "MSG_DEL_TV");
         mBackHandler.sendEmptyMessage(null == mChildThreadTv ? MSG_ADD_TV : MSG_DEL_TV);
     }
 
@@ -235,8 +245,8 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
         mChildThreadTv.setGravity(Gravity.CENTER);
         WindowManager wm = activity.getWindowManager();
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                250, 150, 200, 200, WindowManager.LayoutParams.FIRST_SUB_WINDOW,
-                WindowManager.LayoutParams.TYPE_TOAST, PixelFormat.OPAQUE);
+                250, 150, 200, 200, WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.OPAQUE);
         wm.addView(mChildThreadTv, params);
     }
 
@@ -250,4 +260,12 @@ public class U1Activity extends BaseMvpActivity<U1Presenter> implements U1Contra
         mChildThreadTv = null;
     }
 
+    private void optViewInChildThread2() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG, "optViewInChildThread2");
+            }
+        }).start();
+    }
 }

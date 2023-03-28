@@ -37,4 +37,9 @@
         android:id="@+id/tv_add_view_in_child_thread"
         style="@style/generalTv"
         android:text="在子线程操作ui" />
+
+    <TextView
+        android:id="@+id/tv_add_view_in_child_thread2"
+        style="@style/generalTv"
+        android:text="在子线程操作ui2" />
 </LinearLayout>

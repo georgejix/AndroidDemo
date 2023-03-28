@@ -209,4 +209,5 @@ dependencies {
     implementation project(path: ':pullrefreshview')    //下拉刷新
 
     implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
