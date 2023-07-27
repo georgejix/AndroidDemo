@@ -41,7 +41,7 @@ public class F2Activity extends BaseMvpActivity<F2Presenter> implements F2Contra
     @BindView(R.id.textview_content)
     TextView contentTextView;
 
-    private String serializableFilePath = BaseApplication.getFile() + File.separator + "user.txt";
+    private String serializableFilePath = BaseApplication.getInstance().getFile() + File.separator + "user.txt";
 
     @Override
     protected void initInject() {

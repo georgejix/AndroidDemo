@@ -37,7 +37,7 @@ public class BitmapCacheDisk {
     }
 
     private BitmapCacheDisk(){
-        dirPath = BaseApplication.getFile() + File.separator + dirName + File.separator;
+        dirPath = BaseApplication.getInstance().getFile() + File.separator + dirName + File.separator;
         File dirFile = new File(dirPath);
         try {
             diskLruCache = DiskLruCache.open(dirFile, 1, 1, DISK_CACHE_SIZE);

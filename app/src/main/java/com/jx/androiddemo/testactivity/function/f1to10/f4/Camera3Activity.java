@@ -283,7 +283,7 @@ public class Camera3Activity extends BaseMvpActivity<EmptyPresenter> implements 
             mediaRecorder.setAudioEncoder(camcorderProfile.audioCodec);
 
             //输出路径
-            mediaRecorder.setOutputFile(BaseApplication.getFile() + File.separator + System.currentTimeMillis() + ".mp4");
+            mediaRecorder.setOutputFile(BaseApplication.getInstance().getFile() + File.separator + System.currentTimeMillis() + ".mp4");
 
             /*//设置视频输出的最大尺寸
             if (mCameraConfigProvider.getVideoFileSize() > 0) {
@@ -333,7 +333,7 @@ public class Camera3Activity extends BaseMvpActivity<EmptyPresenter> implements 
         mCamera.takePicture(null, null, null, new Camera.PictureCallback() {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
-                String photoPath = BaseApplication.getFile() + File.separator + System.currentTimeMillis() + ".jpg";
+                String photoPath = BaseApplication.getInstance().getFile() + File.separator + System.currentTimeMillis() + ".jpg";
                 FileOutputStream fos = null;
                 try {
                     fos = new FileOutputStream(new File(photoPath));

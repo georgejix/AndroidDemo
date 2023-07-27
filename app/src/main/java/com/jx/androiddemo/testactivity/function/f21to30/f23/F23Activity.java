@@ -121,7 +121,7 @@ public class F23Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void TransformMp4ToYuv() {
-        String mp4Path = BaseApplication.getFile() + File.separator + "1.mp4";
+        String mp4Path = BaseApplication.getInstance().getFile() + File.separator + "1.mp4";
         Mp4Decoder mp4Decoder = new Mp4Decoder();
         try {
             mp4Decoder.init(mp4Path);

@@ -90,11 +90,11 @@ public class F29Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 {
                     String url = "https://vd2.bdstatic.com/mda-mjbzwb7wzwnuvqhj/sc/cae_h264/1634083355852877186/mda-mjbzwb7wzwnuvqhj.mp4";
                     //String url = "https://v26-web.douyinvod.com/29195f4d4c577bf0a8e24b08bc0143ef/61665946/video/tos/cn/tos-cn-ve-15/1ce4d80e5d3743f08e2161583a43e104/?a=6383&br=3312&bt=3312&cd=0%7C0%7C0&ch=26&cr=0&cs=0&cv=1&dr=0&ds=4&er=&ft=jal9wj--bz7ThW_TfLct&l=021634093859543fdbddc0200fff0050a9138570000c0f760b4ec&lr=all&mime_type=video_mp4&net=0&pl=0&qs=0&rc=M3V2MzU6ZjVxODMzNGkzM0ApODM4Mzw5OmU5Nzg8OzdkNWc2Xm0wcjRnZmRgLS1kLTBzczQwLy4zNWMwNTM0M2NgL146Yw%3D%3D&vl=&vr=";
-                    String localPath = BaseApplication.getFile() + File.separator + "temp.mp4";
+                    String localPath = BaseApplication.getInstance().getFile() + File.separator + "temp.mp4";
                     mBackHandler.post(() -> {
                         download(url, localPath);
                         mSourcePath = localPath;
-                        mAudioPath = BaseApplication.getFile() + File.separator + "temp.mp3";
+                        mAudioPath = BaseApplication.getInstance().getFile() + File.separator + "temp.mp3";
                         filterAudio();
                     });
                 });
@@ -104,8 +104,8 @@ public class F29Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                    mSourcePath = BaseApplication.getFile() + File.separator + "2_mp4.mp4";
-                    mAudioPath = BaseApplication.getFile() + File.separator + "2_mp4.mp3";
+                    mSourcePath = BaseApplication.getInstance().getFile() + File.separator + "2_mp4.mp4";
+                    mAudioPath = BaseApplication.getInstance().getFile() + File.separator + "2_mp4.mp3";
                     filterAudio();
                 });
         RxView.clicks(tv_filter_mov)
@@ -113,8 +113,8 @@ public class F29Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                    mSourcePath = BaseApplication.getFile() + File.separator + "2_mov.mov";
-                    mAudioPath = BaseApplication.getFile() + File.separator + "2_mov.mp3";
+                    mSourcePath = BaseApplication.getInstance().getFile() + File.separator + "2_mov.mov";
+                    mAudioPath = BaseApplication.getInstance().getFile() + File.separator + "2_mov.mp3";
                     filterAudio();
                 });
         RxView.clicks(tv_filter_flv)
@@ -122,8 +122,8 @@ public class F29Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                    mSourcePath = BaseApplication.getFile() + File.separator + "2_flv.flv";
-                    mAudioPath = BaseApplication.getFile() + File.separator + "2_flv.mp3";
+                    mSourcePath = BaseApplication.getInstance().getFile() + File.separator + "2_flv.flv";
+                    mAudioPath = BaseApplication.getInstance().getFile() + File.separator + "2_flv.mp3";
                     filterAudio();
                 });
         RxView.clicks(tv_filter_avi)
@@ -131,8 +131,8 @@ public class F29Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .compose(this.bindToLifecycle())
                 .subscribe(o ->
                 {
-                    mSourcePath = BaseApplication.getFile() + File.separator + "2_avi.avi";
-                    mAudioPath = BaseApplication.getFile() + File.separator + "2_avi.mp3";
+                    mSourcePath = BaseApplication.getInstance().getFile() + File.separator + "2_avi.avi";
+                    mAudioPath = BaseApplication.getInstance().getFile() + File.separator + "2_avi.mp3";
                     filterAudio();
                 });
     }

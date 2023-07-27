@@ -56,7 +56,6 @@ public class BaseApplication extends MultiDexApplication {
             getAppComponent().inject(this);
             mHandler = new Handler();
             registerActivityLifecycleCallbacks(new SwitchBackgroundCallbacks());
-            initDir();
         }
     }
 
@@ -159,22 +158,7 @@ public class BaseApplication extends MultiDexApplication {
         return mHandler;
     }
 
-    private static String path;
-    private static File projectFile;
-
-    public static void initDir(){
-        path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "androidDemo";
-        if(null != path){
-            projectFile = new File(path);
-            if(null != projectFile){
-                if(!projectFile.exists()){
-                    projectFile.mkdirs();
-                }
-            }
-        }
-    }
-
-    public static String getFile() {
-        return null == path ? Environment.getExternalStorageDirectory().getAbsolutePath() : path;
+    public String getFile() {
+        return getExternalCacheDir().getAbsolutePath();
     }
 }

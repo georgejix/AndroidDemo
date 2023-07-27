@@ -43,7 +43,7 @@ public class U4Activity extends BaseMvpActivity<EmptyPresenter> implements Empty
     private void initView() {
         if (null == adapter) {
             if (Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
-                adapter = new Adapter4TestBitmap(this, new File(Environment.getExternalStorageDirectory() + File.separator + "pic"));
+                adapter = new Adapter4TestBitmap(this, new File(getExternalCacheDir() + File.separator + "pic"));
             }
 
             listView.setAdapter(adapter);

@@ -93,7 +93,7 @@ public class U16Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     public void choosefromcamera(View view) {
-        cameraFile = new File(BaseApplication.getFile(), "abc.jpg");
+        cameraFile = new File(BaseApplication.getInstance().getFile(), "abc.jpg");
         if (cameraFile.exists()) {
             cameraFile.delete();
         }
@@ -200,7 +200,7 @@ public class U16Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
      * @param bitmap
      */
     public void writeFileByBitmap2(Bitmap bitmap) {
-        String path = BaseApplication.getFile();//手机设置的存储位置
+        String path = BaseApplication.getInstance().getFile();//手机设置的存储位置
         File file = new File(path);
         File imageFile = new File(file, System.currentTimeMillis() + ".png");
 

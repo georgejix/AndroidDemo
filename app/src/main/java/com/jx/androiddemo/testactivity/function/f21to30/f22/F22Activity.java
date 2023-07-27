@@ -66,7 +66,7 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
     }
 
     private void initView() {
-        yuvPath = BaseApplication.getFile() + File.separator + "yuv2.yuv";
+        yuvPath = BaseApplication.getInstance().getFile() + File.separator + "yuv2.yuv";
         //saveYuvToPic2();
     }
 
@@ -293,7 +293,7 @@ public class F22Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
 
 
     private void saveYuvToPic2() {
-        File file = new File(BaseApplication.getFile() + File.separator + "yuvtopic2.jpg");
+        File file = new File(BaseApplication.getInstance().getFile() + File.separator + "yuvtopic2.jpg");
         try {
             file.createNewFile();
             FileOutputStream filecon = new FileOutputStream(file);
