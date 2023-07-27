@@ -3,7 +3,6 @@
 
 #include "libavcodec/avcodec.h"
 #include "libavformat/avformat.h"
-#include "libavfilter/avfiltergraph.h"
 #include "libavfilter/buffersink.h"
 #include "libavfilter/buffersrc.h"
 #include "libavutil/opt.h"
@@ -53,8 +52,6 @@ JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test
     //错误码
     int err_code;
 
-    avcodec_register_all();
-    av_register_all();
     //1.打开输入文件，提取参数
     //打开输入文件，关于输入文件的所有就保存到fmt_ctx中了
     fmt_ctx = avformat_alloc_context();
@@ -223,6 +220,8 @@ writeWavHeader(WavHeader *wavHeader, int32_t pcm_data_len, FILE *wav_file, int c
 JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
         (JNIEnv *env, jclass cls, jstring jstring_input_path, jstring jstring_output_name
         ) {
+
+    LOGI("avcodec_configuration = %s",avcodec_configuration());
     //输入地址
     const char *input_path = (*env)->GetStringUTFChars(env, jstring_input_path, 0);
     //(*env)->ReleaseStringUTFChars(env, jstring_input_path, input_path);
@@ -245,8 +244,6 @@ JNIEXPORT jint JNICALL Java_com_jx_androiddemo_tool_FfmpegTest_test2
     AVCodecContext *c = NULL;
     AVCodec *dec;
 
-    avcodec_register_all();
-    av_register_all();
 
     fmt_ctx = avformat_alloc_context();
     err_code = avformat_open_input(&fmt_ctx, input_path, NULL, NULL);
