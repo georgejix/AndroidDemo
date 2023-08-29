@@ -30,6 +30,7 @@ android {
                     'src/main/res/layouts/ui21-30',
                     'src/main/res/layouts/ui31-40',
                     'src/main/res/layouts/ui41-50',
+                    'src/main/res/layouts/view',
                     'src/main/res'
             ]
         }

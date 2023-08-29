@@ -4,6 +4,11 @@
     local_android:layout_height="match_parent"
     local_android:orientation="vertical">
 
+    <com.jx.androiddemo.view.GeneralTitleLayout
+        local_android:id="@+id/layout_title"
+        local_android:layout_width="match_parent"
+        local_android:layout_height="wrap_content" />
+
     <com.jx.androiddemo.testactivity.ui.ui21to30.ui23.AutoLinefeedLayout
         local_android:layout_width="match_parent"
         local_android:layout_height="wrap_content">

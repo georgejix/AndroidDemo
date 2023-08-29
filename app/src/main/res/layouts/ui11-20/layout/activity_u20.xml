@@ -6,6 +6,12 @@
     android:background="@color/grey"
     android:orientation="vertical">
 
+    <com.jx.androiddemo.view.GeneralTitleLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.jx.androiddemo.testactivity.ui.ui11to20.ui20.TrapezoidLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

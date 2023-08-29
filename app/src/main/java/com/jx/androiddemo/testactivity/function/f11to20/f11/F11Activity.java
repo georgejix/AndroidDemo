@@ -88,7 +88,8 @@ public class F11Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
                 .compose(this.bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(integer -> {
-
+                    Intent service = new Intent(mContext, MyIntentService.class);
+                    startService(service);
                 });
 
         //点击

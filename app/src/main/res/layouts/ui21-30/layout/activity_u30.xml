@@ -3,8 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue"
-    android:orientation="vertical"
-    android:paddingTop="24dp">
+    android:orientation="vertical">
+
+    <com.jx.androiddemo.view.GeneralTitleLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"

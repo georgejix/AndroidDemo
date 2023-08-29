@@ -5,9 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.jx.androiddemo.view.GeneralTitleLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/adv_viewpager2"
         android:layout_width="match_parent"
-        android:layout_height="250dp"/>
+        android:layout_height="250dp" />
 
 </LinearLayout>

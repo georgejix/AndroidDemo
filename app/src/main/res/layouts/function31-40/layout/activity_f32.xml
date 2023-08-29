@@ -4,29 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="80dp">
+    android:orientation="vertical">
+
+    <com.jx.androiddemo.view.GeneralTitleLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_1"
         style="@style/generalTv"
         android:background="#ccc"
         android:text="print1" />
+
     <TextView
         android:id="@+id/tv_2"
         style="@style/generalTv"
         android:background="#ccc"
         android:text="print2" />
+
     <TextView
         android:id="@+id/tv_3"
         style="@style/generalTv"
         android:background="#ccc"
         android:text="print3" />
+
     <TextView
         android:id="@+id/tv_4"
         style="@style/generalTv"
         android:background="#ccc"
         android:text="协变" />
+
     <TextView
         android:id="@+id/tv_5"
         style="@style/generalTv"

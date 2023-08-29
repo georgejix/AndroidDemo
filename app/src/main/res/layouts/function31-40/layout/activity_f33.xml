@@ -4,14 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="100dp">
+    android:orientation="vertical">
+
+    <com.jx.androiddemo.view.GeneralTitleLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_send5"
         style="@style/generalTv"
         android:background="#ccc"
         android:text="send5" />
+
     <TextView
         android:id="@+id/tv_send10"
         style="@style/generalTv"

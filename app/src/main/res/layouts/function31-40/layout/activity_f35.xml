@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     android:background="#ccc">
 
+    <com.jx.androiddemo.view.GeneralTitleLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.jx.androiddemo.testactivity.function.f31to40.f35.CutImgLayout
         android:id="@+id/layout_cut_img"
         android:layout_width="match_parent"
@@ -15,7 +21,7 @@
         android:padding="20dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_title" />
 
     <TextView
         android:id="@+id/tv_print"

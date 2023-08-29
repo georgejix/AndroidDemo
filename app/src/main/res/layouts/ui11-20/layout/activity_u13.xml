@@ -4,30 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.jx.androiddemo.view.GeneralTitleLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <CheckBox
         android:id="@+id/checkbox_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="this is a checkbox one"
         android:background="#00000000"
-        android:button="@null"/>
+        android:button="@null"
+        android:text="this is a checkbox one"
+        android:textSize="30sp" />
+
     <CheckBox
         android:id="@+id/checkbox_two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="this is a checkbox one"
         android:background="?android:attr/selectableItemBackground"
-        android:button="@null"/>
+        android:button="@null"
+        android:text="this is a checkbox one"
+        android:textSize="30sp" />
+
     <CheckBox
         android:id="@+id/checkbox_three"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="this is a checkbox one"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:button="@null"/>
+        android:button="@null"
+        android:text="this is a checkbox one"
+        android:textSize="30sp" />
 </LinearLayout>
