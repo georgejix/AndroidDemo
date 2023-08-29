@@ -7,6 +7,11 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+    <com.jx.androiddemo.view.GeneralTitleLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
         style="@style/generalTv"
         android:text="bitmap传入drawable，画笔画圆"
