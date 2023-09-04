@@ -106,7 +106,7 @@ public class F10Activity extends BaseMvpActivity<EmptyPresenter> implements Empt
 
     private void checkPermission() {
         List<String> permissionLists = new ArrayList<>();
-        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) !=
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED) {
             permissionLists.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }

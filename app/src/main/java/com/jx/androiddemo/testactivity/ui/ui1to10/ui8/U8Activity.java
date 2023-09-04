@@ -35,44 +35,57 @@ import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
-public class U8Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View {
-    private final String TAG = "TouchEventActivity";
+public class U8Activity extends BaseMvpActivity<EmptyPresenter> implements EmptyContract.View
+{
+    private final String TAG = "touchevent";
 
     @BindView(R.id.textview_test1)
     TextView test1TextView;
 
     private GestureDetectorCompat mDetector;
+
     private View pop;
+
     private PopupWindow popupWindow;
+
     private PopupWindowListener popClickListener;
+
     private ViewHolder viewHolder;
 
     @Override
-    protected void initInject() {
+    protected void initInject()
+    {
         getActivityComponent().inject(this);
     }
 
     @Override
-    protected int getLayout() {
+    protected int getLayout()
+    {
         return R.layout.activity_u8;
     }
 
     @SuppressLint("CheckResult")
     @Override
-    protected void initEventAndData() {
+    protected void initEventAndData()
+    {
         initView();
         initListener();
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void initView() {
-        test1TextView.setOnTouchListener(new View.OnTouchListener() {
+    private void initView()
+    {
+        /*test1TextView.setOnTouchListener(new View.OnTouchListener()
+        {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (null != mDetector) {
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                if (null != mDetector)
+                {
                     mDetector.onTouchEvent(event);
                 }
-                switch (event.getAction()) {
+                switch (event.getAction())
+                {
                     case MotionEvent.ACTION_DOWN:
                         ViewConfiguration vc = ViewConfiguration.get(v.getContext());
                         int mSlop = vc.getScaledTouchSlop();
@@ -89,27 +102,30 @@ public class U8Activity extends BaseMvpActivity<EmptyPresenter> implements Empty
                 }
                 return false;
             }
-        });
+        });*/
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
         //扩大view的touchevent响应区域
-        test1TextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        /*test1TextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
+        {
             @Override
-            public void onGlobalLayout() {
+            public void onGlobalLayout()
+            {
                 Rect rect = new Rect();
                 test1TextView.getHitRect(rect);
-                rect.right += 300;
-                rect.left -= 300;
-                rect.top -= 300;
-                rect.bottom += 300;
+                rect.right += 30;
+                rect.left -= 30;
+                rect.top -= 30;
+                rect.bottom += 30;
                 TouchDelegate touchDelegate = new TouchDelegate(rect, test1TextView);
                 ((View) test1TextView.getParent()).setTouchDelegate(touchDelegate);
             }
-        });
+        });*/
     }
 
     @SuppressLint("CheckResult")
-    private void initListener() {
+    private void initListener()
+    {
         //延时方法
         Observable.timer(50, TimeUnit.MILLISECONDS)
                 .compose(this.bindToLifecycle())
@@ -127,139 +143,60 @@ public class U8Activity extends BaseMvpActivity<EmptyPresenter> implements Empty
                 });*/
     }
 
-    class MyGestureListener implements GestureDetector.OnGestureListener {
+    class MyGestureListener implements GestureDetector.OnGestureListener
+    {
 
         @Override
-        public boolean onDown(MotionEvent event) {
+        public boolean onDown(MotionEvent event)
+        {
             Log.d(TAG, "onDown: " + event.toString());
             return true;
         }
 
         @Override
-        public void onShowPress(MotionEvent e) {
+        public void onShowPress(MotionEvent e)
+        {
 
         }
 
         @Override
-        public boolean onSingleTapUp(MotionEvent e) {
+        public boolean onSingleTapUp(MotionEvent e)
+        {
             return true;
         }
 
         @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+        {
             return true;
         }
 
         @Override
-        public void onLongPress(MotionEvent e) {
+        public void onLongPress(MotionEvent e)
+        {
             Log.d(TAG, "onLongPress: " + e.toString());
             showPop();
         }
 
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
-                               float velocityX, float velocityY) {
+                               float velocityX, float velocityY)
+        {
             Log.d(TAG, "onFling: " + event1.toString() + event2.toString());
             return true;
         }
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                Log.d(TAG, "activity down");
-                return true;
-            case MotionEvent.ACTION_MOVE:
-                Log.d(TAG, "activity move");
-                return true;
-            case MotionEvent.ACTION_UP:
-                Log.d(TAG, "activity up");
-                return true;
-        }
-        return super.onTouchEvent(event);
-    }
-
-
-    private void showPop() {
-        if (null == pop) {
-            pop = LayoutInflater.from(this).inflate(R.layout.pop_u8_touchevent, null);
-            if (null == popClickListener) {
-                popClickListener = new PopupWindowListener();
-            }
-            if (null == viewHolder) {
-                viewHolder = new ViewHolder();
-            }
-            if (null != viewHolder) {
-                viewHolder.img = (ImageView) pop.findViewById(R.id.img);
-            }
-            if (null != popClickListener) {
-                pop.findViewById(R.id.img).setOnClickListener(popClickListener);
-            }
-        }
-        if (null == popupWindow && null != pop) {
-            popupWindow = new PopupWindow(pop, (int) (getWindowWidth() - dp2px(100)), RelativeLayout.LayoutParams.WRAP_CONTENT);
-            // 设置PopupWindow的背景
-            popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            // 设置PopupWindow是否能响应外部点击事件
-            popupWindow.setOutsideTouchable(false);
-            // 设置PopupWindow是否能响应点击事件
-            popupWindow.setTouchable(true);
-            popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    setBackgroundAlpha(1f);
-                }
-            });
-            popupWindow.setFocusable(true);
-            popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        }
-        if (null != popupWindow && !popupWindow.isShowing()) {
-            setBackgroundAlpha(0.7f);
-            if (!isFinishing() && !isDestroyed()) {
-                popupWindow.showAtLocation(test1TextView, Gravity.CENTER, 0, 0);
-            }
-            //popupWindow.showAsDropDown(titleBarView.getRight1View(), 0, 0);
-        }
-    }
-
-
-    class ViewHolder {
-        private ImageView img;
-    }
-
-    class PopupWindowListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-            }
-        }
-    }
-
-    private void dimissPop() {
-        if (!isFinishing() && !isDestroyed()) {
-            if (null != popupWindow && popupWindow.isShowing()) {
-                popupWindow.dismiss();
-            }
-        }
-    }
-
-    private void setBackgroundAlpha(float bgAlpha) {
-        if (!isFinishing() && !isDestroyed()) {
-            WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-            layoutParams.alpha = bgAlpha;
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-            getWindow().setAttributes(layoutParams);
-        }
-    }
-
     //关闭popupWindow.setOutsideTouchable，重写此方法，否则pop显示情况下点击+，pop不会消失
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.d("touchevent:", "activity dispatchTouchEvent");
-        if (null != ev && ev.getAction() == MotionEvent.ACTION_DOWN) {
-            if (!isFinishing() && !isDestroyed()) {
-                if (popupWindow != null && popupWindow.isShowing()) {
+    public boolean dispatchTouchEvent(MotionEvent ev)
+    {
+        Log.d("touchevent", "activity dispatchTouchEvent");
+        if (null != ev && ev.getAction() == MotionEvent.ACTION_DOWN)
+        {
+            if (!isFinishing() && !isDestroyed())
+            {
+                if (popupWindow != null && popupWindow.isShowing())
+                {
                     popupWindow.dismiss();
                     return true;
                 }
@@ -268,10 +205,126 @@ public class U8Activity extends BaseMvpActivity<EmptyPresenter> implements Empty
         return super.dispatchTouchEvent(ev);
     }
 
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if (!isFinishing() && !isDestroyed()) {
-                if (popupWindow != null && popupWindow.isShowing()) {
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        switch (event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                Log.d(TAG, "activity onTouchEvent down");
+                return false;
+            case MotionEvent.ACTION_MOVE:
+                Log.d(TAG, "activity onTouchEvent move");
+                return false;
+            case MotionEvent.ACTION_UP:
+                Log.d(TAG, "activity onTouchEvent up");
+                return false;
+        }
+        return false;
+    }
+
+
+    private void showPop()
+    {
+        if (null == pop)
+        {
+            pop = LayoutInflater.from(this).inflate(R.layout.pop_u8_touchevent, null);
+            if (null == popClickListener)
+            {
+                popClickListener = new PopupWindowListener();
+            }
+            if (null == viewHolder)
+            {
+                viewHolder = new ViewHolder();
+            }
+            if (null != viewHolder)
+            {
+                viewHolder.img = (ImageView) pop.findViewById(R.id.img);
+            }
+            if (null != popClickListener)
+            {
+                pop.findViewById(R.id.img).setOnClickListener(popClickListener);
+            }
+        }
+        if (null == popupWindow && null != pop)
+        {
+            popupWindow = new PopupWindow(pop, (int) (getWindowWidth() - dp2px(100)), RelativeLayout.LayoutParams.WRAP_CONTENT);
+            // 设置PopupWindow的背景
+            popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            // 设置PopupWindow是否能响应外部点击事件
+            popupWindow.setOutsideTouchable(false);
+            // 设置PopupWindow是否能响应点击事件
+            popupWindow.setTouchable(true);
+            popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener()
+            {
+                @Override
+                public void onDismiss()
+                {
+                    setBackgroundAlpha(1f);
+                }
+            });
+            popupWindow.setFocusable(true);
+            popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        }
+        if (null != popupWindow && !popupWindow.isShowing())
+        {
+            setBackgroundAlpha(0.7f);
+            if (!isFinishing() && !isDestroyed())
+            {
+                popupWindow.showAtLocation(test1TextView, Gravity.CENTER, 0, 0);
+            }
+            //popupWindow.showAsDropDown(titleBarView.getRight1View(), 0, 0);
+        }
+    }
+
+
+    class ViewHolder
+    {
+        private ImageView img;
+    }
+
+    class PopupWindowListener implements View.OnClickListener
+    {
+
+        @Override
+        public void onClick(View v)
+        {
+            switch (v.getId())
+            {
+            }
+        }
+    }
+
+    private void dimissPop()
+    {
+        if (!isFinishing() && !isDestroyed())
+        {
+            if (null != popupWindow && popupWindow.isShowing())
+            {
+                popupWindow.dismiss();
+            }
+        }
+    }
+
+    private void setBackgroundAlpha(float bgAlpha)
+    {
+        if (!isFinishing() && !isDestroyed())
+        {
+            WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+            layoutParams.alpha = bgAlpha;
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            getWindow().setAttributes(layoutParams);
+        }
+    }
+
+    public boolean dispatchKeyEvent(KeyEvent event)
+    {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN)
+        {
+            if (!isFinishing() && !isDestroyed())
+            {
+                if (popupWindow != null && popupWindow.isShowing())
+                {
                     popupWindow.dismiss();
                     return true;
                 }
@@ -281,11 +334,13 @@ public class U8Activity extends BaseMvpActivity<EmptyPresenter> implements Empty
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
         return super.onKeyDown(keyCode, event);
     }
 
-    public float dp2px(int dp) {
+    public float dp2px(int dp)
+    {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
                 getResources().getDisplayMetrics());
     }
@@ -293,7 +348,8 @@ public class U8Activity extends BaseMvpActivity<EmptyPresenter> implements Empty
     /**
      * @return 窗口宽度
      */
-    public int getWindowWidth() {
+    public int getWindowWidth()
+    {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         return dm.widthPixels;
@@ -302,7 +358,8 @@ public class U8Activity extends BaseMvpActivity<EmptyPresenter> implements Empty
     /**
      * @return 窗口高度
      */
-    public int getWindowHeight() {
+    public int getWindowHeight()
+    {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         return dm.heightPixels;

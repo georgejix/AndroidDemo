@@ -19,9 +19,10 @@ public class MyTextView extends androidx.appcompat.widget.AppCompatTextView {
         super(context, attrs);
     }
 
+    int ii = 0;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.d(TAG, "onTouchEvent");
-        return true;
+        Log.d("touchevent", "view onTouchEvent");
+        return false;
     }
 }

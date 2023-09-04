@@ -24,7 +24,7 @@ class F32Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
     val mBurgerConsumer: Consumer<Burger> = BurgerConsumer()
 
     companion object {
-        val TAG = "f32"
+        val TAG2 = "f32"
     }
 
     override fun initInject() {
@@ -45,7 +45,7 @@ class F32Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
         var num = 0
         while (num < views.size) {
             var i = num
-            views[num].setOnClickListener { v -> Log.d(TAG, "${i}  ${num}") }
+            views[num].setOnClickListener { v -> Log.d(TAG2, "${i}  ${num}") }
             num++
         }
         RxView.clicks(tv_4)
@@ -75,40 +75,40 @@ class F32Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     class FoodProduction : Production<Food> {
         override fun produce(): Food {
-            Log.d(TAG, "produce food")
+            Log.d(TAG2, "produce food")
             return Food()
         }
     }
 
     class FastFoodProduction : Production<FastFood> {
         override fun produce(): FastFood {
-            Log.d(TAG, "produce fastfood")
+            Log.d(TAG2, "produce fastfood")
             return FastFood()
         }
     }
 
     class BurgerProduction : Production<Burger> {
         override fun produce(): Burger {
-            Log.d(TAG, "produce burger")
+            Log.d(TAG2, "produce burger")
             return Burger()
         }
     }
 
     class FoodConsumer : Consumer<Food> {
         override fun consume(item: Food) {
-            Log.d(TAG, "eat food")
+            Log.d(TAG2, "eat food")
         }
     }
 
     class FastFoodConsumer : Consumer<FastFood> {
         override fun consume(item: FastFood) {
-            Log.d(TAG, "eat fastfood")
+            Log.d(TAG2, "eat fastfood")
         }
     }
 
     class BurgerConsumer : Consumer<Burger> {
         override fun consume(item: Burger) {
-            Log.d(TAG, "eat burger")
+            Log.d(TAG2, "eat burger")
         }
     }
 }

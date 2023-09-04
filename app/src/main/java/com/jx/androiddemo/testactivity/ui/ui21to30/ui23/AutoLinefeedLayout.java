@@ -2,6 +2,7 @@ package com.jx.androiddemo.testactivity.ui.ui21to30.ui23;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
  * 自动换行布局，每个子元素，宽度设置为1/2父布局宽度
  */
 public class AutoLinefeedLayout extends ViewGroup {
+    private final String TAG = "layout_measure";
 
     public AutoLinefeedLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -24,6 +26,7 @@ public class AutoLinefeedLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.d(TAG,"AutoLinefeedLayout onLayout");
         layoutHorizontal();
     }
 
@@ -70,6 +73,7 @@ public class AutoLinefeedLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG,"AutoLinefeedLayout onMeasure");
         final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int count = getChildCount();
         final int width = MeasureSpec.getSize(widthMeasureSpec);

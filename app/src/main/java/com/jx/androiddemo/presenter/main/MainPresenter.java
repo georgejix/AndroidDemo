@@ -85,26 +85,31 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class MainPresenter extends BaseRxPresenter<MainContract.View> implements MainContract.Presenter {
+public class MainPresenter extends BaseRxPresenter<MainContract.View> implements MainContract.Presenter
+{
     private final Context context;
 
     private List<MainPageBean> mLeftList = new ArrayList<>();
+
     private List<MainPageBean> mRightList = new ArrayList<>();
 
-
     @Inject
-    MainPresenter(Context context) {
+    MainPresenter(Context context)
+    {
         this.context = context;
     }
 
     @Override
-    public void doDispose() {
+    public void doDispose()
+    {
 
     }
 
     @Override
-    public List<MainPageBean> getLeftList() {
-        if (0 == mLeftList.size()) {
+    public List<MainPageBean> getLeftList()
+    {
+        if (0 == mLeftList.size())
+        {
             addLeft("简单线程,jni", F1Activity.class);
             addLeft("序列化和aidl", F2Activity.class);
             addLeft("handler", F3Activity.class);
@@ -148,8 +153,10 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
     }
 
     @Override
-    public List<MainPageBean> getRightList() {
-        if (0 == mRightList.size()) {
+    public List<MainPageBean> getRightList()
+    {
+        if (0 == mRightList.size())
+        {
             addRight("全屏切换，子线程addView", U1Activity.class);
             addRight("上拉加载，下拉刷新", U2Activity.class);
             addRight("activity生命周期,popupWindow", U3Activity.class);
@@ -193,11 +200,13 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
         return mRightList;
     }
 
-    private void addLeft(String name, Class clazz) {
+    private void addLeft(String name, Class clazz)
+    {
         mLeftList.add(new MainPageBean(name, clazz));
     }
 
-    private void addRight(String name, Class clazz) {
+    private void addRight(String name, Class clazz)
+    {
         mRightList.add(new MainPageBean(name, clazz));
     }
 }

@@ -53,7 +53,7 @@ public class RSSPullService extends IntentService
             long i2 = Thread.currentThread().getId();
             Log.d(TAG, i1 + "," + i2);
             new Thread(() -> {
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     try
                     {
