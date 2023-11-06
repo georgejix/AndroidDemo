@@ -2,34 +2,35 @@ package com.jx.androiddemo;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.multidex.MultiDexApplication;
 
-import com.jx.arch.util.AppProcessUtil;
-import com.jx.arch.util.ArchTool;
-import com.jx.arch.util.QMLog;
 import com.jx.androiddemo.constant.CashInit;
 import com.jx.androiddemo.constant.NotiTag;
 import com.jx.androiddemo.di.component.AppComponent;
 import com.jx.androiddemo.di.component.DaggerAppComponent;
 import com.jx.androiddemo.di.module.AppModule;
 import com.jx.androiddemo.event.NoticeEvent;
+import com.jx.arch.util.AppProcessUtil;
+import com.jx.arch.util.ArchTool;
+import com.jx.arch.util.QMLog;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.File;
-
 import javax.inject.Inject;
+
 
 /**
  * <baseapplication>
  *
  * @author wangtao
  */
-public class BaseApplication extends MultiDexApplication {
+public class BaseApplication extends MultiDexApplication
+{
     /**
      * app实例
      */
@@ -45,26 +46,36 @@ public class BaseApplication extends MultiDexApplication {
     @Inject
     CashInit cashInit;
 
+    public RefWatcher mRefWatcher;
+
 
     @Override
-    public void onCreate() {
+    public void onCreate()
+    {
         super.onCreate();
         QMLog.i("BaseApplication", "onCreate" + AppProcessUtil.isAppProcess(this));
-        if (AppProcessUtil.isAppProcess(this)) {
+        if (AppProcessUtil.isAppProcess(this))
+        {
             sInstance = this;
             ArchTool.init(this); // 初始化
             getAppComponent().inject(this);
             mHandler = new Handler();
             registerActivityLifecycleCallbacks(new SwitchBackgroundCallbacks());
+            if (!LeakCanary.isInAnalyzerProcess(this))
+            {
+                mRefWatcher = LeakCanary.install(this);
+            }
         }
     }
 
-    public static synchronized BaseApplication getInstance() {
+    public static synchronized BaseApplication getInstance()
+    {
         return sInstance;
     }
 
     @Override
-    public void onTerminate() {
+    public void onTerminate()
+    {
         super.onTerminate();
         cashInit.exitApplication();
     }
@@ -74,22 +85,27 @@ public class BaseApplication extends MultiDexApplication {
      *
      * @return
      */
-    public static AppComponent getAppComponent() {
+    public static AppComponent getAppComponent()
+    {
         return DaggerAppComponent.builder()
                 .appModule(new AppModule(sInstance))
                 .build();
     }
 
-    private class SwitchBackgroundCallbacks implements ActivityLifecycleCallbacks {
+    private class SwitchBackgroundCallbacks implements ActivityLifecycleCallbacks
+    {
 
         @Override
-        public void onActivityCreated(Activity activity, Bundle bundle) {
+        public void onActivityCreated(Activity activity, Bundle bundle)
+        {
             cashInit.addActivity(activity);
         }
 
         @Override
-        public void onActivityStarted(Activity activity) {
-            if (count == 0) { //后台切换到前台
+        public void onActivityStarted(Activity activity)
+        {
+            if (count == 0)
+            { //后台切换到前台
                 QMLog.i("info", ">>>>>>>>>>>>>>>>>>>App切到前台");
                 EventBus.getDefault().post(new NoticeEvent<>(NotiTag.TAG_SHOW_FONT));
             }
@@ -97,68 +113,83 @@ public class BaseApplication extends MultiDexApplication {
         }
 
         @Override
-        public void onActivityResumed(Activity activity) {
+        public void onActivityResumed(Activity activity)
+        {
 
         }
 
         @Override
-        public void onActivityPaused(Activity activity) {
+        public void onActivityPaused(Activity activity)
+        {
 
         }
 
         @Override
-        public void onActivityStopped(Activity activity) {
+        public void onActivityStopped(Activity activity)
+        {
             count--;
-            if (count == 0) { //前台切换到后台
+            if (count == 0)
+            { //前台切换到后台
                 QMLog.i("info", ">>>>>>>>>>>>>>>>>>>App切到后台");
                 EventBus.getDefault().post(new NoticeEvent<>(NotiTag.TAG_HIDDEN_BACKGROUND));
             }
         }
 
         @Override
-        public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+        public void onActivitySaveInstanceState(Activity activity, Bundle bundle)
+        {
 
         }
 
         @Override
-        public void onActivityDestroyed(Activity activity) {
+        public void onActivityDestroyed(Activity activity)
+        {
             cashInit.deleteActivity(activity);
         }
     }
 
-    public Activity getCurrentActivity() {
+    public Activity getCurrentActivity()
+    {
         return cashInit.getCurActivity();
     }
 
-    public void startToLoginActivity() {
+    public void startToLoginActivity()
+    {
         cashInit.startToLoginActivity();
     }
 
-    public void delActivity(Activity activity) {
+    public void delActivity(Activity activity)
+    {
         cashInit.deleteActivity(activity);
     }
 
-    public void addDialogFragment(DialogFragment dialogFragment) {
+    public void addDialogFragment(DialogFragment dialogFragment)
+    {
         cashInit.addDialogFragment(dialogFragment);
     }
 
-    public void delDialogFragment(DialogFragment dialogFragment) {
+    public void delDialogFragment(DialogFragment dialogFragment)
+    {
         cashInit.removeDialogFragment(dialogFragment);
     }
 
-    public void dismissAllDialogFragment() {
+    public void dismissAllDialogFragment()
+    {
         cashInit.dismissAllDialogFragment();
     }
 
-    public DialogFragment getCurDialogFragment() {
+    public DialogFragment getCurDialogFragment()
+    {
         return cashInit.getCurDialogFragment();
     }
 
-    public static Handler getHandler() {
+    public static Handler getHandler()
+    {
         return mHandler;
     }
 
-    public String getFile() {
+    public String getFile()
+    {
         return getExternalCacheDir().getAbsolutePath();
     }
 }

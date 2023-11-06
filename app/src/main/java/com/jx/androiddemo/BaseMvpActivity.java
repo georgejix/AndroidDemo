@@ -37,6 +37,7 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseAppAc
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        BaseApplication.getInstance().mRefWatcher.watch(this);
         setContentView(getLayout());
         mUnBinder = ButterKnife.bind(this);
         //设置状态栏颜色

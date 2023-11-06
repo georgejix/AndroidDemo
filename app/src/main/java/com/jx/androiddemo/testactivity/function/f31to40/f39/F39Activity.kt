@@ -1,17 +1,11 @@
 package com.jx.androiddemo.testactivity.function.f31to40.f39;
 
 import android.annotation.SuppressLint
-import android.util.Log
-import com.jakewharton.rxbinding2.view.RxView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
-import com.jx.androiddemo.constant.Constants
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
-import kotlinx.android.synthetic.main.activity_f38.*
 import kotlinx.android.synthetic.main.activity_f39.*
-import kotlinx.coroutines.*
-import java.util.concurrent.TimeUnit
 
 class F39Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
