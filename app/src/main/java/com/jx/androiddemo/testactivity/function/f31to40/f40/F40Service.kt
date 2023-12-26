@@ -4,7 +4,6 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
-import com.jx.androiddemo.aidl2.F40Manage
 
 class F40Service : Service() {
     companion object {
@@ -12,7 +11,7 @@ class F40Service : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-        val f40Manage = object : F40Manage.Stub() {
+        val f40Manage = object : F40ManageLocal2.Stub() {
             override fun basicTypes(
                 anInt: Int,
                 aLong: Long,
@@ -24,7 +23,7 @@ class F40Service : Service() {
             }
 
             override fun sendMsg(msg: String?) {
-                Log.d(TAG,"receiveMsg $msg")
+                Log.d(TAG, "receiveMsg $msg")
             }
 
         }

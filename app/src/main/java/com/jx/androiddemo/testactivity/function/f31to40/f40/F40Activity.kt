@@ -9,7 +9,6 @@ import android.util.Log
 import com.jakewharton.rxbinding2.view.RxView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
-import com.jx.androiddemo.aidl2.F40Manage
 import com.jx.androiddemo.constant.Constants
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
@@ -20,7 +19,7 @@ import java.util.concurrent.TimeUnit
 
 class F40Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
-    private var mF40Manage: F40Manage? = null
+    private var mF40Manage: F40ManageLocal2? = null
 
     companion object {
         private val TAG = "F40Activity"
@@ -72,7 +71,7 @@ class F40Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
         bindService(intent, object : ServiceConnection {
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
                 Log.d(F40Activity.TAG, "onServiceConnected")
-                if (service is F40Manage) {
+                if (service is F40ManageLocal2) {
                     mF40Manage = service
                 }
             }
