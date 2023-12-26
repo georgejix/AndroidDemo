@@ -43,6 +43,7 @@ import com.jx.androiddemo.testactivity.function.f31to40.f36.F36Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f37.F37Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f38.F38Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f39.F39Activity;
+import com.jx.androiddemo.testactivity.function.f31to40.f40.F40Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui11.U11Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui12.U12Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui13.U13Activity;
@@ -150,6 +151,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addLeft("注解", F37Activity.class);
             addLeft("协程", F38Activity.class);
             addLeft("容器类", F39Activity.class);
+            addLeft("aidl测试", F40Activity.class);
         }
 
         Collections.reverse(mLeftList);

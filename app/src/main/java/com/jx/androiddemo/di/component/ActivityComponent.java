@@ -49,6 +49,7 @@ import com.jx.androiddemo.testactivity.function.f31to40.f36.F36Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f37.F37Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f38.F38Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f39.F39Activity;
+import com.jx.androiddemo.testactivity.function.f31to40.f40.F40Activity;
 import com.jx.androiddemo.testactivity.ui.ui1to10.ui1.U1Activity;
 import com.jx.androiddemo.testactivity.ui.ui1to10.ui10.U10Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui11.U11Activity;
@@ -186,6 +187,8 @@ public interface ActivityComponent
     void inject(F38Activity f38Activity);
 
     void inject(F39Activity f39Activity);
+
+    void inject(F40Activity f40Activity);
 
     void inject(U1Activity u1Activity);
 

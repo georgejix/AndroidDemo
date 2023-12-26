@@ -98,6 +98,7 @@
         <activity android:name=".testactivity.function.f31to40.f37.F37Activity" />
         <activity android:name=".testactivity.function.f31to40.f38.F38Activity" />
         <activity android:name=".testactivity.function.f31to40.f39.F39Activity" />
+        <activity android:name=".testactivity.function.f31to40.f40.F40Activity" />
 
         <activity android:name=".testactivity.ui.ui1to10.ui1.U1Activity" />
         <activity android:name=".testactivity.ui.ui1to10.ui2.U2Activity" />
@@ -173,6 +174,12 @@
         <!-- IntentService -->
         <service android:name=".testactivity.function.f11to20.f11.MyIntentService" />
 
+        <service android:name=".testactivity.function.f31to40.f40.F40Service">
+            <intent-filter>
+                <action android:name="com.jx.f40.f40service" />
+            </intent-filter>
+        </service>
+
         <receiver android:name=".testactivity.function.f11to20.f11.AlarmReceiver" />
         <receiver android:name=".testactivity.function.f11to20.f11.SampleBootReceiver">
             <intent-filter>
@@ -208,6 +215,6 @@
 
         <!-- 悬浮窗口 -->
         <service android:name=".testactivity.ui.ui21to30.ui27.PopService" />
-    </application>
 
+    </application>
 </manifest>
