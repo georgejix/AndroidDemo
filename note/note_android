@@ -134,3 +134,38 @@ adb connect ip:5555
 gradlew打包命令
 gradlew :app:assembleRelease
 gradlew :app:assembleAliRelease
+
+gradlew打包aar(如果gradle报错jdk版本，将本机环境变量jdk改为11或17)
+gradlew :module:assemble
+gradlew :module:assembleRelease
+
+合并aar
+1.build.gradle->buildscript->dependencies->增加classpath 'com.github.kezong:fat-aar:1.3.6'
+2.module->plugins->增加
+id 'com.kezong.fat-aar'
+3.module->build.gradle->dependencies增加
+   compileOnly fileTree(dir: 'libs', include: '*.aar')
+   embed(name: 'aar1', ext: 'aar')
+   embed(name: 'aar2', ext: 'aar')
+4.module->build.gradle->android->增加
+    repositories {
+            flatDir {
+                dirs 'libs'
+            }
+        }
+5.module->build.gradle->android->增加
+//编译完成自动拷贝到app libs下
+    afterEvaluate {
+        android.libraryVariants.all { variant ->
+            File outputFile = variant.outputs.first().outputFile
+            tasks.named("assemble${variant.name.capitalize()}").configure {
+                doLast {
+                    copy {
+                        from outputFile
+                        into "../fat-aar-jar/libs"
+                        rename outputFile.name, "fat-aar.aar"
+                    }
+                }
+            }
+        }
+    }

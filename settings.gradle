@@ -2,3 +2,4 @@ include ':HTTPDNS_ANDROID_SDK_V3.3.0_G96'
 include ':app', ':arch', ':appfw', ':rvhelper', ':pullrefreshview'
 rootProject.name = "androiddemo"
 include ':loading'
+include ':mergeaar1'

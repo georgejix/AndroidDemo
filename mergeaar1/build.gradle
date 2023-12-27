@@ -1,0 +1,55 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.kezong.fat-aar'
+}
+
+android {
+    namespace 'com.example.mergeaar1'
+    compileSdk 32
+
+    defaultConfig {
+        minSdk 28
+        targetSdk 32
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    //编译完成自动拷贝到app libs下
+    afterEvaluate {
+        android.libraryVariants.all { variant ->
+            File outputFile = variant.outputs.first().outputFile
+            tasks.named("assemble${variant.name.capitalize()}").configure {
+                doLast {
+                    copy {
+                        from outputFile
+                        into "../merge-aar-jar/libs"
+                        rename outputFile.name, "merge-aar.aar"
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compileOnly fileTree(dir: 'libs', include: '*.aar')
+    embed(name: 'aar1', ext: 'aar')
+    embed(name: 'aar2', ext: 'aar')
+}
