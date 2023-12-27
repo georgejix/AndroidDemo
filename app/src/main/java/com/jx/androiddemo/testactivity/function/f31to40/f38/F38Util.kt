@@ -2,6 +2,8 @@ package com.jx.androiddemo.testactivity.function.f31to40.f38
 
 import android.util.Log
 import kotlinx.coroutines.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class F38Util {
     val TAG = "F38Util"
@@ -101,6 +103,35 @@ class F38Util {
         Log.d(TAG, "enter blocking() with $param")
         delay(5000)
         Log.d(TAG, "done blocking() with $param")
+    }
+
+    val cbToSync = {
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.d(TAG, "cbToSync")
+            val str = getStringSync()
+            Log.d(TAG, "cbToSync result ${str}")
+        }
+    }
+
+    private fun getStringAsync(callback: (String) -> Unit) {
+        Log.d(TAG, "getStringAsync")
+        // 执行一个调用回调的异步操作
+        // 模拟延迟
+        Thread.sleep(1000)
+        callback("Callback result")
+    }
+
+    private suspend fun getStringSync(): String {
+        Log.d(TAG, "getStringSync")
+        return suspendCoroutine { continuation ->
+            // 执行一个调用回调的异步操作
+            Log.d(TAG, "getStringSync suspendCoroutine")
+            getStringAsync { result ->
+                // 用回调结果恢复协程
+                Log.d(TAG, "getStringSync suspendCoroutine resume")
+                continuation.resume(result)
+            }
+        }
     }
 
 }
