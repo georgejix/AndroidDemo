@@ -39,7 +39,7 @@ android {
                 doLast {
                     copy {
                         from outputFile
-                        into "../merge-aar-jar/libs"
+                        into "../merge-aar/libs"
                         rename outputFile.name, "merge-aar.aar"
                     }
                 }

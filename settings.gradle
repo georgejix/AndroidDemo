@@ -3,3 +3,4 @@ include ':app', ':arch', ':appfw', ':rvhelper', ':pullrefreshview'
 rootProject.name = "androiddemo"
 include ':loading'
 include ':mergeaar1'
+include ':mergeaarjar'
