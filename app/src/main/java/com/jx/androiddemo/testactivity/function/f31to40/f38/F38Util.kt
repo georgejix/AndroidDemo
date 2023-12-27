@@ -4,7 +4,6 @@ import android.util.Log
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 class F38Util {
     val TAG = "F38Util"
@@ -124,7 +123,7 @@ class F38Util {
 
     private suspend fun getStringSync(): String {
         Log.d(TAG, "getStringSync")
-        return suspendCoroutine { continuation ->
+        /*return suspendCoroutine { continuation ->
             // 执行一个调用回调的异步操作
             Log.d(TAG, "getStringSync suspendCoroutine")
             val timer = Timer("CoroutineTimer", false)
@@ -140,6 +139,28 @@ class F38Util {
                 kotlin.runCatching {
                     timer.cancel()
                     continuation.resume(result)
+                }
+            }
+        }*/
+        return suspendCancellableCoroutine { continuation ->
+            // 执行一个调用回调的异步操作
+            Log.d(TAG, "getStringSync suspendCoroutine")
+            val timer = Timer("CoroutineTimer", false)
+            timer.schedule(object : TimerTask() {
+                override fun run() {
+                    Log.d(TAG, "getStringSync time out")
+                    continuation.cancel()
+                }
+                // 用超时结果恢复协程
+            }, 1000L)
+            getStringAsync { result ->
+                // 用回调结果恢复协程
+                Log.d(TAG, "getStringSync suspendCoroutine resume")
+                if (!continuation.isCancelled) {
+                    timer.cancel()
+                    continuation.resume(result)
+                } else {
+                    Log.d(TAG, "getStringSync suspendCoroutine time out")
                 }
             }
         }
@@ -162,6 +183,5 @@ class F38Util {
         Result.success("success")
         Log.d(TAG, "delayFunc end ${Thread.currentThread().name}")
     }
-
 
 }
