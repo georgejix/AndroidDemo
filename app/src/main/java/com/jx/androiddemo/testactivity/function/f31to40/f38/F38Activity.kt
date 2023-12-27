@@ -42,6 +42,7 @@ class F38Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
         list.add(F38ListBean("withContext") { mF38Util.testWithContext() })
         list.add(F38ListBean("suspend") { mF38Util.testSuspend() })
         list.add(F38ListBean("cb to sync") { mF38Util.cbToSync() })
+        list.add(F38ListBean("launch async withcontext") { mF38Util.testLaunchAsyncWithContext() })
         mAdapter?.setData(list)
         rv.adapter = mAdapter
     }

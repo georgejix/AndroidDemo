@@ -145,4 +145,23 @@ class F38Util {
         }
     }
 
+    fun testLaunchAsyncWithContext() {
+        CoroutineScope(Dispatchers.Main).launch {
+            Log.d(TAG, "testLaunchAsyncWithContext start ${Thread.currentThread().name}")
+            val async = async {
+                delayFunc()
+            }
+            Log.d(TAG, "testLaunchAsyncWithContext mid ${Thread.currentThread().name}")
+            async.await()
+            Log.d(TAG, "testLaunchAsyncWithContext end ${Thread.currentThread().name}")
+        }
+    }
+
+    private suspend fun delayFunc() = withContext(Dispatchers.IO) {
+        delay(2000)
+        Result.success("success")
+        Log.d(TAG, "delayFunc end ${Thread.currentThread().name}")
+    }
+
+
 }
