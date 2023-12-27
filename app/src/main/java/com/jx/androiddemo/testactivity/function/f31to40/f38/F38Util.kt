@@ -2,6 +2,7 @@ package com.jx.androiddemo.testactivity.function.f31to40.f38
 
 import android.util.Log
 import kotlinx.coroutines.*
+import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -117,7 +118,7 @@ class F38Util {
         Log.d(TAG, "getStringAsync")
         // 执行一个调用回调的异步操作
         // 模拟延迟
-        Thread.sleep(1000)
+        Thread.sleep((Math.random() * 2000).toLong())
         callback("Callback result")
     }
 
@@ -126,10 +127,20 @@ class F38Util {
         return suspendCoroutine { continuation ->
             // 执行一个调用回调的异步操作
             Log.d(TAG, "getStringSync suspendCoroutine")
+            val timer = Timer("CoroutineTimer", false)
+            timer.schedule(object : TimerTask() {
+                override fun run() {
+                    continuation.resume("Timeout occurred")
+                }
+                // 用超时结果恢复协程
+            }, 1000L)
             getStringAsync { result ->
                 // 用回调结果恢复协程
                 Log.d(TAG, "getStringSync suspendCoroutine resume")
-                continuation.resume(result)
+                kotlin.runCatching {
+                    timer.cancel()
+                    continuation.resume(result)
+                }
             }
         }
     }
