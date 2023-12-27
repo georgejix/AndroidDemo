@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_f39.*
 
 class F39Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
-    private var mU37Adapter: U37Adapter? = null
+    private var mU37Adapter: F39Adapter? = null
     private val mList: ArrayList<ListBean> = ArrayList()
 
     companion object {
@@ -34,7 +34,7 @@ class F39Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
     }
 
     private fun initView() {
-        mU37Adapter = U37Adapter(mContext, object : U37Adapter.Listener {
+        mU37Adapter = F39Adapter(mContext, object : F39Adapter.Listener {
             override fun onItemClick(position: Int, bean: ListBean) {
                 tv_content.text = bean.content
             }

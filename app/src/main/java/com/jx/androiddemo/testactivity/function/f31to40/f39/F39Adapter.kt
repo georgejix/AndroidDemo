@@ -9,8 +9,8 @@ import com.jx.androiddemo.R
 import com.jx.androiddemo.tool.ClickListenerUtil
 import kotlinx.android.synthetic.main.item_f39.view.*
 
-class U37Adapter(val mContext: Context, val mListener: Listener?) :
-    RecyclerView.Adapter<U37Adapter.ViewHolder>() {
+class F39Adapter(val mContext: Context, val mListener: Listener?) :
+    RecyclerView.Adapter<F39Adapter.ViewHolder>() {
     private var mContentList = ArrayList<ListBean>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

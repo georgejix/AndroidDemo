@@ -4,30 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_test1"
-        style="@style/generalTv"
-        android:layout_marginTop="100dp"
-        android:background="#eee"
-        android:text="协程"
-        app:layout_constraintStart_toStartOf="parent"
+    <com.jx.androiddemo.view.GeneralTitleLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_test2"
-        style="@style/generalTv"
-        android:layout_marginTop="10dp"
-        android:background="#eee"
-        android:text="协程2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_test1" />
-
-    <TextView
-        android:id="@+id/tv_test3"
-        style="@style/generalTv"
-        android:layout_marginTop="10dp"
-        android:background="#eee"
-        android:text="协程3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_test2" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>
