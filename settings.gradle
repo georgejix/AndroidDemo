@@ -4,3 +4,5 @@ rootProject.name = "androiddemo"
 include ':loading'
 include ':mergeaar1'
 include ':mergeaarjar'
+include ':testgradle1'
+include ':testgradle2'
