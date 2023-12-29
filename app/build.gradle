@@ -155,6 +155,23 @@ android {
     }
 }
 
+4.times {count->
+    tasks.register("task$count"){
+        doLast{println("this is task $count")}
+    }
+}
+tasks.named("task1"){
+    doLast{
+        tasks.forEach{println("${it.name}")}
+        println("add txt to task 1")
+    }
+}
+tasks.named("task2"){
+    doLast{
+        println("add txt to task 2")
+    }
+}
+
 dependencies {
     implementation project(path: ':loading')
     def presentationDependencies = rootProject.ext.presentationDependencies
