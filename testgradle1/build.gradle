@@ -41,8 +41,11 @@ tasks.named("task1"){
         println("add txt to task 1")
     }
 }
+
+//task2依赖:testgradle2:assembleRelease 和:testgradle2:testgradle2_hello1
+//执行完成之后再执行:testgradle2:testgradle2_hello2
 tasks.named("task2"){
-    dependsOn ':testgradle2:testgradle2_hello1'
+    dependsOn ':testgradle2:assembleRelease',':testgradle2:testgradle2_hello1'
     finalizedBy ':testgradle2:testgradle2_hello2'
     doLast{
         println("add txt to task 2")
@@ -50,10 +53,8 @@ tasks.named("task2"){
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
