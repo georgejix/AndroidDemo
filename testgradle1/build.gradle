@@ -30,24 +30,26 @@ android {
     }
 }
 
-4.times {count->
-    tasks.register("task$count"){
-        doLast{println("this is task $count")}
+4.times { count ->
+    tasks.register("task$count") {
+        doLast { println("this is task $count") }
     }
 }
-tasks.named("task1"){
-    doLast{
-        tasks.forEach{println("${it.name}")}
+tasks.named("task1") {
+    doLast {
+        tasks.forEach { println("${it.name}") }
         println("add txt to task 1")
     }
 }
 
+//gradle7.3 https://docs.gradle.org/7.3/userguide/more_about_tasks.html
 //task2依赖:testgradle2:assembleRelease 和:testgradle2:testgradle2_hello1
 //执行完成之后再执行:testgradle2:testgradle2_hello2
-tasks.named("task2"){
-    dependsOn ':testgradle2:assembleRelease',':testgradle2:testgradle2_hello1'
+tasks.named("task2") { task ->
+    onlyIf { task.name.endsWith("2") }  //onlyif 断言，为真时，当前task才执行，假时不执行，dependsOn，finalizedBy不受影响
+    dependsOn ':testgradle2:assembleRelease', ':testgradle2:testgradle2_hello1'
     finalizedBy ':testgradle2:testgradle2_hello2'
-    doLast{
+    doLast {
         println("add txt to task 2")
     }
 }
