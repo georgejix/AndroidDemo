@@ -121,7 +121,7 @@ class F41Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                 if (0 == size) {
                     size = parcel.readInt()
                 }
-                while (list.size < size - 1) {
+                while (list.size < size) {
                     list.add(UsbAudioInfo.createFromParcel(parcel))
                     if (parcel.dataAvail() < 1024 && !terminal) {
                         val position = parcel.dataPosition() - 1024
