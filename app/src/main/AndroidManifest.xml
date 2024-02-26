@@ -29,8 +29,6 @@
     <uses-permission android:name="com.mplanet.testhandler.WRITE_CONTENT" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <!--  访问相册时一直报EACCES (Permission denied),Android Q 默认开启沙箱模式 导致出现文件读写失败,增加requestLegacyExternalStorage -->
     <application

@@ -73,10 +73,12 @@ tasks.register("makeJar",Jar) {
     new File(buildDir.getPath()).mkdirs()
     def dir = new File(buildDir.getPath()+'/outputs/aar2/libs/')
     println("jar="+dir)
-    files(dir.listFiles()).each { file ->
+    if(dir.exists()) {
+        files(dir.listFiles()).each { file ->
 
-        if (file.name.endsWith('.jar')) {
-            from (project.zipTree(file.absolutePath))
+            if (file.name.endsWith('.jar')) {
+                from(project.zipTree(file.absolutePath))
+            }
         }
     }
     destinationDirectory = file(buildDir.getPath()+"/outputs/aar2")

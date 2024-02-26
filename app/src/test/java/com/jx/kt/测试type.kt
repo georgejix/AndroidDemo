@@ -2,7 +2,7 @@ package com.jx.kt
 
 import org.junit.Test
 
-class 测试网络 {
+class 测试type {
     private fun judgeType(key: Any?) {
         when (key) {
             is String? -> println("String?")
