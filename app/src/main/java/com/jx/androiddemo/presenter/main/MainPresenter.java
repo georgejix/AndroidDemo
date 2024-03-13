@@ -45,6 +45,7 @@ import com.jx.androiddemo.testactivity.function.f31to40.f38.F38Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f39.F39Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f40.F40Activity;
 import com.jx.androiddemo.testactivity.function.f41to50.f41.F41Activity;
+import com.jx.androiddemo.testactivity.function.f41to50.f42.F42Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui11.U11Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui12.U12Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui13.U13Activity;
@@ -82,6 +83,7 @@ import com.jx.androiddemo.testactivity.ui.ui31to40.ui33.U33Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui34.U34Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui35.U35Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui36.U36Activity;
+import com.jx.androiddemo.testactivity.ui.ui31to40.ui38.U38Activity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -154,6 +156,8 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addLeft("容器类", F39Activity.class);
             addLeft("aidl测试", F40Activity.class);
             addLeft("parcel分段读写", F41Activity.class);
+            addLeft("录音", F42Activity.class);
+            addLeft("------", null);
         }
 
         Collections.reverse(mLeftList);
@@ -202,6 +206,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addRight("拖拽旋转缩放view", U35Activity.class);
             addRight("图片镜像", U36Activity.class);
             addRight("recyclerview拖动排序", U37Activity.class);
+            addRight("view动画", U38Activity.class);
         }
 
         Collections.reverse(mRightList);

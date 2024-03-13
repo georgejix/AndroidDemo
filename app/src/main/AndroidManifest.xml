@@ -98,6 +98,7 @@
         <activity android:name=".testactivity.function.f31to40.f39.F39Activity" />
         <activity android:name=".testactivity.function.f31to40.f40.F40Activity" />
         <activity android:name=".testactivity.function.f41to50.f41.F41Activity" />
+        <activity android:name=".testactivity.function.f41to50.f42.F42Activity" />
 
         <activity android:name=".testactivity.ui.ui1to10.ui1.U1Activity" />
         <activity android:name=".testactivity.ui.ui1to10.ui2.U2Activity" />
@@ -154,6 +155,7 @@
         <activity android:name=".testactivity.ui.ui31to40.ui35.U35Activity" />
         <activity android:name=".testactivity.ui.ui31to40.ui36.U36Activity" />
         <activity android:name=".testactivity.ui.ui31to40.ui37.U37Activity" />
+        <activity android:name=".testactivity.ui.ui31to40.ui38.U38Activity" />
 
         <!-- aidl -->
         <service

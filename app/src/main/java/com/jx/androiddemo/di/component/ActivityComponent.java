@@ -51,6 +51,7 @@ import com.jx.androiddemo.testactivity.function.f31to40.f38.F38Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f39.F39Activity;
 import com.jx.androiddemo.testactivity.function.f31to40.f40.F40Activity;
 import com.jx.androiddemo.testactivity.function.f41to50.f41.F41Activity;
+import com.jx.androiddemo.testactivity.function.f41to50.f42.F42Activity;
 import com.jx.androiddemo.testactivity.ui.ui1to10.ui1.U1Activity;
 import com.jx.androiddemo.testactivity.ui.ui1to10.ui10.U10Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui11.U11Activity;
@@ -89,6 +90,7 @@ import com.jx.androiddemo.testactivity.ui.ui1to10.ui7.U7Activity;
 import com.jx.androiddemo.testactivity.ui.ui1to10.ui8.U8Activity;
 import com.jx.androiddemo.testactivity.ui.ui1to10.ui9.U9Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui36.U36Activity;
+import com.jx.androiddemo.testactivity.ui.ui31to40.ui38.U38Activity;
 
 import dagger.Component;
 
@@ -193,6 +195,8 @@ public interface ActivityComponent
 
     void inject(F41Activity f41Activity);
 
+    void inject(F42Activity f42Activity);
+
     void inject(U1Activity u1Activity);
 
     void inject(U2Activity u2Activity);
@@ -268,4 +272,6 @@ public interface ActivityComponent
     void inject(U36Activity u36Activity);
 
     void inject(U37Activity u37Activity);
+
+    void inject(U38Activity u38Activity);
 }
