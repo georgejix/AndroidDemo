@@ -37,6 +37,10 @@ public class PermissionUtil {
                 PackageManager.PERMISSION_GRANTED) {
             permissionLists.add(Manifest.permission.RECORD_AUDIO);
         }
+        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(context, Manifest.permission.MEDIA_CONTENT_CONTROL) !=
+                PackageManager.PERMISSION_GRANTED) {
+            permissionLists.add(Manifest.permission.MEDIA_CONTENT_CONTROL);
+        }
         return permissionLists;
     }
 }

@@ -75,6 +75,12 @@ android {
             keyAlias 'com.jx.androiddemo'
             keyPassword 'jixiao'
         }
+        /*releaseConfig {
+            storeFile file('../buildsystem/platform.jks')
+            storePassword 'HSAEH625'
+            keyAlias 'H625'
+            keyPassword 'HSAEH625'
+        }*/
     }
 
     productFlavors {

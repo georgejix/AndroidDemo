@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jx.androiddemo">
+    <!--android:sharedUserId="android.uid.system">-->
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -29,6 +30,7 @@
     <uses-permission android:name="com.mplanet.testhandler.WRITE_CONTENT" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
 
     <!--  访问相册时一直报EACCES (Permission denied),Android Q 默认开启沙箱模式 导致出现文件读写失败,增加requestLegacyExternalStorage -->
     <application
@@ -99,6 +101,7 @@
         <activity android:name=".testactivity.function.f31to40.f40.F40Activity" />
         <activity android:name=".testactivity.function.f41to50.f41.F41Activity" />
         <activity android:name=".testactivity.function.f41to50.f42.F42Activity" />
+        <activity android:name=".testactivity.function.f41to50.f43.F43Activity" />
 
         <activity android:name=".testactivity.ui.ui1to10.ui1.U1Activity" />
         <activity android:name=".testactivity.ui.ui1to10.ui2.U2Activity" />
@@ -216,6 +219,8 @@
 
         <!-- 悬浮窗口 -->
         <service android:name=".testactivity.ui.ui21to30.ui27.PopService" />
+
+        <service android:name=".testactivity.function.f41to50.f43.F43Service"/>
 
     </application>
 </manifest>
