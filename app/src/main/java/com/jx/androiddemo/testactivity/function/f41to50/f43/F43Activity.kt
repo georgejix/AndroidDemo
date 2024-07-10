@@ -6,6 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.media.MediaMetadata
 import android.media.session.MediaSessionManager
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.ResultReceiver
 import android.util.Log
 import com.jakewharton.rxbinding2.view.RxView
 import com.jx.androiddemo.BaseMvpActivity
@@ -18,6 +22,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_f43.tv_control
 import kotlinx.android.synthetic.main.activity_f43.tv_start
 import kotlinx.android.synthetic.main.activity_f43.tv_print
+import kotlinx.android.synthetic.main.activity_f43.tv_send_command
 import java.util.concurrent.TimeUnit
 
 
@@ -79,6 +84,12 @@ class F43Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
             .subscribe { o ->
                 control()
             }
+        RxView.clicks(tv_send_command)
+            .throttleFirst(Constants.CLICK_TIME.toLong(), TimeUnit.MILLISECONDS)
+            .compose(this.bindToLifecycle())
+            .subscribe { o ->
+                sendCommand()
+            }
     }
 
     private fun start() {
@@ -98,7 +109,7 @@ class F43Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
             }
     }
 
-    private fun control(){
+    private fun control() {
         mm.getActiveSessions(ComponentName(packageName, TAG))
             .find { it.packageName == packageName }
             ?.let {
@@ -108,6 +119,18 @@ class F43Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                 it.transportControls.skipToPrevious()
                 it.transportControls.skipToNext()
             }
+    }
+
+    private fun sendCommand() {
+        mm.getActiveSessions(ComponentName(packageName, TAG))
+            .find { it.packageName == packageName }
+            ?.sendCommand("test command", Bundle().apply {
+                putString("key", "key01")
+            }, object : ResultReceiver(Handler(Looper.getMainLooper())) {
+                override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
+                    Log.d(TAG, "onReceiveResult resultCode=$resultCode result=${resultData?.getString("result")}")
+                }
+            })
     }
 
 }

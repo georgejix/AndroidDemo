@@ -55,6 +55,10 @@ class F43Service : Service() {
 
             override fun onCommand(command: String, args: Bundle?, cb: ResultReceiver?) {
                 super.onCommand(command, args, cb)
+                Log.d(TAG, "oncommand ${command} key=${args?.getString("key")}")
+                cb?.send(0, Bundle().apply {
+                    putString("result", "ok")
+                })
             }
         })
         CoroutineScope(Dispatchers.IO).launch {

@@ -20,4 +20,9 @@
         style="@style/generalTv"
         android:gravity="center"
         android:text="control" />
+    <TextView
+        android:id="@+id/tv_send_command"
+        style="@style/generalTv"
+        android:gravity="center"
+        android:text="send_command" />
 </LinearLayout>
