@@ -47,6 +47,7 @@ import com.jx.androiddemo.testactivity.function.f31to40.f40.F40Activity;
 import com.jx.androiddemo.testactivity.function.f41to50.f41.F41Activity;
 import com.jx.androiddemo.testactivity.function.f41to50.f42.F42Activity;
 import com.jx.androiddemo.testactivity.function.f41to50.f43.F43Activity;
+import com.jx.androiddemo.testactivity.function.f41to50.f44.F44Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui11.U11Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui12.U12Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui13.U13Activity;
@@ -77,13 +78,13 @@ import com.jx.androiddemo.testactivity.ui.ui21to30.ui27.U27Activity;
 import com.jx.androiddemo.testactivity.ui.ui21to30.ui28.U28Activity;
 import com.jx.androiddemo.testactivity.ui.ui21to30.ui29.U29Activity;
 import com.jx.androiddemo.testactivity.ui.ui21to30.ui30.U30Activity;
-import com.jx.androiddemo.testactivity.ui.ui31to40.ui37.U37Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui31.U31Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui32.U32Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui33.U33Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui34.U34Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui35.U35Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui36.U36Activity;
+import com.jx.androiddemo.testactivity.ui.ui31to40.ui37.U37Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui38.U38Activity;
 
 import java.util.ArrayList;
@@ -159,6 +160,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addLeft("parcel分段读写", F41Activity.class);
             addLeft("录音", F42Activity.class);
             addLeft("mediasession", F43Activity.class);
+            addLeft("mediaplayer", F44Activity.class);
             addLeft("------", null);
         }
 

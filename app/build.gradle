@@ -75,6 +75,7 @@ android {
             keyAlias 'com.jx.androiddemo'
             keyPassword 'jixiao'
         }
+        //mediasession
         /*releaseConfig {
             storeFile file('../buildsystem/platform.jks')
             storePassword 'HSAEH625'
