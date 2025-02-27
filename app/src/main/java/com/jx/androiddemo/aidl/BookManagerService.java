@@ -6,6 +6,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -41,6 +42,7 @@ public class BookManagerService extends Service {
 
         @Override
         public void registerListner(IOnNewBookArrivedListener listener) throws RemoteException {
+            Log.d(TAG,"registerListner " + listener + "," + listener.asBinder());
             mListenerList.register(listener);
             int N = mListenerList.beginBroadcast();
             QMLog.d(TAG, "register listener size= " + N);

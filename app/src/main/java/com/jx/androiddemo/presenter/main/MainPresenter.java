@@ -48,6 +48,7 @@ import com.jx.androiddemo.testactivity.function.f41to50.f41.F41Activity;
 import com.jx.androiddemo.testactivity.function.f41to50.f42.F42Activity;
 import com.jx.androiddemo.testactivity.function.f41to50.f43.F43Activity;
 import com.jx.androiddemo.testactivity.function.f41to50.f44.F44Activity;
+import com.jx.androiddemo.testactivity.function.f41to50.f45.F45Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui11.U11Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui12.U12Activity;
 import com.jx.androiddemo.testactivity.ui.ui11to20.ui13.U13Activity;
@@ -161,6 +162,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addLeft("录音", F42Activity.class);
             addLeft("mediasession", F43Activity.class);
             addLeft("mediaplayer", F44Activity.class);
+            addLeft("gnss", F45Activity.class);
             addLeft("------", null);
         }
 

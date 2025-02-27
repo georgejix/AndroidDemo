@@ -188,6 +188,7 @@ public class F2Activity extends BaseMvpActivity<F2Presenter> implements F2Contra
                 list = bookManager.getBookList();
                 printBookList(list);
                 bookManager.registerListner(mOnNewBookArrivedListener);
+                bookManager.registerListner(mOnNewBookArrivedListener);
             } catch (Exception e) {
             }
         }
