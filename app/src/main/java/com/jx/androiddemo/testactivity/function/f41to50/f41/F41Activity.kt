@@ -136,7 +136,7 @@ class F41Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
                             for (i in 0 until length) {
                                 bytesNew[index++] = bytesRead[i]
                             }
-                            parcel.unmarshall(bytesNew, 0, index - 1)
+                            parcel.unmarshall(bytesNew, 0, index)
                             parcel.setDataPosition(position)
                         } else {
                             terminal = true
