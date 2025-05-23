@@ -87,6 +87,7 @@ import com.jx.androiddemo.testactivity.ui.ui31to40.ui35.U35Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui36.U36Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui37.U37Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui38.U38Activity;
+import com.jx.androiddemo.testactivity.ui.ui31to40.ui39.U39Activity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -213,6 +214,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addRight("图片镜像", U36Activity.class);
             addRight("recyclerview拖动排序", U37Activity.class);
             addRight("view动画", U38Activity.class);
+            addRight("白天黑夜模式", U39Activity.class);
         }
 
         Collections.reverse(mRightList);

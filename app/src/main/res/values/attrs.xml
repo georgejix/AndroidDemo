@@ -13,4 +13,8 @@
         <attr name="roundLayoutRadius" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="U39UiMode">
+        <attr name="root_bg_color" format="color"/>
+        <attr name="root_bg_img" format="reference"/>
+    </declare-styleable>
 </resources>
