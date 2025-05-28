@@ -81,7 +81,7 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="10dp"
                     android:padding="10dp"
-                    android:src="@mipmap/icon_pop_close"
+                    android:src="@mipmap/icon_hook"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_restart"
                     app:layout_constraintTop_toTopOf="parent" />

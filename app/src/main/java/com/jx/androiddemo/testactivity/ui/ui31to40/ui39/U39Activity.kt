@@ -9,6 +9,8 @@ import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatDelegate
 import com.jx.androiddemo.R
+import kotlinx.android.synthetic.main.activity_u39.img
+import kotlinx.android.synthetic.main.activity_u39.root
 
 
 class U39Activity : Activity() {
@@ -36,11 +38,9 @@ class U39Activity : Activity() {
         if (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES) {
             // 处于深色模式
             Log.d(TAG, "处于深色模式")
-            setTheme(R.style.U39Night)
         } else {
             // 处于浅色模式
             Log.d(TAG, "处于浅色模式")
-            setTheme(R.style.U39Day)
         }
     }
 
@@ -50,11 +50,13 @@ class U39Activity : Activity() {
             Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES) {
             // 处于深色模式
             Log.d(TAG, "处于深色模式")
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             // 处于浅色模式
             Log.d(TAG, "处于浅色模式")
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+        root.setBackgroundColor(getColor(R.color.u39_bg))
+        img.setImageResource(R.mipmap.icon_hook)
     }
 }

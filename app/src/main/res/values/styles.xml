@@ -82,13 +82,4 @@
         <attr name="loading_color" format="color" />
     </declare-styleable>
 
-    <style name="U39Day">
-        <item name="root_bg_color">#0000ff</item>
-        <item name="root_bg_img">@mipmap/icon_hook</item>
-    </style>
-
-    <style name="U39Night">
-        <item name="root_bg_color">#00ff00</item>
-        <item name="root_bg_img">@mipmap/icon_close</item>
-    </style>
 </resources>
