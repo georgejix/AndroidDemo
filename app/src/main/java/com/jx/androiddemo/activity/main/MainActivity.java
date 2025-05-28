@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -80,6 +81,12 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     protected void onDestroy()
     {
         super.onDestroy();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
     }
 
     private void initView()
