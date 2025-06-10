@@ -59,4 +59,5 @@ class U39Activity : Activity() {
         root.setBackgroundColor(getColor(R.color.u39_bg))
         img.setImageResource(R.mipmap.icon_hook)
     }
+
 }
