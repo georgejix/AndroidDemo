@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -29,6 +30,8 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContract.View
 {
+
+    private final String TAG = getClass().getSimpleName();
 
     @BindView(R.id.layout_root)
     View mRootLayout;
@@ -87,6 +90,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     public void onConfigurationChanged(@NonNull Configuration newConfig)
     {
         super.onConfigurationChanged(newConfig);
+        Log.d(TAG, "onConfigurationChanged");
     }
 
     private void initView()
