@@ -1,0 +1,100 @@
+使用Android.mk编写jni：
+1.build.gradle添加配置
+    android.defaultConfig.ndk添加abiFilters("armeabi-v7a", "arm64-v8a")
+    android.externalNativeBuild.ndkBuild添加path "src/main/jni/Android.mk"
+2.新建Android.mk文件
+    LOCAL_PATH := $(call my-dir)
+    include $(CLEAR_VARS)
+    LOCAL_MODULE := module_name
+    LOCAL_C_INCLUDES += $(LOCAL_PATH)
+    LOCAL_SRC_FILES += cpp_name.cpp
+    LOCAL_CFLAGS += -fexceptions
+    LOCAL_LDLIBS += -llog
+    include $(BUILD_SHARED_LIBRARY)
+3.java新增native函数
+    public static native int native_func1(Callback cb, ByteBuffer buf, int length);
+    public static native int native_func2(Callback cb, String str);
+4.新建cpp_name.cpp文件
+    #include <jni.h>
+    #define JavaJniVersion JNI_VERSION_1_6
+    #define JavaClassUser  "com/xxx/xxx/Callback"
+    static JavaVM *mJavaVM = NULL;
+    static jclass mJavaClass = NULL;
+
+    static jint nativeNative_func1(JNIEnv *env, jobject obj, jobject callback, jobject stream, jint len) {
+        jbyte *data_ptr = NULL;
+        data_ptr = (jbyte *)env->GetDirectBufferAddress(stream);
+        return 0;
+    }
+    static jint nativeNative_func2(JNIEnv *env, jobject obj, jobject callback, jstring str) {
+        jobject cb = env->NewGlobalRef(callback);
+        const char *pUinxPath = NULL;
+        pUinxPath = env->GetStringUTFChars(unixPath, NULL);
+        return 0;
+    }
+
+    static const JNINativeMethod nativeMethods[] = {
+        { "native_func1",  "(L" JavaClassUser "$Callback;Ljava/nio/ByteBuffer;I)I", (void *)nativeNative_func1 },
+        { "native_func2",  "(L" JavaClassUser "$Callback;Ljava/lang/String;)I",     (void *)nativeNative_func2 },
+    };
+
+    重写JNIEXPORT jint JNI_OnLoad(JavaVM *jvm, void *reserved) {
+        JNIEnv *env = NULL;
+        jclass clazz = NULL;
+        if (jvm->GetEnv((void **)&env, JavaJniVersion)) {
+            LOGE("JNI version mismatch error");
+            return JNI_ERR;
+        }
+
+        clazz = env->FindClass(JavaClassUser);
+        if (clazz == NULL) {
+            LOGE("Native registration unable to find class '%s'", JavaClassUser);
+            return JNI_ERR;
+        }
+
+        if (env->RegisterNatives(clazz, nativeMethods,
+            sizeof(nativeMethods) / sizeof(nativeMethods[0])) < 0) {
+            LOGE("RegisterNatives failed for '%s'", JavaClassUser);
+            return JNI_FALSE;
+        }
+        mJavaVM = jvm;
+        mJavaClass = (jclass)
+            env->NewGlobalRef(clazz);
+        return JavaJniVersion;
+    }
+5.java使用so
+    static {
+            System.loadLibrary("module_name");
+        }
+
+
+
+
+
+java与native的数据格式对应
+    基本数据类型的转换
+        Java                    Native                  Signature
+        byte                    jbyte                   B
+        char                    jchar                   C
+        double                  jdouble                 D
+        float                   jfloat                  F
+        int                     jint                    I
+        short                   jshort                  S
+        long                    jlong                   J
+        boolean                 jboolean                Z
+        void                    void                    V
+    引用数据类型的转换
+        Java                    Native                  Signature
+        所有对象                  jobject                 L+classname+;
+        Class                   jclass                   Ljava/lang/Class;
+        String                  jstring                  Ljava/lang/String;
+        Throwable               jthrowable               Ljava/lang/Throwable;
+        Object[]                jobjectArray             [L+classname+;
+        byte[]                  jbyteArray               [B
+        char[]                  jcharArray               [C
+        double[]                jdoubleArray             [D
+        float[]                 jfloatArray              [F
+        int[]                   jintArray                [I
+        short[]                 jshortArray              [S
+        long[]                  jlongArray               [J
+        boolean[]               jbooleanArray            [Z
