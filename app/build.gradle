@@ -86,6 +86,7 @@ android {
 
     productFlavors {
         androiddemo1 { // 通用版本
+            dimension 'androiddemo1'
             applicationId globalConfiguration.getAt("androidApplicationId")
             versionName globalConfiguration.getAt("androidVersionName")
             resValue "string", "app_name", globalConfiguration.getAt("androidAppName")
@@ -100,6 +101,7 @@ android {
             //applicationIdSuffix '.debug' //在debug版本中，将会在程序的原包名上加上.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             project.gradle.startParameter.excludedTaskNames.add('lint')  // 屏蔽lint耗时检查
+            buildConfigField "String", "BUILE_TIME", "\"${String.format('%s', new Date().format("yyyyMMddHHmm"))}\""
         }
         release {
             minifyEnabled false
@@ -107,6 +109,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             aaptOptions.cruncherEnabled = false
             aaptOptions.useNewCruncher = false
+            buildConfigField "String", "BUILE_TIME", "\"${String.format('%s', new Date().format("yyyyMMddHHmm"))}\""
         }
     }
 
