@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jx.androiddemo.R
 import com.jx.androiddemo.tool.ClickListenerUtil
-import kotlinx.android.synthetic.main.item_f39.view.*
 
 class F38Adapter(val mContext: Context) :
     RecyclerView.Adapter<F38Adapter.ViewHolder>() {
@@ -31,7 +31,7 @@ class F38Adapter(val mContext: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         mContentList[position].apply {
-            holder.itemView.tv_content.text = this.mName
+            holder.itemView.findViewById<TextView>(R.id.tv_content).text = this.mName
             holder.itemView.setOnClickListener {
                 if (ClickListenerUtil.canClick(50)) {
                     f()

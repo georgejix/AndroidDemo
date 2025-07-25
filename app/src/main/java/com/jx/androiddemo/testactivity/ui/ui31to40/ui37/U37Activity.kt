@@ -2,16 +2,17 @@ package com.jx.androiddemo.testactivity.ui.ui31to40.ui37
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
-import kotlinx.android.synthetic.main.activity_u37.*
 
 class U37Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     private var mU37Adapter: U37Adapter? = null
     private var mItemTouchHelper: ItemTouchHelper? = null
+    private val rv by lazy { findViewById<RecyclerView>(R.id.rv) }
 
     companion object {
         val TAG = "U37Activity"

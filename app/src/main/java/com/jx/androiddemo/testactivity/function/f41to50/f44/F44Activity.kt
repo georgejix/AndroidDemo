@@ -3,13 +3,13 @@ package com.jx.androiddemo.testactivity.function.f41to50.f44
 import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.util.Log
+import android.view.View
 import com.jakewharton.rxbinding2.view.RxView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
 import com.jx.androiddemo.constant.Constants
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
-import kotlinx.android.synthetic.main.activity_f44.tv_play
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit
 
 class F44Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
+    private val tv_play by lazy { findViewById<View>(R.id.tv_play) }
 
     @Override
     override fun initInject() {

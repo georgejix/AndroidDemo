@@ -3,6 +3,8 @@ package com.jx.androiddemo.testactivity.ui.ui31to40.ui36
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.view.View
+import android.widget.ImageView
 import androidx.core.graphics.drawable.toBitmap
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
@@ -11,10 +13,11 @@ import com.jx.androiddemo.R
 import com.jx.androiddemo.constant.Constants
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
-import kotlinx.android.synthetic.main.activity_u36.*
 import java.util.concurrent.TimeUnit
 
 class U36Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
+    private val layout_bg by lazy { findViewById<View>(R.id.layout_bg) }
+    private val img by lazy { findViewById<ImageView>(R.id.img) }
 
     @Override
     override fun initInject() {
@@ -43,7 +46,7 @@ class U36Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
             .subscribe { v -> mirror2() }
     }
 
-    private fun mirror2(){
+    private fun mirror2() {
         img.scaleX = -img.scaleX
     }
 

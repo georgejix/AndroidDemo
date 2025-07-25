@@ -2,9 +2,8 @@ package com.jx.androiddemo.testactivity.function.f41to50.f42
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.media.AudioManager
 import android.media.MediaRecorder
-import android.util.Log
+import android.view.View
 import com.jakewharton.rxbinding2.view.RxView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
@@ -13,8 +12,6 @@ import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_f42.tv_start
-import kotlinx.android.synthetic.main.activity_f42.tv_stop
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -22,6 +19,8 @@ import java.util.concurrent.TimeUnit
 class F42Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     private var mMediaRecorder: MediaRecorder? = null
+    private val tv_start by lazy { findViewById<View>(R.id.tv_start) }
+    private val tv_stop by lazy { findViewById<View>(R.id.tv_stop) }
 
     @Override
     override fun initInject() {

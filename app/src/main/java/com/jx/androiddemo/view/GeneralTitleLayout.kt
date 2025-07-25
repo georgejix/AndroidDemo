@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.jx.androiddemo.R
 import com.jx.androiddemo.tool.DisplayUtils
-import kotlinx.android.synthetic.main.layout_general_title.view.*
 
 class GeneralTitleLayout : RelativeLayout {
     private lateinit var mContext: Context
@@ -33,7 +32,7 @@ class GeneralTitleLayout : RelativeLayout {
         addView(view)
         val toolBarHeight: Int = DisplayUtils.getToolBarHeight(mContext)
         if (toolBarHeight > 0) {
-            view.layout_title_bar.layoutParams.height = toolBarHeight
+            view.findViewById<View>(R.id.layout_title_bar).layoutParams.height = toolBarHeight
         }
     }
 }

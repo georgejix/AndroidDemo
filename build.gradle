@@ -3,7 +3,7 @@ apply from: 'buildsystem/ci.gradle'
 apply from: 'buildsystem/dependencies.gradle'
 
 buildscript {
-    ext.kotlin_version = '1.6.0'
+    ext.kotlin_version = '1.8.0'
     repositories {
         maven{url 'https://maven.aliyun.com/repository/public'}
         maven{url 'https://maven.aliyun.com/repository/google'}

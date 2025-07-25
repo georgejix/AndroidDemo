@@ -1,7 +1,7 @@
 package com.jx.androiddemo.testactivity.ui.ui31to40.ui38
 
 import android.annotation.SuppressLint
-import android.view.animation.Animation
+import android.view.View
 import android.view.animation.AnimationUtils
 import com.jakewharton.rxbinding2.view.RxView
 import com.jx.androiddemo.BaseMvpActivity
@@ -9,10 +9,11 @@ import com.jx.androiddemo.R
 import com.jx.androiddemo.constant.Constants
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
-import kotlinx.android.synthetic.main.activity_u38.tv_anim
 import java.util.concurrent.TimeUnit
 
 class U38Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
+
+    private val tv_anim by lazy { findViewById<View>(R.id.tv_anim) }
 
     companion object {
         val TAG = "U38Activity"

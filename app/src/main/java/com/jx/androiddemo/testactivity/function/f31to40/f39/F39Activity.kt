@@ -1,16 +1,20 @@
 package com.jx.androiddemo.testactivity.function.f31to40.f39;
 
 import android.annotation.SuppressLint
+import android.view.View
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
-import kotlinx.android.synthetic.main.activity_f39.*
 
 class F39Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     private var mU37Adapter: F39Adapter? = null
     private val mList: ArrayList<ListBean> = ArrayList()
+    private val tv_content by lazy { findViewById<TextView>(R.id.tv_content) }
+    private val rv_list by lazy { findViewById<RecyclerView>(R.id.rv_list) }
 
     companion object {
         val TAG0 = "F39Activity"

@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jx.androiddemo.R
 import com.jx.androiddemo.tool.ClickListenerUtil
-import kotlinx.android.synthetic.main.item_u37.view.*
 
 class U37Adapter(val mContext: Context, val mListener: Listener?) :
     RecyclerView.Adapter<U37Adapter.ViewHolder>() {
@@ -31,7 +31,7 @@ class U37Adapter(val mContext: Context, val mListener: Listener?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         mContentList[position].apply {
-            holder.itemView.tv_text.text = this
+            holder.itemView.findViewById<TextView>(R.id.tv_text).text = this
             holder.itemView.setOnClickListener {
                 if (ClickListenerUtil.canClick()) {
                     mListener?.onItemClick(position, this)

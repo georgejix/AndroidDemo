@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
 import android.util.Log
+import android.view.View
 import com.jakewharton.rxbinding2.view.RxView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
@@ -14,12 +15,13 @@ import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_f40.*
 import java.util.concurrent.TimeUnit
 
 class F40Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     private var mF40Manage: F40ManageLocal2? = null
+    private val tv1 by lazy { findViewById<View>(R.id.tv1) }
+    private val tv2 by lazy { findViewById<View>(R.id.tv2) }
 
     companion object {
         private val TAG = "F40Activity"

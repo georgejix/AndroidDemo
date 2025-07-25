@@ -1,20 +1,21 @@
 package com.jx.androiddemo.testactivity.ui.ui31to40.ui39
 
 import android.app.Activity
-import android.content.Context
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.ContextThemeWrapper
-import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatDelegate
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
 import com.jx.androiddemo.R
-import kotlinx.android.synthetic.main.activity_u39.img
-import kotlinx.android.synthetic.main.activity_u39.root
 
 
 class U39Activity : Activity() {
     private val TAG = this::class.java.simpleName
+    private val img by lazy { findViewById<ImageView>(R.id.img) }
+    private val root by lazy { findViewById<LinearLayout>(R.id.root) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
@@ -27,6 +28,7 @@ class U39Activity : Activity() {
         Log.d(TAG, "onResume")
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         Log.d(TAG, "onConfigurationChanged")
@@ -45,6 +47,7 @@ class U39Activity : Activity() {
     }
 
     //关联的是value-night value
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun updateTheme2() {
         if (resources.configuration.uiMode and
             Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES) {

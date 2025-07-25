@@ -2,18 +2,18 @@ package com.jx.androiddemo.testactivity.function.f31to40.f37;
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import com.jakewharton.rxbinding2.view.RxView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
 import com.jx.androiddemo.constant.Constants
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_f37.*
 import java.util.concurrent.TimeUnit
 
 class F37Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
+    private val tv_test1 by lazy { findViewById<View>(R.id.tv_test1) }
 
     @Override
     override fun initInject() {

@@ -11,7 +11,6 @@ import com.jx.androiddemo.constant.Constants
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
 import com.jx.androiddemo.tool.ClickListenerUtil
-import kotlinx.android.synthetic.main.activity_f32.*
 import java.util.concurrent.TimeUnit
 
 class F32Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
@@ -22,6 +21,11 @@ class F32Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
     val mFoodConsumer: Consumer<Burger> = FoodConsumer()
     val mFastFoodConsumer: Consumer<Burger> = FastFoodConsumer()
     val mBurgerConsumer: Consumer<Burger> = BurgerConsumer()
+    private val tv_1 by lazy { findViewById<TextView>(R.id.tv_1) }
+    private val tv_2 by lazy { findViewById<TextView>(R.id.tv_2) }
+    private val tv_3 by lazy { findViewById<TextView>(R.id.tv_3) }
+    private val tv_4 by lazy { findViewById<TextView>(R.id.tv_4) }
+    private val tv_5 by lazy { findViewById<TextView>(R.id.tv_5) }
 
     companion object {
         val TAG2 = "f32"

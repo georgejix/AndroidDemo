@@ -13,7 +13,6 @@ import com.jx.androiddemo.R
 import com.jx.androiddemo.constant.Constants
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
-import kotlinx.android.synthetic.main.activity_u35.*
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 import kotlin.math.sqrt
@@ -22,6 +21,11 @@ class U35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
     private val mPopMinWidth: Int by lazy { resources.getDimensionPixelOffset(R.dimen.pxtodp300) }
     private val mPopMinHeight: Int by lazy { resources.getDimensionPixelOffset(R.dimen.pxtodp80) }
     private var mImgPer: Double = 0.0
+    private val layout_pop by lazy { findViewById<View>(R.id.layout_pop) }
+    private val layout_img by lazy { findViewById<View>(R.id.layout_img) }
+    private val img_scale_bg by lazy { findViewById<View>(R.id.img_scale_bg) }
+    private val img_scale_pop by lazy { findViewById<View>(R.id.img_scale_pop) }
+    private val layout_bg by lazy { findViewById<View>(R.id.layout_bg) }
 
     enum class TouchEnum {
         DRAG,

@@ -6,11 +6,12 @@ import com.jx.androiddemo.R
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
 import com.jx.androiddemo.tool.ClickListenerUtil
-import kotlinx.android.synthetic.main.activity_f33.*
 
 class F33Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     val mF33Network: F33Network by lazy { F33Network() }
+    private val tv_send5 by lazy { findViewById<View>(R.id.tv_send5) }
+    private val tv_send10 by lazy { findViewById<View>(R.id.tv_send10) }
 
     companion object {
         val TAG = "F33Activity"

@@ -3,16 +3,26 @@ package com.jx.androiddemo.testactivity.function.f31to40.f36
 import android.view.View
 import android.widget.ImageView
 import android.widget.SeekBar
+import android.widget.TextView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
 import com.jx.androiddemo.tool.ClickListenerUtil
-import kotlinx.android.synthetic.main.activity_f36.*
 
 class F36Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     var mF36AudioUtil: F36AudioUtil? = null
+    private val tv_load1 by lazy { findViewById<View>(R.id.tv_load1) }
+    private val tv_load2 by lazy { findViewById<View>(R.id.tv_load2) }
+    private val img_play_pause by lazy { findViewById<ImageView>(R.id.img_play_pause) }
+    private val img_play_pause2 by lazy { findViewById<ImageView>(R.id.img_play_pause2) }
+    private val seekbar by lazy { findViewById<SeekBar>(R.id.seekbar) }
+    private val seekbar2 by lazy { findViewById<SeekBar>(R.id.seekbar2) }
+    private val tv_current_time by lazy { findViewById<TextView>(R.id.tv_current_time) }
+    private val tv_total_time by lazy { findViewById<TextView>(R.id.tv_total_time) }
+    private val tv_current_time2 by lazy { findViewById<TextView>(R.id.tv_current_time2) }
+    private val tv_total_time2 by lazy { findViewById<TextView>(R.id.tv_total_time2) }
 
     companion object {
         val TAG = "F36Activity"

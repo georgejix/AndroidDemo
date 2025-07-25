@@ -6,9 +6,10 @@ import com.jx.androiddemo.R
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
 import com.jx.androiddemo.tool.ClickListenerUtil
-import kotlinx.android.synthetic.main.activity_f35.*
 
 class F35Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
+    private val layout_cut_img by lazy { findViewById<CutImgLayout>(R.id.layout_cut_img) }
+    private val tv_print by lazy { findViewById<View>(R.id.tv_print) }
 
     companion object {
         val TAG = "F35Activity"

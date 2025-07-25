@@ -1,16 +1,18 @@
 package com.jx.androiddemo.testactivity.function.f31to40.f38;
 
 import android.annotation.SuppressLint
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
 import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
-import kotlinx.android.synthetic.main.activity_f38.*
 
 class F38Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     private var mAdapter: F38Adapter? = null
     private val mF38Util by lazy { F38Util() }
+    private val rv by lazy { findViewById<RecyclerView>(R.id.rv) }
 
     companion object {
         val TAG0 = "F38Activity"

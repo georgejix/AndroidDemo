@@ -11,6 +11,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.ResultReceiver
 import android.util.Log
+import android.view.View
 import com.jakewharton.rxbinding2.view.RxView
 import com.jx.androiddemo.BaseMvpActivity
 import com.jx.androiddemo.R
@@ -19,16 +20,16 @@ import com.jx.androiddemo.testactivity.empty.EmptyContract
 import com.jx.androiddemo.testactivity.empty.EmptyPresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_f43.tv_control
-import kotlinx.android.synthetic.main.activity_f43.tv_start
-import kotlinx.android.synthetic.main.activity_f43.tv_print
-import kotlinx.android.synthetic.main.activity_f43.tv_send_command
 import java.util.concurrent.TimeUnit
 
 
 class F43Activity : BaseMvpActivity<EmptyPresenter>(), EmptyContract.View {
 
     private val mm by lazy { getSystemService(Context.MEDIA_SESSION_SERVICE) as MediaSessionManager }
+    private val tv_control by lazy { findViewById<View>(R.id.tv_control) }
+    private val tv_start by lazy { findViewById<View>(R.id.tv_start) }
+    private val tv_print by lazy { findViewById<View>(R.id.tv_print) }
+    private val tv_send_command by lazy { findViewById<View>(R.id.tv_send_command) }
 
     @Override
     override fun initInject() {
