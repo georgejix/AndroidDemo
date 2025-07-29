@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_fff">#fff</color>
+    <color name="color_000">#000</color>
+    <color name="color_d_000_n_fff">#000</color>
+    <color name="color_d_fff_n_000">#fff</color>
+</resources>
