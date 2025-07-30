@@ -6,8 +6,15 @@ include ':mergeaar1'
 include ':mergeaarjar'
 include ':testgradle1'
 include ':testgradle2'
+//监听主体变化,手动设置颜色
 include ':testtheme1'
+//监听主体变化,setContentView
 include ':testtheme2'
+//监听主体变化,reCreate()
 include ':testtheme3'
+//不监听主体变化,自动reCreate()
 include ':testtheme4'
+//监听主题变化，通过viewBinding自动刷新ui主题
+include ':testtheme5'
+include ':testtheme6'
 include ':testtheme_base'

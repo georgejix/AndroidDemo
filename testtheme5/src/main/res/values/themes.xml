@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Day" parent="android:Theme.Material.Light.NoActionBar">
+    </style>
+
+    <style name="Theme.Night" parent="android:Theme.Material.Light.NoActionBar">
+    </style>
+</resources>

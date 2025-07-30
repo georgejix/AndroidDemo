@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="gVM"
+            type="com.jx.testtheme.GlobalViewModel" />
+
+        <variable
+            name="vm2"
+            type="com.jx.testtheme.ViewModel2" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@{gVM.mThemeDay == gVM.mTheme ? @color/color_fff : @color/color_000}"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="@={vm2.MStr}"
+            android:textColor="@{gVM.mThemeDay == gVM.mTheme ? @color/color_000 : @color/color_fff}"
+            android:textSize="20sp" />
+    </LinearLayout>
+</layout>
