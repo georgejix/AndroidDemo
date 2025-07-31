@@ -19,7 +19,7 @@ class Fragment1() : Fragment() {
     private var mBg: View? = null
 
     init {
-        Log.d(TAG, "init $mStr")
+        Log.d(TAG, "init $mStr hashCode=${hashCode()}")
     }
 
     fun setText(str: String) {

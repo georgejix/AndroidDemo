@@ -79,15 +79,10 @@ class TestTheme1Activity : FragmentActivity() {
         mRv = findViewById(R.id.rv)
         mLoading = findViewById(R.id.loading)
         mVp = findViewById(R.id.vp)
-        if (mNeedInitView) {
-            mLoading?.visibility = View.VISIBLE
-            mRv?.visibility = View.GONE
-            CoroutineScope(Dispatchers.Main).launch {
-                delay(3000)
-                mLoading?.visibility = View.GONE
-                mRv?.visibility = View.VISIBLE
-            }
-        } else {
+        mLoading?.visibility = View.VISIBLE
+        mRv?.visibility = View.GONE
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(3000)
             mLoading?.visibility = View.GONE
             mRv?.visibility = View.VISIBLE
         }

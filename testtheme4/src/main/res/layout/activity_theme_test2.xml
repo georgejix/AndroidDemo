@@ -15,4 +15,10 @@
         android:text="page2"
         android:textColor="@color/color_d_000_n_fff"
         android:textSize="20sp" />
+
+    <FrameLayout
+        android:id="@+id/fl"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp" />
 </LinearLayout>

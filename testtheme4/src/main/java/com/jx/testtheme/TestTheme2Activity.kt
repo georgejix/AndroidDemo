@@ -6,24 +6,46 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.replace
 import com.jx.testtheme4.R
+import com.jx.testtheme_base.Fragment1
 
 //手动更换主题颜色
-class TestTheme2Activity : ComponentActivity() {
+class TestTheme2Activity : FragmentActivity() {
     private val TAG = javaClass.simpleName
     private val mBg by lazy { findViewById<View>(R.id.bg) }
     private val mTv by lazy { findViewById<TextView>(R.id.tv) }
+    private val mFragmentList: ArrayList<Fragment1> by lazy {
+        Log.d(TAG, "init mFragmentList")
+        arrayListOf(
+            Fragment1().apply { setText("f1") },
+            Fragment1().apply { setText("f2") },
+            Fragment1().apply { setText("f3") },
+        )
+    }
+    private var mNeedInitView = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         updateTheme()
         setContentView(R.layout.activity_theme_test2)
+        mNeedInitView = true
     }
 
     override fun onResume() {
         Log.d(TAG, "onResume")
         super.onResume()
+        if (mNeedInitView) {
+            initView()
+            mNeedInitView = false
+        }
+    }
+
+    private fun initView() {
+        Log.d(TAG, "mFragmentList[0].hashCode=${mFragmentList[0].hashCode()}")
+        supportFragmentManager.beginTransaction().replace(R.id.fl, mFragmentList[0]).commit()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

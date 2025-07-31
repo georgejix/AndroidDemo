@@ -1,8 +1,10 @@
 package com.jx.testtheme_base
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.util.Log
@@ -62,7 +64,19 @@ class LocalLoading : SurfaceView, Runnable {
         Log.d(TAG, "LocalLoading start")
         while (mDrawing) {
             val canvas = holder.lockCanvas()
+            if (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                == Configuration.UI_MODE_NIGHT_YES
+            ) {
+                // 处于深色模式
+                Log.d(TAG, "处于深色模式")
+                mBgPaint.color = Color.BLACK
+            } else {
+                // 处于浅色模式
+                Log.d(TAG, "处于浅色模式")
+                mBgPaint.color = Color.WHITE
+            }
             canvas.drawRect(Rect(0, 0, width, height), mBgPaint)
+            //canvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR)
             /*canvas.drawArc(
                 20f, 20f, width - 40f, height - 40f,
                 (mAngle++ * 30f) % 360, 270f, false, mPaint

@@ -68,7 +68,8 @@ class TestTheme1Activity : FragmentActivity() {
 
     private fun updateTheme() {
         Log.d(TAG, "updateTheme ${resources.configuration.uiMode}")
-        if (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES) {
+        if (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+            == Configuration.UI_MODE_NIGHT_YES) {
             // 处于深色模式
             Log.d(TAG, "处于深色模式")
             mBg.setBackgroundColor(Color.BLACK)
@@ -91,17 +92,12 @@ class TestTheme1Activity : FragmentActivity() {
     }
 
     private fun initView() {
-        if (mNeedInitView) {
-            mLoading.visibility = View.VISIBLE
-            mRv.visibility = View.GONE
-            CoroutineScope(Dispatchers.Main).launch {
-                delay(3000)
-                mLoading.visibility = View.GONE
-                mRv.visibility = View.VISIBLE
-            }
-        } else {
-            mLoading?.visibility = View.GONE
-            mRv?.visibility = View.VISIBLE
+        mLoading.visibility = View.VISIBLE
+        mRv.visibility = View.GONE
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(3000)
+            mLoading.visibility = View.GONE
+            mRv.visibility = View.VISIBLE
         }
 
         mTest1Adapter = Test1Adapter(this)

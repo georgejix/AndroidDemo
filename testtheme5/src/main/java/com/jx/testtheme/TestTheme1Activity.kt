@@ -58,15 +58,10 @@ class TestTheme1Activity : FragmentActivity() {
     }
 
     private fun initView() {
-        if (mNeedInitView) {
-            mBinding?.loading?.visibility = View.VISIBLE
-            mBinding?.rv?.visibility = View.GONE
-            CoroutineScope(Dispatchers.Main).launch {
-                delay(3000)
-                mBinding?.loading?.visibility = View.GONE
-                mBinding?.rv?.visibility = View.VISIBLE
-            }
-        } else {
+        mBinding?.loading?.visibility = View.VISIBLE
+        mBinding?.rv?.visibility = View.GONE
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(3000)
             mBinding?.loading?.visibility = View.GONE
             mBinding?.rv?.visibility = View.VISIBLE
         }
