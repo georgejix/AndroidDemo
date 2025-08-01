@@ -16,9 +16,55 @@
         android:textColor="@color/color_d_000_n_fff"
         android:textSize="20sp" />
 
+    <CheckBox
+        android:id="@+id/cb"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_rr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="replace+replace"
+        android:textColor="@color/color_d_000_n_fff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_rs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="replace+show"
+        android:textColor="@color/color_d_000_n_fff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_ss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="show+show"
+        android:textColor="@color/color_d_000_n_fff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_sr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="show+replace"
+        android:textColor="@color/color_d_000_n_fff"
+        android:textSize="20sp" />
+
     <FrameLayout
         android:id="@+id/fl"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="50dp" />
 </LinearLayout>

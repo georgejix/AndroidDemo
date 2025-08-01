@@ -9,8 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.jx.testtheme4.R
-import com.jx.testtheme4.databinding.ActivityThemeTest1Binding
+import com.jx.testtheme5.R
+import com.jx.testtheme5.databinding.ActivityThemeTest1Binding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -66,6 +66,7 @@ class TestTheme1Activity : FragmentActivity() {
             mBinding?.rv?.visibility = View.VISIBLE
         }
 
+        mBinding?.tv?.text = "page1 ${hashCode()}"
         mTest1Adapter ?: let {
             mTest1Adapter = Test1Adapter(this)
             repeat(5) {

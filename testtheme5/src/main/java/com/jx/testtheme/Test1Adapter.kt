@@ -1,15 +1,13 @@
 package com.jx.testtheme
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.jx.testtheme4.R
-import com.jx.testtheme4.databinding.ItemTest1Binding
+import com.jx.testtheme5.R
+import com.jx.testtheme5.databinding.ItemTest1Binding
 
 class Test1Adapter(val mContext: Context) : RecyclerView.Adapter<Test1Adapter.ViewHolder>() {
     private var mContentList = ArrayList<ItemBean>()
@@ -37,7 +35,7 @@ class Test1Adapter(val mContext: Context) : RecyclerView.Adapter<Test1Adapter.Vi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         mContentList[position].apply {
-            holder.itemView.findViewById<TextView>(R.id.tv).text = this.data
+            holder.itemView.findViewById<TextView>(R.id.tv).text = "$data ${this@Test1Adapter.hashCode()}"
         }
     }
 

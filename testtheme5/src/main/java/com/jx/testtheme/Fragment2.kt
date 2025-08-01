@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jx.testtheme4.databinding.FragmentFragment2Binding
+import com.jx.testtheme5.databinding.FragmentFragment2Binding
 
 
 class Fragment2() : Fragment() {

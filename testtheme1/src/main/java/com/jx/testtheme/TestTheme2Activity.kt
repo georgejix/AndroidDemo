@@ -24,6 +24,7 @@ class TestTheme2Activity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "onResume")
+        mTv.text = "page2 ${hashCode()}"
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

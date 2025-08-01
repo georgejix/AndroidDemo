@@ -31,7 +31,7 @@ class Test1Adapter(val mContext: Context) : RecyclerView.Adapter<Test1Adapter.Vi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         mContentList[position].apply {
-            holder.itemView.findViewById<TextView>(R.id.tv).text = this.data
+            holder.itemView.findViewById<TextView>(R.id.tv).text = "$data ${this@Test1Adapter.hashCode()}"
         }
     }
 

@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.databinding.DataBindingUtil
-import com.jx.testtheme4.R
-import com.jx.testtheme4.databinding.ActivityThemeTest2Binding
+import com.jx.testtheme5.R
+import com.jx.testtheme5.databinding.ActivityThemeTest2Binding
 
 //手动更换主题颜色
 class TestTheme2Activity : ComponentActivity() {
@@ -26,6 +26,7 @@ class TestTheme2Activity : ComponentActivity() {
         Log.d(TAG, "onResume")
         super.onResume()
         updateStr(resources.configuration.uiMode)
+        mBinding?.tv?.text = "page2 ${hashCode()}"
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

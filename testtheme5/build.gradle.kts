@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.jx.testtheme4"
+    namespace = "com.jx.testtheme5"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.jx.testtheme4"
+        applicationId = "com.jx.testtheme5"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

@@ -88,6 +88,7 @@ class TestTheme1Activity : FragmentActivity() {
             mRv.visibility = View.VISIBLE
         }
 
+        mTv.text = "page1 ${hashCode()}"
         mTest1Adapter ?: let {
             mTest1Adapter = Test1Adapter(this)
             repeat(5) {
