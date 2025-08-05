@@ -2,15 +2,20 @@ package com.jx.testtheme
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.PixelFormat
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.jx.testtheme5.R
 import com.jx.testtheme5.databinding.ActivityThemeTest1Binding
+import com.jx.testtheme5.databinding.LayoutDialogBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -92,6 +97,17 @@ class TestTheme1Activity : FragmentActivity() {
     private fun addListener() {
         mBinding?.tv?.setOnClickListener {
             startActivity(Intent(this, TestTheme2Activity::class.java))
+        }
+        mBinding?.tvDialog?.setOnClickListener {
+            /*val dialog = TipDialog(this@TestTheme1Activity)
+            dialog.show()*/
+            val view = LayoutDialogBinding.inflate(LayoutInflater.from(this), null, false)
+            view.gvm = GlobalViewModel
+            val params = WindowManager.LayoutParams(200, 200)
+            params.type = WindowManager.LayoutParams.TYPE_APPLICATION
+            params.format = PixelFormat.TRANSLUCENT // 支持透明
+            params.gravity = Gravity.CENTER
+            windowManager.addView(view.root, params)
         }
     }
 }

@@ -88,8 +88,8 @@ class TestTheme2Activity : FragmentActivity() {
      */
     private fun loadFragment(addBack: Boolean, id: Int) {
         Log.d(TAG, "loadFragment ${supportFragmentManager.fragments.size}")
-        clearPopStack()
-        printPopStack()
+        //clearPopStack()
+        //printPopStack()
         mJob?.cancel()
         when (id) {
             R.id.tv_rr -> {

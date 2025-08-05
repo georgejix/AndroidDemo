@@ -2,9 +2,14 @@ package com.jx.testtheme
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.PixelFormat
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -25,6 +30,7 @@ import kotlinx.coroutines.launch
 class TestTheme1Activity : FragmentActivity() {
     private val TAG = javaClass.simpleName
     private val mTv by lazy { findViewById<TextView>(R.id.tv) }
+    private val mDialogTv by lazy { findViewById<TextView>(R.id.tv_dialog) }
     private val mLoading by lazy { findViewById<LocalLoading>(R.id.loading) }
     private val mRv by lazy { findViewById<RecyclerView>(R.id.rv) }
     private val mVp by lazy { findViewById<ViewPager2>(R.id.vp) }
@@ -114,6 +120,16 @@ class TestTheme1Activity : FragmentActivity() {
     private fun addListener() {
         mTv.setOnClickListener {
             startActivity(Intent(this, TestTheme2Activity::class.java))
+        }
+        mDialogTv.setOnClickListener {
+            /*val dialog = TipDialog(this@TestTheme1Activity)
+            dialog.show()*/
+            val view = LayoutInflater.from(this).inflate(R.layout.layout_dialog, null)
+            val params = WindowManager.LayoutParams(200, 200)
+            params.type = WindowManager.LayoutParams.TYPE_APPLICATION
+            params.format = PixelFormat.TRANSLUCENT // 支持透明
+            params.gravity = Gravity.CENTER
+            windowManager.addView(view, params)
         }
     }
 }
