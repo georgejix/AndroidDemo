@@ -209,13 +209,6 @@ class TestTheme2Activity : FragmentActivity() {
         }
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        Log.d(TAG, "onConfigurationChanged ${newConfig.uiMode}")
-        updateTheme()
-        setContentView(R.layout.activity_theme_test2)
-    }
-
     private fun updateTheme() {
         Log.d(TAG, "updateTheme ${resources.configuration.uiMode}")
         if (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES) {

@@ -34,9 +34,7 @@ class TestTheme2Activity : ComponentActivity() {
         super.onConfigurationChanged(newConfig)
         Log.d(TAG, "onConfigurationChanged ${newConfig.uiMode}")
         mNeedRecreate = true
-        //recreate()
-        mBg.setBackgroundColor(getColor(R.color.color_d_fff_n_000))
-        mTv.setTextColor(getColor(R.color.color_d_000_n_fff))
+        recreate()
     }
 
     private fun updateTheme() {

@@ -15,4 +15,12 @@
         android:text="page2"
         android:textColor="#000"
         android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true" />
 </LinearLayout>

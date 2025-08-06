@@ -28,5 +28,14 @@
             android:text="@={vm2.MStr}"
             android:textColor="@{gVM.mThemeDay == gVM.mTheme ? @color/color_000 : @color/color_fff}"
             android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:src="@{gVM.mThemeDay == gVM.mTheme ? @drawable/icon_star_dark : @drawable/icon_star}" />
     </LinearLayout>
 </layout>

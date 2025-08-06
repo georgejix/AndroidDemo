@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.jx.testtheme3.R
 
@@ -31,7 +32,8 @@ class Test1Adapter(val mContext: Context) : RecyclerView.Adapter<Test1Adapter.Vi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         mContentList[position].apply {
-            holder.itemView.findViewById<TextView>(R.id.tv).text = "$data ${this@Test1Adapter.hashCode()}"
+            holder.itemView.findViewById<TextView>(R.id.tv).text =
+                "$data ${this@Test1Adapter.hashCode()}"
         }
     }
 

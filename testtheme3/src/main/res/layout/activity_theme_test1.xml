@@ -4,7 +4,7 @@
     android:id="@+id/bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_d_fff_n_000"
+    android:background="?attr/color_bg"
     android:orientation="vertical">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="page1"
-        android:textColor="@color/color_d_000_n_fff"
+        android:textColor="?attr/color_txt"
         android:textSize="20sp" />
 
     <com.jx.testtheme_base.LocalLoading

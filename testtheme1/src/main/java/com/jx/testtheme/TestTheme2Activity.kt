@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import com.jx.testtheme1.R
@@ -14,6 +15,7 @@ class TestTheme2Activity : ComponentActivity() {
     private val TAG = javaClass.simpleName
     private val mBg by lazy { findViewById<View>(R.id.bg) }
     private val mTv by lazy { findViewById<TextView>(R.id.tv) }
+    private val mImg by lazy { findViewById<ImageView>(R.id.img) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +42,13 @@ class TestTheme2Activity : ComponentActivity() {
             Log.d(TAG, "处于深色模式")
             mBg.setBackgroundColor(Color.BLACK)
             mTv.setTextColor(Color.WHITE)
+            mImg.setImageResource(R.mipmap.icon_star)
         } else {
             // 处于浅色模式
             Log.d(TAG, "处于浅色模式")
             mBg.setBackgroundColor(Color.WHITE)
             mTv.setTextColor(Color.BLACK)
+            mImg.setImageResource(R.mipmap.icon_star_dark)
         }
     }
 }
