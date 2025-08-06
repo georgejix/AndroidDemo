@@ -9,10 +9,11 @@
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:gravity="center"
         android:text="23333"
-        android:textColor="?attr/color_txt" />
+        android:textColor="?attr/color_txt"
+        android:textSize="30sp" />
 
     <FrameLayout
         android:id="@+id/fl2"

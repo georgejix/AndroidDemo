@@ -36,7 +36,7 @@ class Fragment2_2 : Fragment() {
         mRootView = inflater.inflate(R.layout.fragment_fragment2, null)
         mBg = mRootView?.findViewById(R.id.bg)
         mTv = mRootView?.findViewById(R.id.tv)
-        mTv?.text = "f2_2 ${hashCode()}"
+        mTv?.text = "$TAG ${hashCode()}"
         updateTheme()
         return mRootView
     }

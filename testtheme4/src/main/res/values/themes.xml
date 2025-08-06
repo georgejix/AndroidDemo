@@ -4,10 +4,12 @@
     <style name="Theme.Day" parent="android:Theme.Material.Light.NoActionBar">
         <item name="color_bg">@color/color_fff</item>
         <item name="color_txt">@color/color_000</item>
+        <item name="img_star">@mipmap/icon_star_dark</item>
     </style>
 
     <style name="Theme.Night" parent="android:Theme.Material.Light.NoActionBar">
         <item name="color_bg">@color/color_000</item>
         <item name="color_txt">@color/color_fff</item>
+        <item name="img_star">@mipmap/icon_star</item>
     </style>
 </resources>

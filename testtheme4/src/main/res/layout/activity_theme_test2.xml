@@ -16,6 +16,15 @@
         android:textColor="?attr/color_txt"
         android:textSize="20sp" />
 
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:src="?attr/img_star"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true" />
+
     <CheckBox
         android:id="@+id/cb"
         android:layout_width="50dp"
@@ -66,5 +75,5 @@
         android:id="@+id/fl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="10dp" />
 </LinearLayout>

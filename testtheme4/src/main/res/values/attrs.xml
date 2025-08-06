@@ -2,4 +2,5 @@
 <resources>
     <attr name="color_bg" format="reference"/>
     <attr name="color_txt" format="reference"/>
+    <attr name="img_star" format="reference"/>
 </resources>
