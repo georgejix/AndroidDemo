@@ -89,6 +89,7 @@ import com.jx.androiddemo.testactivity.ui.ui31to40.ui37.U37Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui38.U38Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui39.U39Activity;
 import com.jx.androiddemo.testactivity.ui.ui31to40.ui40.U40Activity;
+import com.jx.androiddemo.testactivity.ui.ui41to50.ui41.U41Activity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -217,6 +218,7 @@ public class MainPresenter extends BaseRxPresenter<MainContract.View> implements
             addRight("view动画", U38Activity.class);
             addRight("白天黑夜模式", U39Activity.class);
             addRight("制作bitmap显示", U40Activity.class);
+            addRight("图片查看-可缩放", U41Activity.class);
         }
 
         Collections.reverse(mRightList);

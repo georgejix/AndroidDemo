@@ -168,6 +168,7 @@
         <activity android:name=".testactivity.ui.ui31to40.ui39.U39Activity"
             android:configChanges="uiMode"/>
         <activity android:name=".testactivity.ui.ui31to40.ui40.U40Activity" />
+        <activity android:name=".testactivity.ui.ui41to50.ui41.U41Activity" />
 
         <!-- aidl -->
         <service

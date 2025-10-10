@@ -16,6 +16,11 @@
         android:background="@{gVM.mThemeDay == gVM.mTheme ? @color/color_fff : @color/color_000}"
         android:orientation="vertical">
 
+        <EditText
+            android:layout_marginTop="50dp"
+            android:hint="11111111111111"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
         <TextView
             android:id="@+id/tv"
             android:layout_width="match_parent"
