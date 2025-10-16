@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>0</minor>
+  </specVersion>
+
+  <device>
+    <deviceType>urn:schemas-upnp-org:device:MediaRenderer:1</deviceType>
+    <friendlyName>CarTV</friendlyName>
+    <modelName>8397</modelName>
+    <modelNumber>L1</modelNumber>
+    <UDN>uuid:time8888-p444-v444-r444-macaddress12</UDN>
+    <serialNumber>0000001</serialNumber>
+    <manufacturer>Microsoft</manufacturer>
+    <modelURL>https://www.microsoft.com/</modelURL>
+    <modelDescription>CarTV Renderer Device</modelDescription>
+    <manufacturerURL>https://www.microsoft.com/</manufacturerURL>
+    <dlna:X_DLNADOC xmlns:dlna="urn:schemas-dlna-org:device-1-0">DMR-1.0</dlna:X_DLNADOC>
+
+    <serviceList>
+      <service>
+        <serviceType>urn:schemas-upnp-org:service:AVTransport:1</serviceType>
+        <serviceId>urn:upnp-org:serviceId:AVTransport</serviceId>
+        <controlURL>/AVTransport1/action</controlURL>
+        <eventSubURL>/AVTransport1/event</eventSubURL>
+        <SCPDURL>AVTransport1.xml</SCPDURL>
+      </service>
+      <service>
+        <serviceType>urn:schemas-upnp-org:service:RenderingControl:1</serviceType>
+        <serviceId>urn:upnp-org:serviceId:RenderingControl</serviceId>
+        <controlURL>/RenderingControl1/action</controlURL>
+        <eventSubURL>/RenderingControl1/event</eventSubURL>
+        <SCPDURL>RenderingControl1.xml</SCPDURL>
+      </service>
+      <service>
+        <serviceType>urn:schemas-upnp-org:service:ConnectionManager:1</serviceType>
+        <serviceId>urn:upnp-org:serviceId:ConnectionManager</serviceId>
+        <controlURL>/ConnectionManager1/action</controlURL>
+        <eventSubURL>/ConnectionManager1/event</eventSubURL>
+        <SCPDURL>ConnectionManager1.xml</SCPDURL>
+      </service>
+    </serviceList>
+  </device>
+</root>

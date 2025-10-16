@@ -108,6 +108,7 @@
         <activity android:name=".testactivity.function.f41to50.f43.F43Activity" />
         <activity android:name=".testactivity.function.f41to50.f44.F44Activity" />
         <activity android:name=".testactivity.function.f41to50.f45.F45Activity" />
+        <activity android:name=".testactivity.function.f41to50.f46.F46Activity" />
 
         <activity android:name=".testactivity.ui.ui1to10.ui1.U1Activity" />
         <activity android:name=".testactivity.ui.ui1to10.ui2.U2Activity" />
