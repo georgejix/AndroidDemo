@@ -31,6 +31,9 @@ object F46AssetsHelper {
         }
     }
 
+    /**
+     * 修改部分内容
+     */
     private fun copy(storagePath: String?, inputStream: InputStream) {
         val file = File(storagePath)
         try {
@@ -70,6 +73,9 @@ object F46AssetsHelper {
         return timeStr.substring(timeStr.length - 8)
     }
 
+    /**
+     * 不修改直接拷贝
+     */
     private fun copy2(storagePath: String?, inputStream: InputStream) {
         val file = File(storagePath)
         try {
